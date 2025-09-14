@@ -33,7 +33,7 @@ bool redimensionarVector(VectorInt* vec, size_t cap)
         return false;
     }
 
-    printf("Redimension de %llu a %llu\n", vec->cap, cap);
+    printf("Redimension de %lu a %lu\n", vec->cap, cap);
 
     vec->vec = vecTmp;
     vec->cap = cap;
