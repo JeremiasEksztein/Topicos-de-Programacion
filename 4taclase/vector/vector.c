@@ -40,6 +40,7 @@ bool redimensionarVector(VectorInt* vec, size_t cap)
 
     return true;
 }
+
 void vectorDestruir(VectorInt* vec)
 {
     free(vec->vec);
