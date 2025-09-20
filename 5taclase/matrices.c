@@ -132,3 +132,25 @@ int triangularSuperiorSecundaria(int orden, int** matriz)
 
     return tmp;
 }
+
+int** productoMatricial(int** a, int** b, int filasA, int columnasA, int filasB, int columnasB)
+{
+    if(columnasA != filasB){
+        return NULL;
+    }
+
+    int** prod = (int**) crearMatriz(filasA, columnasB, sizeof(int));
+    int tmp = 0;
+    int i, j, limJ;
+
+    for(i = 0; i < filasA; i++){
+        for(j = 0; j < columnasA; j++){
+            tmp += a[i][j] * b[j][i];
+        }
+
+        prod[i][limJ] = tmp;
+        tmp = 0;
+    }
+    
+    return prod;
+}

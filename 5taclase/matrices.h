@@ -27,4 +27,6 @@ int triangularDerechaAbsoluta(int orden, int** matriz);
 
 void mostrarMatrizEnEspiral(int orden, int** matriz);
 
+int** productoMatricial(int** a, int** b, int filasA, int columnasA, int filasB, int columnasB);
+
 #endif
