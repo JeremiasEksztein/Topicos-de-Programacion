@@ -168,8 +168,3 @@ void mostrarVector(Vector_t* vector, void (*Mostrar)(void*))
         Mostrar(i);
     }
 }
-
-
-
-
-
