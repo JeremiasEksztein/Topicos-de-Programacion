@@ -221,11 +221,11 @@ char* stringSubstring(char* dest, char* src)
     while(*tmpD){
 
         while(*tmpAux == *tmpS && *tmpAux && *tmpS){
-            tmpD++;
+            tmpAux++;
             tmpS++;
         }
 
-        if(!*tmpS){
+        if(!(*tmpS)){
             return tmpD;
         }
 

@@ -36,6 +36,7 @@ int stringSpan(char* dest, char* src);
 
 //Probada
 char* stringPbreak(char* dest, char* src);
+//Probada
 char* stringSubstring(char* dest, char* src);
 
 //Probada
