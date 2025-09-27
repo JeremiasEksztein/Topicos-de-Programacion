@@ -32,7 +32,9 @@ int main()
 
     //printf("%s\n", stringPbreak(z, c));
 
-    printf("%s\n", stringSubstring(frase, pal));
+    //printf("%s\n", stringSubstring(frase, pal));
+
+    printf("%s\n", stringReverse(b));
 
     return 0;
 }

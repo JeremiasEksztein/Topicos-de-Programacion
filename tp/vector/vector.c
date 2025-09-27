@@ -124,13 +124,22 @@ int vectorEliminarPos(Vector_t* vector, size_t pos)
 
 int vectorOrdenar(Vector_t* vector, int (*Cmp)(void*, void*))
 {
-    void* tmp = malloc(vector->tamElem);
+    void* i = vector->data + vector->tamElem;
+    void* j = vector->data;
+    void* ult = vector->data + (vector->cantElem - 1) * vector->tamElem;
+    
+    for(; i <= ult; i += vector->tamElem){
+        j = i - vector->tamElem;
+    
+        while(Cmp(j, i) > 0 && j >= vector->data){
+            memmove(j + vector->tamElem, j, vector->tamElem);
+            j -= vector->tamElem;
+        }
 
-    if(!tmp){
-        return ERR_SIN_MEM;
+        memmove(j + vector->tamElem, i, vector->tamElem);
     }
 
-    /*Rellenar con codigo*/
+    return EXITO;
 }
 
 size_t vectorBuscar(Vector_t* vector, void* elem, int (*Cmp)(void*, void*))

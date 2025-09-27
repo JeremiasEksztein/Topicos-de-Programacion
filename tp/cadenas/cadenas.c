@@ -28,7 +28,28 @@ int stringNCmp(char* dest, char* src, size_t n)
 
 int stringCmpi(char* dest, char* src)
 {
-    return 0;
+    char* tmpD = dest;
+    char* tmpS = src;
+
+    while(!(tolower(*tmpD) - tolower(*tmpS) && *tmpD && *tmpS)){
+        tmpD++;
+        tmpS++;
+    }
+
+    return (tolower(*tmpD) - tolower(*tmpS));
+}
+
+int stringNCmpi(char* dest, char* src, size_t n)
+{
+    char* tmpD = dest;
+    char* tmpS = src;
+
+    while(!(tolower(*tmpD) - tolower(*tmpS)) && *tmpD && *tmpS && n){
+        tmpD++;
+        tmpS++;
+    }
+
+    return (tolower(*tmpD) - tolower(*tmpS));
 }
 
 char* stringCpy(char* dest, char* src)
@@ -114,6 +135,64 @@ char* stringCat(char* dest, char* src)
     *tmpD = '\0';
 
     return dest;
+}
+
+char* stringNCat(char* dest, char* src, size_t n)
+{
+    char* tmpD = dest + stringLenght(dest) - 1;
+    char* tmpS = src;
+
+    while(*tmpS && n){
+        *tmpD = *tmpS;
+        tmpD++;
+        tmpS++;
+        n--;
+    }
+
+    *tmpD = '\0';
+
+    return dest;
+}
+
+char* stringToUpper(char* str)
+{
+    char* tmp = str;
+
+    while(*tmp){
+        *tmp = toupper(*tmp);
+        tmp++;
+    }
+
+    return str;
+}
+
+char* stringToLower(char* str)
+{
+    char* tmp = str;
+
+    while(*tmp){
+        *tmp = tolower(*tmp);
+        tmp++;
+    }
+
+    return str;
+}
+
+char* stringReverse(char* str)
+{
+    char* i = str;
+    char* j = str + stringLenght(str) - 2; // -1 es '\0'
+    char tmp;
+
+    while(i <= j){
+        tmp = *i;
+        *i = *j;
+        *j = tmp;
+        i++;
+        j--;
+    }
+
+    return str;
 }
 
 char* stringChar(char* dest, int ch)
