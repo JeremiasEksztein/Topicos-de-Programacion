@@ -48,8 +48,8 @@ size_t vectorBuscar(Vector_t* vector, void* elem, int (*Cmp)(void*, void*));
 size_t vectorCantElem(Vector_t* vector);
 size_t vectorTamElem(Vector_t* vector);
 size_t vectorCapacidad(Vector_t* vector);
-void mostrarVector(Vector_t* vector, void (*Mostrar)(void*));
-
 bool vectorVacio(Vector_t* vector);
+
+void mostrarVector(Vector_t* vector, void (*Mostrar)(void*));
 
 #endif

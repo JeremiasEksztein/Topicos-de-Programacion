@@ -51,6 +51,97 @@ int vectorRedimensionar(Vector_t* vector, size_t nuevaCap)
     return EXITO;
 }
 
+int vectorLeerDeTexto(Vector_t* vector, const char* nomArch, int (ParsearTexto)(FILE*, void*))
+{
+    FILE* arch = fopen(nomArch, "rt");
+
+    if(!arch){
+        return ERR_INPUT;
+    }
+
+    void* tmp = malloc(vector->tamElem);
+
+    if(!tmp){
+        fclose(arch);
+        return ERR_SIN_MEM;
+    }
+
+    ParsearTexto(arch, tmp);
+    vectorEmpujar(vector, tmp);
+
+    while(!feof(arch)){
+        ParsearTexto(arch, tmp);
+        vectorEmpujar(vector, tmp);
+    }
+
+    fclose(arch);
+    free(tmp);
+
+    return EXITO;
+}
+
+int vectorEscribirATexto(Vector_t* vector, const char* nomArch, int (ParsearTexto)(FILE*, void*))
+{
+    FILE* arch = fopen(nomArch, "wt");
+
+    if(!arch){
+        return ERR_INPUT;
+    }
+
+    void* i = vector->data;
+    void* ult = vector->data + (vector->cantElem - 1) * vector->tamElem;
+
+    for(; i <= ult; i += vector->tamElem){
+        ParsearTexto(arch, i);
+    }
+
+    fclose(arch);
+
+    return EXITO;
+}
+
+int vectorLeerDeBinario(Vector_t* vector, const char* nomArch)
+{
+    FILE* arch = fopen(nomArch, "rb");
+
+    if(!arch){
+        return ERR_INPUT;
+    }
+
+    fseek(arch, 0, SEEK_END);
+
+    size_t tamArch = ftell(arch) / vector->tamElem;
+
+    fseek(arch, 0, SEEK_SET);
+
+    if(tamArch >= vector->capacidad){
+        if(vectorRedimensionar(vector, tamArch * FACTOR_INCR)){
+            return ERR_SIN_MEM;
+        }
+    }
+
+    fread(vector->data, tamArch * vector->tamElem, tamArch, arch);
+
+    fclose(arch);
+
+    return EXITO;
+}
+
+int vectorEscribirABinario(Vector_t* vector, const char* nomArch)
+{
+    FILE* arch = fopen(nomArch, "wb");
+
+    if(!arch){
+        return ERR_INPUT;
+    }
+
+    fwrite(vector->data, vector->tamElem, vector->cantElem, arch);
+
+    fclose(arch);
+
+    return EXITO;
+}
+
 int vectorInsertar(Vector_t* vector, size_t pos, void* elem)
 {
     if(pos < 0 || pos > vector->cantElem){
