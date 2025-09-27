@@ -53,7 +53,7 @@ int vectorRedimensionar(Vector_t* vector, size_t nuevaCap)
 
 int vectorInsertar(Vector_t* vector, size_t pos, void* elem)
 {
-    if(pos < 1 || pos > vector->cantElem){
+    if(pos < 0 || pos > vector->cantElem){
         return ERR_INPUT;
     }
 
@@ -90,6 +90,33 @@ int vectorEmpujar(Vector_t* vector, void* elem)
     return EXITO;
 }
 
+int vectorInsertarOrd(Vector_t* vector, void* elem, int (*Cmp)(void*, void*))
+{
+    if(vector->cantElem == vector->capacidad){
+        if(vectorRedimensionar(vector, FACTOR_INCR * vector->capacidad)){
+            return ERR_SIN_MEM;
+        }
+    }
+
+    void* i = vector->data;
+    void* j = vector->data + (vector->cantElem - 1) * vector->tamElem; 
+
+    while(Cmp(elem, i) > 0 && i <= j){
+        i +=  vector->tamElem;
+    }
+
+    if(Cmp(elem, i) == 0 && i > j){
+        return ERR_INPUT;
+    }
+
+    memmove(i + vector->tamElem, i, j - i + vector->tamElem);
+
+    memmove(i, elem, vector->tamElem);
+    vector->cantElem++;
+
+    return EXITO;
+}
+
 int vectorEliminarElem(Vector_t* vector, void* elem, int (*Cmp)(void*, void*))
 {
     if(Cmp == NULL){
@@ -107,9 +134,26 @@ int vectorEliminarElem(Vector_t* vector, void* elem, int (*Cmp)(void*, void*))
     return EXITO;
 }
 
+int vectorOrdEliminarElem(Vector_t* vector, void* elem, int (*Cmp)(void*, void*))
+{
+    if(Cmp == NULL){
+        return ERR_INPUT;
+    }
+
+    size_t pos = vectorBuscar(vector, elem, Cmp);
+
+    if(pos == -1){
+        return ERR_INPUT;
+    }
+
+    vectorEliminarPos(vector, --pos);
+
+    return EXITO;
+}
+
 int vectorEliminarPos(Vector_t* vector, size_t pos)
 {
-    if(pos < 1 || pos > vector->cantElem){
+    if(pos < 0 || pos > vector->cantElem){
         return ERR_INPUT;
     }
 
@@ -127,16 +171,22 @@ int vectorOrdenar(Vector_t* vector, int (*Cmp)(void*, void*))
     void* i = vector->data + vector->tamElem;
     void* j = vector->data;
     void* ult = vector->data + (vector->cantElem - 1) * vector->tamElem;
+    void* tmp = malloc(vector->tamElem);
+
+    if(!tmp){
+        return ERR_SIN_MEM;
+    }
     
     for(; i <= ult; i += vector->tamElem){
         j = i - vector->tamElem;
+        memcpy(tmp, i, vector->tamElem);
     
-        while(Cmp(j, i) > 0 && j >= vector->data){
+        while(Cmp(j, tmp) > 0 && j >= vector->data){
             memmove(j + vector->tamElem, j, vector->tamElem);
             j -= vector->tamElem;
         }
 
-        memmove(j + vector->tamElem, i, vector->tamElem);
+        memmove(j + vector->tamElem, tmp, vector->tamElem);
     }
 
     return EXITO;
@@ -147,25 +197,47 @@ size_t vectorBuscar(Vector_t* vector, void* elem, int (*Cmp)(void*, void*))
     void* ori = vector->data;
     void* li = vector->data;
     void* ls = vector->data + (vector->cantElem - 1) * vector->tamElem;
-    void* med = li + ((ls - li) / (2 * vector->tamElem));
+    void* med = li + ((ls - li) / (2 * vector->tamElem)) * vector->tamElem;
 
     int cmp = 0;
 
-    if(ls > li && (cmp = Cmp(med, elem)) != 0){
+    while(li <= ls && (cmp = Cmp(med, elem)) != 0){
         if(cmp > 0){
             ls = med - vector->tamElem;
         }else{
             li = med + vector->tamElem;
         }
 
-        med = li + ((ls - li) / (2 * vector->tamElem));
+        med = li + ((ls - li) / (2 * vector->tamElem)) * vector->tamElem;
     }
 
-    if(ls <= li){
+    if(li > ls){
         return -1;
     }
 
+    printf("%zu\n", ((med - ori) / vector->tamElem));
+
     return ((med - ori) / vector->tamElem);    
+}
+
+size_t vectorCantElem(Vector_t* vector)
+{
+    return vector->cantElem;
+}
+
+size_t vectorTamElem(Vector_t* vector)
+{
+    return vector->tamElem;
+}
+
+size_t vectorCapacidad(Vector_t* vector)
+{
+    return vector->capacidad;
+}
+
+bool vectorVacio(Vector_t* vector)
+{
+    return vector->cantElem == 0 ? true : false;
 }
 
 void mostrarVector(Vector_t* vector, void (*Mostrar)(void*))
@@ -173,7 +245,7 @@ void mostrarVector(Vector_t* vector, void (*Mostrar)(void*))
     void* i = vector->data;
     void* ult = vector->data + (vector->cantElem - 1) * vector->tamElem;
 
-    for(; i < ult; i += vector->tamElem){
+    for(; i <= ult; i += vector->tamElem){
         Mostrar(i);
     }
 }
