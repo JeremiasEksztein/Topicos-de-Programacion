@@ -48,7 +48,7 @@ TablaDeDatos_t* tablaDeDatosCrear(int cantColumnas, char** nombresColumnas, tipo
     dest.nombresCampos = nombresColumnas;
     dest.tiposDeDatos = tiposDeDatos;
 
-    void*** tmp = dest.datos;
+    void** tmp = dest.datos;
 
     tmp = malloc(DEFAULT_CANT_FILAS * sizeof(void*));
 

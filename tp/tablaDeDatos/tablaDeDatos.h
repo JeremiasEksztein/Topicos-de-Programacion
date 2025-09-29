@@ -18,10 +18,10 @@ typedef struct{
     int cantColumnas;
     int cantFilas;
     int capacidadFilas;
-    void*** datos;
+    void** datos; 
 }TablaDeDatos_t;
 
-TablaDeDatos_t* tablaDeDatosCrear(int cantColumnas, char** nombresCampos, tipoDeDato* tiposDeDatos);
+TablaDeDatos_t* tablaDeDatosCrear(int cantColumnas, const char** nombresCampos, tipoDeDato* tiposDeDatos);
 void tablaDeDatosDestruir(TablaDeDatos_t* tabla);
 
 int tablaDeDatosInsertar(TablaDeDatos_t* tabla, void** valores);
