@@ -14,7 +14,7 @@ int main()
     
     mapaDinamicoEscribir(&mapa, 1, 1, 0, 4, 2);
     mapaDinamicoEscribir(&mapa, 1, 1, 4, 8, 5);
-    mapaDinamicoEscribir(&mapa, 1, 1, 12, 4, 2);
+    mapaDinamicoEscribir(&mapa, 1, 2, 12, 4, 2);
 
     uint64_t a = mapaDinamicoLeer(&mapa, 1, 1, 4, 8);
 

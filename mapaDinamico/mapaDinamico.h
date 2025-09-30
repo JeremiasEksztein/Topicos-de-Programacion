@@ -17,10 +17,6 @@ typedef struct{
     size_t columnas;
 }MapaDinamico_t;
 
-/*Matriz de filas y columnas, cada elemento en la matriz es un uint64_t, se guarda en el struct: El puntero a la matriz, las filas, las columnas
-y un puntero a los rangos
-*/
-
 int mapaDinamicoCrear(MapaDinamico_t* mapa, size_t filas, size_t columnas);
 int mapaDinamicoDestruir(MapaDinamico_t* mapa);
 
@@ -29,7 +25,6 @@ uint64_t mapaDinamicoLeer(MapaDinamico_t* mapa, size_t fila, size_t columna, int
 
 size_t mapaDinamicoFilas(MapaDinamico_t* mapa);
 size_t mapaDinamicoColumnas(MapaDinamico_t* mapa);
-int* mapaDinamicoRangos(MapaDinamico_t* mapa);
 
 void mapaDinamicoMostrar(MapaDinamico_t* mapa);
 
