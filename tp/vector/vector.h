@@ -23,6 +23,8 @@ typedef struct vector
     size_t capacidad;    
 }Vector_t;
 
+int bubbleSort(Vector_t* vector, int (*Cmp)(void*, void*));
+
 int vectorCrear(Vector_t* vector, size_t tamElem);
 int vectorDestruir(Vector_t* vector);
 

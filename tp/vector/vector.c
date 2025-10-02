@@ -1,15 +1,50 @@
 #include "vector.h"
 
+// 131s
+/*
+int meminte(void* dest, void* src, size_t n);
+
+int meminte(void* restrict dest, void* restrict src, size_t n)
+{   
+    long* d = dest;
+    long* s = src;
+    int resto = n % sizeof(long);
+    
+    for(n /= sizeof(long); n > 0; --n){
+        *d ^= *s; // D = D ^ S
+        *s ^= *d;           // S = S ^ D
+        *d++ ^= *s++;   // D = S ^ D
+    }
+
+    char* da = (char*)d;
+    char* sa = (char*)s;
+
+    for(; resto > 0; --resto){
+        *da ^= *sa; // D = D ^ S
+        *sa ^= *da;           // S = S ^ D
+        *da++ ^= *sa++;   // D = S ^ D
+    }
+
+    return 0;
+}
+*/
+
+
 int meminte(void* dest, void* src, void* tmp, size_t n);
+
+// 49s 49s 50s
+
 
 int meminte(void* dest, void* src, void* tmp, size_t n)
 {
     memcpy(tmp, dest, n);
     memcpy(dest, src, n);
     memcpy(src, tmp, n);
-
     return EXITO;
 }
+
+
+
 
 int vectorCrear(Vector_t* vector, size_t tamElem)
 {
@@ -120,7 +155,7 @@ int vectorLeerDeBinario(Vector_t* vector, const char* nomArch)
         }
     }
 
-    fread(vector->data, tamArch * vector->tamElem, tamArch, arch);
+    !fread(vector->data, tamArch * vector->tamElem, tamArch, arch);
 
     fclose(arch);
 
@@ -256,6 +291,30 @@ int vectorEliminarPos(Vector_t* vector, size_t pos)
 
     return EXITO;
 }
+
+int bubbleSort(Vector_t* vector, int (*Cmp)(void*, void*))
+{
+    void* i = vector->data;
+    void* j = vector->data;
+    void* ult = vector->data + (vector->cantElem - 2) * vector->tamElem;
+    void* limJ = ult + vector->tamElem;
+
+    void* tmp = malloc(vector->tamElem);
+
+    for(; i < ult; i += vector->tamElem, limJ -= vector->tamElem){
+        for(j = vector->data; j < limJ; j += vector->tamElem){
+            if(Cmp(j, j + vector->tamElem) > 0){
+                //meminte(j, j + vector->tamElem, vector->tamElem);
+                meminte(j, j + vector->tamElem, tmp, vector->tamElem);
+            }
+        }
+    }
+
+    free(tmp);
+
+    return 0;
+}
+
 
 int vectorOrdenar(Vector_t* vector, int (*Cmp)(void*, void*))
 {
