@@ -1,11 +1,12 @@
 #include "vector.h"
+#include "iterador.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
 
-#define ELEMS 100000
+#define ELEMS 10
 
-int compararEmpleado(const void* emplA, const void* emplB);
+int compararEmpleado(void* emplA, void* emplB);
 void mostrarEmpleado(void* empleado);
 
 int compararInt(void* intA, void* intB);
@@ -27,6 +28,7 @@ int main()
     srand(1);
 
     Empleado tmp;
+    Empleado* ptr;
 
     vectorCrear(&vecA, sizeof(Empleado));
 
@@ -37,13 +39,25 @@ int main()
     
     int seg_ini = time(NULL);
 
-    //vectorOrdenar(&vecA, compararEmpleado);
+    vectorOrdenar(&vecA, compararEmpleado);
 
-    qsort(vecA.data, vecA.cantElem, vecA.tamElem, compararEmpleado);
+    Iterador_t iterA;
+
+    iteradorCrear(&iterA, &vecA);
+
+    while((ptr = iteradorSiguiente(&iterA))){
+        mostrarEmpleado(ptr);
+    }
+
+    iteradorMoverCursor(&iterA, -2, ITER_FIN);
+
+    while((ptr = iteradorSiguiente(&iterA))){
+        mostrarEmpleado(ptr);
+    }
+
+    iteradorDestruir(&iterA);
 
     int seg_fin = time(NULL);
-
-    mostrarVector(&vecA, mostrarEmpleado);
 
     printf("%d\n", seg_fin - seg_ini);
 
@@ -59,7 +73,7 @@ void mostrarEmpleado(void* empleado)
     printf("%s\t%s\t%05d\t $%0.2f\n", tmp->nomApe, tmp->departamento, tmp->legajo, tmp->sueldo);
 }
 
-int compararEmpleado(const void* emplA, const void* emplB)
+int compararEmpleado(void* emplA, void* emplB)
 {
     Empleado* tmpA = (Empleado*) emplA;
     Empleado* tmpB = (Empleado*) emplB;

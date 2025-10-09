@@ -1,39 +1,6 @@
 #include "vector.h"
 
-// 131s
-/*
-int meminte(void* dest, void* src, size_t n);
-
-int meminte(void* restrict dest, void* restrict src, size_t n)
-{   
-    long* d = dest;
-    long* s = src;
-    int resto = n % sizeof(long);
-    
-    for(n /= sizeof(long); n > 0; --n){
-        *d ^= *s; // D = D ^ S
-        *s ^= *d;           // S = S ^ D
-        *d++ ^= *s++;   // D = S ^ D
-    }
-
-    char* da = (char*)d;
-    char* sa = (char*)s;
-
-    for(; resto > 0; --resto){
-        *da ^= *sa; // D = D ^ S
-        *sa ^= *da;           // S = S ^ D
-        *da++ ^= *sa++;   // D = S ^ D
-    }
-
-    return 0;
-}
-*/
-
-
 int meminte(void* dest, void* src, void* tmp, size_t n);
-
-// 49s 49s 50s
-
 
 int meminte(void* dest, void* src, void* tmp, size_t n)
 {
@@ -43,8 +10,64 @@ int meminte(void* dest, void* src, void* tmp, size_t n)
     return EXITO;
 }
 
+/*  
+*   @brief Inicializar el vector de tipo Vector_t
+*   @param
+*       vector : Puntero a Vector_t
+*       tamElem : Tamaño del elemento que guardara el vector
+*   @return
+*       EXITO si se pudo crear el vector, ERR_SIN_MEM si no hay memoria suficiente
+*   @details 
+*       vector tiene que ser un puntero valido, tamElem un numero positivo.
+*       vector->data tiene que ser un puntero nulo     
+*/
 
+int map(Vector_t* vector, int (*Mapear)(void* dato))
+{
+    void* i = vector->data;
+    void* ult = vector->data + (vector->cantElem - 1) * vector->tamElem;
+    
+    for(; i < ult; i += vector->tamElem){
+        Mapear(i);
+    }
 
+    return EXITO;
+}
+
+Vector_t* filter(Vector_t* vector, int (*Predicado)(void* dato))
+{
+    Vector_t* tmp = malloc(sizeof(Vector_t));
+
+    if(!tmp){
+        return NULL;
+    }
+
+    vectorCrear(tmp, vector->tamElem);
+
+    void* i = vector->data;
+    void* ult = vector->data + (vector->cantElem - 1) * vector->tamElem;
+
+    for(; i < ult; i += vector->tamElem){
+        if(Predicado(i)){
+            vectorEmpujar(tmp, i);
+        }
+    }
+
+    return tmp;
+}
+
+void* reduce(Vector_t* vector, void* (*Reductor)(void* dato, void* estado))
+{
+    void* i = vector->data;
+    void* ult = vector->data + (vector->cantElem - 1) * vector->tamElem;
+    void* acumulador = NULL;
+
+    for(; i < ult; i += vector->tamElem){
+        acumulador = Reductor(i, acumulador);
+    }
+
+    return acumulador;
+}
 
 int vectorCrear(Vector_t* vector, size_t tamElem)
 {
@@ -155,7 +178,7 @@ int vectorLeerDeBinario(Vector_t* vector, const char* nomArch)
         }
     }
 
-    !fread(vector->data, tamArch * vector->tamElem, tamArch, arch);
+    (fread(vector->data, tamArch * vector->tamElem, tamArch, arch));
 
     fclose(arch);
 
@@ -291,30 +314,6 @@ int vectorEliminarPos(Vector_t* vector, size_t pos)
 
     return EXITO;
 }
-
-int bubbleSort(Vector_t* vector, int (*Cmp)(void*, void*))
-{
-    void* i = vector->data;
-    void* j = vector->data;
-    void* ult = vector->data + (vector->cantElem - 2) * vector->tamElem;
-    void* limJ = ult + vector->tamElem;
-
-    void* tmp = malloc(vector->tamElem);
-
-    for(; i < ult; i += vector->tamElem, limJ -= vector->tamElem){
-        for(j = vector->data; j < limJ; j += vector->tamElem){
-            if(Cmp(j, j + vector->tamElem) > 0){
-                //meminte(j, j + vector->tamElem, vector->tamElem);
-                meminte(j, j + vector->tamElem, tmp, vector->tamElem);
-            }
-        }
-    }
-
-    free(tmp);
-
-    return 0;
-}
-
 
 int vectorOrdenar(Vector_t* vector, int (*Cmp)(void*, void*))
 {

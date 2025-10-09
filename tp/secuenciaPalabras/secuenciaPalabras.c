@@ -1,4 +1,4 @@
-#include "secuenciaPalabra.h"
+#include "secuenciaPalabras.h"
 
 int secuenciaPalabrasCrear(SecuenciaPalabras_t* sec, char* cadena)
 {
