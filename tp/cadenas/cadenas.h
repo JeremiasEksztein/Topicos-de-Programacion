@@ -17,6 +17,8 @@ char* stringNCat(char* dest, char* src, size_t n);
 char* stringToUpper(char* str);
 char* stringToLower(char* str);
 char* stringReverse(char* str);
+char* stringRemove(char* str, int ch);
+char* stringReplace(char* str, int dest, int src);
 
 //Examinacion de cadenas
 

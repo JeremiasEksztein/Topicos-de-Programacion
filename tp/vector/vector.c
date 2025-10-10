@@ -10,18 +10,6 @@ int meminte(void* dest, void* src, void* tmp, size_t n)
     return EXITO;
 }
 
-/*  
-*   @brief Inicializar el vector de tipo Vector_t
-*   @param
-*       vector : Puntero a Vector_t
-*       tamElem : Tamaño del elemento que guardara el vector
-*   @return
-*       EXITO si se pudo crear el vector, ERR_SIN_MEM si no hay memoria suficiente
-*   @details 
-*       vector tiene que ser un puntero valido, tamElem un numero positivo.
-*       vector->data tiene que ser un puntero nulo     
-*/
-
 int map(Vector_t* vector, int (*Mapear)(void* dato))
 {
     void* i = vector->data;

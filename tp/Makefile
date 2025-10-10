@@ -1,28 +1,31 @@
 CC = gcc
 CFLAGS = -Wall -Werror -g -std=c99
 
-dirBackup = ./dirBackup
+SRC_DIRS = master vector secuenciaPalabras proceso cadenas comunes tablaDeDatos
+SRC = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
+OBJ = $(SRC:.c=.o)
+
+TARGET = pruebaTP
+
 nomAperturas = serie_ipc_aperturas.csv
 nomDivisiones = serie_ipc_divisiones.csv
+dirBackup = backup
 
-dirCadenas = ./cadenas
-dirComunes = ./comunes
-dirMaster = ./master
-dirProceso = ./proceso
-dirSecPal = ./SecuenciaPalabras
-dirVector = ./vector
+.PHONY: all clean restaurarCSV
 
-all: pruebaTP
+all: $(TARGET)
 
-pruebaTP: 
-	$(CC) $(CFLAGS) master.c -L. 
+$(TARGET): $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $(OBJ)
 
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 restaurarCSV:
-	rm nomAperturas nomDivisiones
+	rm -f $(nomAperturas) $(nomDivisiones)
 	cp $(dirBackup)/$(nomAperturas) ./
 	cp $(dirBackup)/$(nomDivisiones) ./
 
-clear:
-	rm pruebaTP
+clean:
+	rm -f $(OBJ) $(TARGET)
 

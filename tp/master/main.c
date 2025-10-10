@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include "../vector/vector.h"
 #include "../secuenciaPalabras/secuenciaPalabras.h"
-#include "../proceso"
+#include "../proceso/proceso.h"
 
 #define CANT_ARGS 3
 
 #define ARG_DIVISIONES_NOM 1
 #define ARG_APERTURAS_NOM 2
 
+// main.c serie_ipc_divisiones.csv serie_ipc_aperturas.csv
 
 int main(int argc, char* argv[])
 {
@@ -27,5 +28,14 @@ int main(int argc, char* argv[])
 
     corregirCampos(&vecAperturas, corregirIPCAperturas);
 
-    return 0;
+    herramientaAjustarMontosIPCDivisiones(&vecDivisiones);
+
+    clasificarBySDivisiones(&vecDivisiones);
+
+    herramientaCalcularAlquiler(&vecAperturas);
+
+    vectorDestruir(&vecDivisiones);
+    vectorDestruir(&vecAperturas);
+
+    return EXITO;
 }
