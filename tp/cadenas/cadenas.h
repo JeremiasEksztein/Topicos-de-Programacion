@@ -18,7 +18,8 @@ char* stringToUpper(char* str);
 char* stringToLower(char* str);
 char* stringReverse(char* str);
 char* stringRemove(char* str, int ch);
-char* stringReplace(char* str, int dest, int src);
+char* stringReplace(char* str, int ori, int new);
+char* stringTrim(char* dest, char* str, int i, int j);
 
 //Examinacion de cadenas
 

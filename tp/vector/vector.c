@@ -102,7 +102,7 @@ int vectorLeerDeTexto(Vector_t* vector, const char* nomArch, int (ParsearTexto)(
     FILE* arch = fopen(nomArch, "rt");
 
     if(!arch){
-        return ERR_INPUT;
+        return ERR_USUARIO;
     }
 
     void* tmp = malloc(vector->tamElem);
@@ -131,7 +131,7 @@ int vectorEscribirATexto(Vector_t* vector, const char* nomArch, int (ParsearText
     FILE* arch = fopen(nomArch, "wt");
 
     if(!arch){
-        return ERR_INPUT;
+        return ERR_USUARIO;
     }
 
     void* i = vector->data;
@@ -151,7 +151,7 @@ int vectorLeerDeBinario(Vector_t* vector, const char* nomArch)
     FILE* arch = fopen(nomArch, "rb");
 
     if(!arch){
-        return ERR_INPUT;
+        return ERR_USUARIO;
     }
 
     fseek(arch, 0, SEEK_END);
@@ -178,7 +178,7 @@ int vectorEscribirABinario(Vector_t* vector, const char* nomArch)
     FILE* arch = fopen(nomArch, "wb");
 
     if(!arch){
-        return ERR_INPUT;
+        return ERR_USUARIO;
     }
 
     fwrite(vector->data, vector->tamElem, vector->cantElem, arch);
@@ -191,7 +191,7 @@ int vectorEscribirABinario(Vector_t* vector, const char* nomArch)
 int vectorInsertar(Vector_t* vector, size_t pos, void* elem)
 {
     if(pos < 0 || pos > vector->cantElem){
-        return ERR_INPUT;
+        return ERR_USUARIO;
     }
 
     if(vector->cantElem == vector->capacidad){
@@ -243,7 +243,7 @@ int vectorInsertarOrd(Vector_t* vector, void* elem, int (*Cmp)(void*, void*))
     }
 
     if(Cmp(elem, i) == 0 && i > j){
-        return ERR_INPUT;
+        return ERR_USUARIO;
     }
 
     memmove(i + vector->tamElem, i, j - i + vector->tamElem);
@@ -257,13 +257,13 @@ int vectorInsertarOrd(Vector_t* vector, void* elem, int (*Cmp)(void*, void*))
 int vectorEliminarElem(Vector_t* vector, void* elem, int (*Cmp)(void*, void*))
 {
     if(Cmp == NULL){
-        return ERR_INPUT;
+        return ERR_USUARIO;
     }
 
     size_t pos = vectorBuscar(vector, elem, Cmp);
 
     if(!pos){
-        return ERR_INPUT;
+        return ERR_USUARIO;
     }
 
     vectorEliminarPos(vector, pos);
@@ -274,13 +274,13 @@ int vectorEliminarElem(Vector_t* vector, void* elem, int (*Cmp)(void*, void*))
 int vectorOrdEliminarElem(Vector_t* vector, void* elem, int (*Cmp)(void*, void*))
 {
     if(Cmp == NULL){
-        return ERR_INPUT;
+        return ERR_USUARIO;
     }
 
     size_t pos = vectorBuscar(vector, elem, Cmp);
 
     if(pos == -1){
-        return ERR_INPUT;
+        return ERR_USUARIO;
     }
 
     vectorEliminarPos(vector, --pos);
@@ -291,7 +291,7 @@ int vectorOrdEliminarElem(Vector_t* vector, void* elem, int (*Cmp)(void*, void*)
 int vectorEliminarPos(Vector_t* vector, size_t pos)
 {
     if(pos < 0 || pos > vector->cantElem){
-        return ERR_INPUT;
+        return ERR_USUARIO;
     }
 
     void* i = vector->data + pos * vector->tamElem;
@@ -382,7 +382,7 @@ void mostrarVector(Vector_t* vector, void (*Mostrar)(void*))
     void* i = vector->data;
     void* ult = vector->data + (vector->cantElem - 1) * vector->tamElem;
 
-    for(; i <= ult; i += vector->tamElem){
+    for(; i < ult; i += vector->tamElem){
         Mostrar(i);
     }
 }

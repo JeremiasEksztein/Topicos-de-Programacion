@@ -16,7 +16,7 @@
 #define DIVISIONES_CLASIF_LEN 30
 #define DIVISIONES_INDICES_LEN 15
 #define DIVISIONES_REGION_LEN 9
-#define DIVISIONES_PERIODO_LEN 25
+#define DIVISIONES_PERIODO_LEN 35
 
 #define APERTURAS_COD_LEN 20
 #define APERTURAS_DESC_LEN 30
@@ -74,12 +74,12 @@ int decodificarFechaDivisiones(IPCDivisiones* reg, int* decod);
 int convertirFechaDivisiones(IPCDivisiones* reg);
 int normalizarDescripcionDivisiones(IPCDivisiones* reg);
 
-void pasarATitulo(Palabra_t* pal);
+void palabraATitulo(Palabra_t* pal);
 void palabraAMinuscula(Palabra_t* pal);
 
 int corregirIPCAperturas(void* reg);
 
-int corregirFormatoFechaAperturas(void* reg);
+int corregirFormatoFechaAperturas(IPCAperturas* reg);
 
 
 int herramientaAjustarMontosIPCDivisiones(Vector_t* vec);

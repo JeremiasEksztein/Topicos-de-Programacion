@@ -6,14 +6,11 @@
 #include <stdlib.h> 
 #include <memory.h>
 #include <stddef.h>
+#include "../comunes/comunes.h"
 
 #define FACTOR_INCR 2
 
 #define DEFAULT_CAP 10
-
-#define EXITO 0
-#define ERR_SIN_MEM 1
-#define ERR_INPUT 2
 
 typedef struct vector
 {

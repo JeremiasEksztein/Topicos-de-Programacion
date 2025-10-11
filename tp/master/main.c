@@ -1,7 +1,10 @@
 #include <stdio.h>
+#include "../comunes/comunes.h"
 #include "../vector/vector.h"
 #include "../secuenciaPalabras/secuenciaPalabras.h"
 #include "../proceso/proceso.h"
+
+void imprimirRegistroDivisiones(void* reg);
 
 #define CANT_ARGS 3
 
@@ -13,20 +16,29 @@
 int main(int argc, char* argv[])
 {
     if(argc != CANT_ARGS){
-        return -1;
+        return ERR_USUARIO;
     }
 
     Vector_t vecDivisiones, vecAperturas;
 
-    vectorCrear(&vecDivisiones, sizeof(IPCDivisiones));
-    vectorLeerDeTexto(&vecDivisiones, argv[ARG_DIVISIONES_NOM], parsearIPCDivisiones);
+    TRY(vectorCrear(&vecDivisiones, sizeof(IPCDivisiones)));
+    TRY(vectorLeerDeTexto(&vecDivisiones, argv[ARG_DIVISIONES_NOM], parsearIPCDivisiones));
 
-    corregirCampos(&vecDivisiones, corregirIPCDivisiones);
+    //mostrarVector(&vecDivisiones, imprimirRegistroDivisiones);
 
-    vectorCrear(&vecAperturas, sizeof(IPCAperturas));
-    vectorLeerDeTexto(&vecAperturas, argv[ARG_APERTURAS_NOM], parsearIPCAperturas);
+    TRY(corregirCampos(&vecDivisiones, corregirIPCDivisiones));
 
-    corregirCampos(&vecAperturas, corregirIPCAperturas);
+    TRY(vectorCrear(&vecAperturas, sizeof(IPCAperturas)));
+    TRY(vectorLeerDeTexto(&vecAperturas, argv[ARG_APERTURAS_NOM], parsearIPCAperturas));
+
+    TRY(corregirCampos(&vecAperturas, corregirIPCAperturas));
+
+    vectorDestruir(&vecDivisiones);
+    vectorDestruir(&vecAperturas);
+
+    return 0;
+
+    /*
 
     herramientaAjustarMontosIPCDivisiones(&vecDivisiones);
 
@@ -38,4 +50,14 @@ int main(int argc, char* argv[])
     vectorDestruir(&vecAperturas);
 
     return EXITO;
+
+    */
+}
+
+
+void imprimirRegistroDivisiones(void* reg)
+{
+    IPCDivisiones* tmp = reg;
+
+    printf("%s %s %s %s %s %s %s %s\n", tmp->cod, tmp->desc, tmp->clasif, tmp->indiceIPC, tmp->varMensIPC, tmp->varAnualIPC, tmp->region, tmp->periodo);
 }

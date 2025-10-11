@@ -1,8 +1,9 @@
 CC = gcc
 CFLAGS = -Wall -Werror -g -std=c99
 
-SRC_DIRS = master vector secuenciaPalabras proceso cadenas comunes tablaDeDatos
-SRC = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
+
+SRC_DIRS = master vector secuenciaPalabras proceso cadenas comunes
+SRC = $(foreach dir,$(SRC_DIRS),$(filter-out %/prueba.c %/pruebaVector.c,$(wildcard $(dir)/*.c)))
 OBJ = $(SRC:.c=.o)
 
 TARGET = pruebaTP
@@ -28,4 +29,6 @@ restaurarCSV:
 
 clean:
 	rm -f $(OBJ) $(TARGET)
+
+
 
