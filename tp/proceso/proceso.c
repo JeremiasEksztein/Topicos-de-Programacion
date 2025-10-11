@@ -21,7 +21,7 @@ int parsearIPCDivisiones(FILE* arch, void* reg)
     }
 
     i++;
-    stringCopy(tmp->periodo, i);
+    stringNCopy(tmp->periodo, i, DIVISIONES_PERIODO_LEN);
     *(--i) = '\0';
 
     if(!(i = stringRChar(buffer, ';'))){
@@ -29,7 +29,7 @@ int parsearIPCDivisiones(FILE* arch, void* reg)
     }
 
     i++;
-    stringCopy(tmp->region, i);
+    stringNCopy(tmp->region, i, DIVISIONES_REGION_LEN);
     *(--i) = '\0';
 
     if(!(i = stringRChar(buffer, ';'))){
@@ -37,7 +37,7 @@ int parsearIPCDivisiones(FILE* arch, void* reg)
     }
 
     i++;
-    stringCopy(tmp->varAnualIPC, i);
+    stringNCopy(tmp->varAnualIPC, i, DIVISIONES_INDICES_LEN);
     *(--i) = '\0';
 
     if(!(i = stringRChar(buffer, ';'))){
@@ -45,7 +45,7 @@ int parsearIPCDivisiones(FILE* arch, void* reg)
     }
 
     i++;
-    stringCopy(tmp->varMensIPC, i);
+    stringNCopy(tmp->varMensIPC, i, DIVISIONES_INDICES_LEN);
     *(--i) = '\0';
 
     if(!(i = stringRChar(buffer, ';'))){
@@ -53,7 +53,7 @@ int parsearIPCDivisiones(FILE* arch, void* reg)
     }
 
     i++;
-    stringCopy(tmp->indiceIPC, i);
+    stringNCopy(tmp->indiceIPC, i, DIVISIONES_INDICES_LEN);
     *(--i) = '\0';
 
     if(!(i = stringRChar(buffer, ';'))){
@@ -61,7 +61,7 @@ int parsearIPCDivisiones(FILE* arch, void* reg)
     }
 
     i++;
-    stringCopy(tmp->clasif, i);
+    stringNCopy(tmp->clasif, i, DIVISIONES_CLASIF_LEN);
     *(--i) = '\0';
 
     if(!(i = stringRChar(buffer, ';'))){
@@ -69,12 +69,12 @@ int parsearIPCDivisiones(FILE* arch, void* reg)
     }
 
     i++;
-    stringCopy(tmp->desc, i);
+    stringNCopy(tmp->desc, i, DIVISIONES_DESC_LEN);
     *(--i) = '\0';
 
-    stringCopy(tmp->cod, buffer);
+    stringNCopy(tmp->cod, buffer, DIVISIONES_COD_LEN);
 
-//    printf("%s %s %s %s %s %s %s %s\n", tmp->cod, tmp->desc, tmp->clasif, tmp->indiceIPC, tmp->varMensIPC, tmp->varAnualIPC, tmp->region, tmp->periodo);
+    //printf("%s %s %s %s %s %s %s %s\n", tmp->cod, tmp->desc, tmp->clasif, tmp->indiceIPC, tmp->varMensIPC, tmp->varAnualIPC, tmp->region, tmp->periodo);
     
     return EXITO;
 }
@@ -98,7 +98,7 @@ int parsearIPCAperturas(FILE* arch, void* reg)
     }
 
     i++;
-    stringCopy(tmp->region, i);
+    stringNCopy(tmp->region, i, APERTURAS_REGION_LEN);
     *(--i) = '\0';
 
     if(!(i = strrchr(buffer, ';'))){
@@ -106,7 +106,7 @@ int parsearIPCAperturas(FILE* arch, void* reg)
     }
 
     i++;
-    stringCopy(tmp->varAnualIPC, i);
+    stringNCopy(tmp->varAnualIPC, i, APERTURAS_INDICES_LEN);
     *(--i) = '\0';
 
     if(!(i = strrchr(buffer, ';'))){
@@ -114,7 +114,7 @@ int parsearIPCAperturas(FILE* arch, void* reg)
     }
 
     i++;
-    stringCopy(tmp->varMensIPC, i);
+    stringNCopy(tmp->varMensIPC, i, APERTURAS_INDICES_LEN);
     *(--i) = '\0';
 
     if(!(i = strrchr(buffer, ';'))){
@@ -122,7 +122,7 @@ int parsearIPCAperturas(FILE* arch, void* reg)
     }
 
     i++;
-    stringCopy(tmp->indiceIPC, i);
+    stringNCopy(tmp->indiceIPC, i, APERTURAS_INDICES_LEN);
     *(--i) = '\0';
 
     if(!(i = strrchr(buffer, ';'))){
@@ -130,7 +130,7 @@ int parsearIPCAperturas(FILE* arch, void* reg)
     }
 
     i++;
-    stringCopy(tmp->periodo, i);
+    stringNCopy(tmp->periodo, i, APERTURAS_PERIODO_LEN);
     *(--i) = '\0';
 
     if(!(i = strrchr(buffer, ';'))){
@@ -138,7 +138,7 @@ int parsearIPCAperturas(FILE* arch, void* reg)
     }
 
     i++;
-    stringCopy(tmp->clasif, i);
+    stringNCopy(tmp->clasif, i, APERTURAS_CLASIF_LEN);
     *(--i) = '\0';
 
     if(!(i = strrchr(buffer, ';'))){
@@ -146,10 +146,10 @@ int parsearIPCAperturas(FILE* arch, void* reg)
     }
 
     i++;
-    sscanf(i, "%s", tmp->desc);
+    stringNCopy(tmp->desc, i, APERTURAS_DESC_LEN);
     *(--i) = '\0';
 
-    stringCopy(tmp->cod, buffer);
+    stringNCopy(tmp->cod, buffer, APERTURAS_COD_LEN);
     
     return EXITO;
 }
@@ -178,13 +178,12 @@ int corregirIPCDivisiones(void* reg)
     int decodificador[10] = {'4', '6', '8', '7', '1', '5', '5', '0', '3', '2'};
 
     decodificarFechaDivisiones(tmp, decodificador);
-
-    printf("%s | %s | %s | %s | %s | %s | %s | %s\n", tmp->cod, tmp->desc, tmp->clasif, tmp->indiceIPC, tmp->varMensIPC, tmp->varAnualIPC, tmp->region, tmp->periodo);
-
     convertirFechaDivisiones(tmp);
     normalizarDescripcionDivisiones(tmp);
     stringReplace(tmp->indiceIPC, ',', '.');
-    
+    stringReplace(tmp->varAnualIPC, ',', '.');
+    stringReplace(tmp->varMensIPC, ',', '.');
+
     return EXITO;
 }
 
@@ -219,7 +218,8 @@ int convertirFechaDivisiones(IPCDivisiones* reg)
     int mes;
 
     stringNCopy(a, i, 4);
-    stringNCopy(m, i + 4, 3);
+
+    stringNCopy(m, i + 4, 2);
     mes = atoi(m);
 
     if(mes < 1 || mes > 12){
@@ -237,20 +237,23 @@ int normalizarDescripcionDivisiones(IPCDivisiones* reg)
     Palabra_t pal;
 
     char* i = reg->desc;
-    char buf[DIVISIONES_DESC_LEN];
+    char buf[100];
 
     secuenciaPalabrasCrear(&lect, i);
     secuenciaPalabrasCrear(&escr, buf);
 
     secuenciaPalabrasLeer(&lect, &pal);
     palabraModificar(&pal, palabraATitulo);
-    palabraMostrar(buf);
     secuenciaPalabrasEscribir(&escr, &pal);
+    secuenciaPalabrasEscribirCaract(&escr, ' ');
+
+    secuenciaPalabrasLeer(&lect, &pal);
 
     while(!secuenciaPalabrasEsFin(&lect)){
-        secuenciaPalabrasLeer(&lect, &pal);
         palabraModificar(&pal, palabraAMinuscula);
         secuenciaPalabrasEscribir(&escr, &pal);
+        secuenciaPalabrasEscribirCaract(&escr, ' ');
+        secuenciaPalabrasLeer(&lect, &pal);
     }
 
     secuenciaPalabrasCerrar(&escr);
@@ -288,6 +291,8 @@ int corregirIPCAperturas(void* reg)
 
     corregirFormatoFechaAperturas(tmp);
     stringReplace(tmp->indiceIPC, ',', '.');
+    stringReplace(tmp->varAnualIPC, ',', '.');
+    stringReplace(tmp->varMensIPC, ',', '.');
 
     return EXITO;
 }
@@ -299,7 +304,7 @@ int corregirFormatoFechaAperturas(IPCAperturas* reg)
     char a[5], m[3];
 
     stringNCopy(a, i, 4);
-    stringTrim(m, i, 4, 7);
+    stringNCopy(m, i + 4, 2);
 
     sprintf(i, "%s-%s-01", a, m);
 

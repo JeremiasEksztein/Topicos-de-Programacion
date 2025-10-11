@@ -19,7 +19,11 @@ all: $(TARGET)
 $(TARGET): $(OBJ)
 	$(CC) $(CFLAGS) -o $@ $(OBJ)
 
-%.o: %.c
+
+# Listado de headers
+HDR = $(wildcard master/*.h vector/*.h secuenciaPalabras/*.h proceso/*.h cadenas/*.h comunes/*.h tablaDeDatos/*.h)
+
+%.o: %.c $(HDR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 restaurarCSV:

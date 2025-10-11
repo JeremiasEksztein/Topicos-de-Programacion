@@ -91,6 +91,8 @@ int vectorRedimensionar(Vector_t* vector, size_t nuevaCap)
         return ERR_SIN_MEM;
     }
 
+    printf("Realocacion exitosa de %zu a %zu bytes\n", vector->capacidad * vector->tamElem, nuevaCap * vector->tamElem);
+
     vector->data = nuevaData;
     vector->capacidad = nuevaCap;
 
@@ -137,7 +139,7 @@ int vectorEscribirATexto(Vector_t* vector, const char* nomArch, int (ParsearText
     void* i = vector->data;
     void* ult = vector->data + (vector->cantElem - 1) * vector->tamElem;
 
-    for(; i <= ult; i += vector->tamElem){
+    for(; i < ult; i += vector->tamElem){
         ParsearTexto(arch, i);
     }
 
