@@ -178,6 +178,9 @@ int corregirIPCDivisiones(void* reg)
     int decodificador[10] = {'4', '6', '8', '7', '1', '5', '5', '0', '3', '2'};
 
     decodificarFechaDivisiones(tmp, decodificador);
+
+    printf("%s | %s | %s | %s | %s | %s | %s | %s\n", tmp->cod, tmp->desc, tmp->clasif, tmp->indiceIPC, tmp->varMensIPC, tmp->varAnualIPC, tmp->region, tmp->periodo);
+
     convertirFechaDivisiones(tmp);
     normalizarDescripcionDivisiones(tmp);
     stringReplace(tmp->indiceIPC, ',', '.');
@@ -190,9 +193,13 @@ int decodificarFechaDivisiones(IPCDivisiones* reg, int* decod)
     char* i = reg->periodo;
 
     while(*i){
-        *i = decod[*i - 48];
+        if(*i >= '0' && *i <= '9'){
+            *i = decod[*i - '0'];
+        } else {
+            return ERR_REGISTRO;
+        }
         i++;
-    }    
+    }      
 
     return EXITO;   
 }
@@ -214,7 +221,7 @@ int convertirFechaDivisiones(IPCDivisiones* reg)
     stringNCopy(a, i, 4);
     stringNCopy(m, i + 4, 3);
     mes = atoi(m);
-    
+
     if(mes < 1 || mes > 12){
         return ERR_REGISTRO;
     }
@@ -237,6 +244,7 @@ int normalizarDescripcionDivisiones(IPCDivisiones* reg)
 
     secuenciaPalabrasLeer(&lect, &pal);
     palabraModificar(&pal, palabraATitulo);
+    palabraMostrar(buf);
     secuenciaPalabrasEscribir(&escr, &pal);
 
     while(!secuenciaPalabrasEsFin(&lect)){
