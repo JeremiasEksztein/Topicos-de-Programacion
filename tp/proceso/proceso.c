@@ -314,7 +314,27 @@ int corregirFormatoFechaAperturas(IPCAperturas* reg)
 
 
 int herramientaAjustarMontoIPCDivisiones(Vector_t* divs)
-{
+{/*
+    Vector_t* tmp;
+    MenuDinamico_t menuDeAjustar;
+
+    menuDinamicoCrear(&menuDeAjustar, ...);
+
+    void* respuestas = menuPreguntar();
+
+    tmp = filter(&divs, filtrarIPCDivisiones, respuestas);
+
+    IPCDivisiones* i = vectorObtener(tmp, 0);
+    IPCDivisiones* f = vectorObtener(tmp, 1);
+
+    double varPor = ((atof(f->indiceIPC) / atof((i->indiceIPC - 1)))) * 100;
+    double montoAjus = respuestas.monto * (1 + varPor);
+
+    printf("El monto %0.2lf en la region %s durante %s, ajustado en la misma region al %s vale %0.2lf\n", respuestas.monto, respuestas.region, respuestas.periodoIni, respuestas.periodoFin);
+
+    menuDinamicoDestruir(&menuDeAjustar);
+    vectorDestruir(tmp);
+*/
     return EXITO;
 }
 

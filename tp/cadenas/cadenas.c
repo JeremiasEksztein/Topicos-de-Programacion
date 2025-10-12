@@ -376,3 +376,15 @@ size_t stringLenght(char* str)
 
     return ++sum;
 }
+
+int memzero(void* ptr, size_t n)
+{
+    char* tmp = ptr;
+
+    while(n){
+        *tmp = 0;
+        tmp++;
+    }
+
+    return 0;
+}

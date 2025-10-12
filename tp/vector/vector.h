@@ -21,7 +21,7 @@ typedef struct vector
 }Vector_t;
 
 int map(Vector_t* vector, int (*Mapear)(void*));
-Vector_t* filter(Vector_t* vector, int (*Predicado)(void*));
+Vector_t* filter(Vector_t* vector, int (*Predicado)(void*, void*), void* contexto);
 void* reduce(Vector_t* vector, void* (*Reductor)(void*, void*));
 
 int vectorCrear(Vector_t* vector, size_t tamElem);
@@ -34,6 +34,8 @@ int vectorEscribirATexto(Vector_t* vector, const char* nomArch, int (*ParsearTxt
 
 int vectorLeerDeBinario(Vector_t* vector, const char* nomArch);
 int vectorEscribirABinario(Vector_t* vector, const char* nomArch);
+
+void* vectorObtener(Vector_t* vector, size_t pos);
 
 int vectorInsertar(Vector_t* vector, size_t pos, void* elem);
 int vectorEmpujar(Vector_t* vector, void* elem);

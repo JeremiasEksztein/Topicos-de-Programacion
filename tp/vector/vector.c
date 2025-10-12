@@ -22,7 +22,7 @@ int map(Vector_t* vector, int (*Mapear)(void* dato))
     return EXITO;
 }
 
-Vector_t* filter(Vector_t* vector, int (*Predicado)(void* dato))
+Vector_t* filter(Vector_t* vector, int (*Predicado)(void* dato, void* contexto), void* contexto)
 {
     Vector_t* tmp = malloc(sizeof(Vector_t));
 
@@ -36,7 +36,7 @@ Vector_t* filter(Vector_t* vector, int (*Predicado)(void* dato))
     void* ult = vector->data + (vector->cantElem - 1) * vector->tamElem;
 
     for(; i < ult; i += vector->tamElem){
-        if(Predicado(i)){
+        if(Predicado(i, contexto)){
             vectorEmpujar(tmp, i);
         }
     }
@@ -168,7 +168,7 @@ int vectorLeerDeBinario(Vector_t* vector, const char* nomArch)
         }
     }
 
-    (fread(vector->data, tamArch * vector->tamElem, tamArch, arch));
+    fread(vector->data, tamArch * vector->tamElem, tamArch, arch);
 
     fclose(arch);
 
@@ -188,6 +188,15 @@ int vectorEscribirABinario(Vector_t* vector, const char* nomArch)
     fclose(arch);
 
     return EXITO;
+}
+
+void* vectorObtener(Vector_t* vector, size_t pos)
+{
+    if(pos < 1 || pos > vector->cantElem){
+        return NULL;
+    }
+
+    return (vector->data + vector->tamElem * pos);
 }
 
 int vectorInsertar(Vector_t* vector, size_t pos, void* elem)

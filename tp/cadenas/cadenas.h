@@ -35,4 +35,6 @@ char* stringPbreak(char* dest, char* src);
 char* stringSubstring(char* dest, char* src);
 size_t stringLenght(char* str);
 
+int memzero(void* ptr, size_t n);
+
 #endif
