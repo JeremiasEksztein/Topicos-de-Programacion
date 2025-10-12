@@ -10,16 +10,38 @@ int meminte(void* dest, void* src, void* tmp, size_t n)
     return EXITO;
 }
 
-int map(Vector_t* vector, int (*Mapear)(void* dato))
+int transform(Vector_t* vector, int (*Transformar)(void* dato))
 {
     void* i = vector->data;
     void* ult = vector->data + (vector->cantElem - 1) * vector->tamElem;
     
     for(; i < ult; i += vector->tamElem){
-        Mapear(i);
+        Transformar(i);
     }
 
     return EXITO;
+}
+
+Vector_t* map(Vector_t* vector, void* (*Mapear)(void* dato), size_t n)
+{
+    Vector_t* tmp = malloc(sizeof(Vector_t));
+    void* elem = NULL;
+
+    if(!tmp){
+        return NULL;
+    }
+
+    vectorCrear(tmp, n);
+
+    void* i = vector->data;
+    void* ult = vector->data + (vector->cantElem - 1) * vector->tamElem;
+
+    for(; i < ult; i += vector->tamElem){
+        elem = Mapear(i);
+        vectorEmpujar(tmp, elem);
+    }
+
+    return tmp;
 }
 
 Vector_t* filter(Vector_t* vector, int (*Predicado)(void* dato, void* contexto), void* contexto)

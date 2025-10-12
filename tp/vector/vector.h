@@ -20,7 +20,8 @@ typedef struct vector
     size_t capacidad;    
 }Vector_t;
 
-int map(Vector_t* vector, int (*Mapear)(void*));
+int transform(Vector_t* vector, int (*Mapear)(void*));
+Vector_t* map(Vector_t* vector, void* (*Mapear)(void*), size_t n);
 Vector_t* filter(Vector_t* vector, int (*Predicado)(void*, void*), void* contexto);
 void* reduce(Vector_t* vector, void* (*Reductor)(void*, void*));
 

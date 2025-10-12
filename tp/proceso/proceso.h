@@ -9,6 +9,7 @@
 #include "../comunes/comunes.h"
 #include "../vector/vector.h"
 #include "../vector/iterador.h"
+#include "../vector/algoritmos.h"
 #include "../secuenciaPalabras/secuenciaPalabras.h"
 #include "../cadenas/cadenas.h"
 
@@ -55,7 +56,6 @@ typedef struct{
 typedef struct{
     char fecha[CLASIFICADO_PERIODO_LEN];
     char desc[CLASIFICADO_DESC_LEN];
-    char periodo[CLASIFICADO_PERIODO_LEN]; // ¿¿ Repite el campo de fecha ??
     char indiceIPC[CLASIFICADO_IND_IPC_LEN];
     char region[CLASIFICADO_REGION_LEN];
     char grupo[CLASIFICADO_GRUPO_LEN];

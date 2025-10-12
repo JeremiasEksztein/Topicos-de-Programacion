@@ -1,7 +1,5 @@
 #include "proceso.h"
 
-
-
 int parsearIPCDivisiones(FILE* arch, void* reg)
 {
     IPCDivisiones* tmp = reg;
@@ -313,7 +311,8 @@ int corregirFormatoFechaAperturas(IPCAperturas* reg)
     return EXITO;
 }
 
-/*Hay que agregar aca una interfaz de menu, pero el "backend" funciona*/
+/*Hay que agregar aca una interfaz de menu y en general emprolijarlo todo
+ pero como prueba de concepto parece funcionar*/
 
 int herramientaAjustarMontosIPCDivisiones(Vector_t* divs)
 {
@@ -397,7 +396,45 @@ int filtrarIPCDivisiones(void* dato, void* contexto)
 
 int clasificarBySIPCDivisiones(Vector_t* divs)
 {
+    Vector_t* bienesYServicios;
+    Vector_t* nacional;
+
+    bienesYServicios = filtrarVector(divs, filtrarBienesYServicios, NULL);
+    bienesYServicios = mapearVector(bienesYServicios, mapearBienesYServicios, sizeof(IPCClasificado));
+
+    
+
+
+    vectorEscribirATexto(bienesYServicios, "pruebaNacional.csv", parsearIPCNacional);
+
+    vectorDestruir(bienesYServicios);
+
     return EXITO;
+}
+
+int filtrarBienesYServicios(void* dato, void* contexto)
+{
+    IPCDivisiones* tmp = dato;
+
+    if(!stringCmp(tmp->desc, "NIVEL GENERAL") || !stringCmp(tmp->desc, "NA")){
+        return 0;
+    }
+
+    return 1;
+}
+
+void* mapearBienesYServicios(void* dato, void* elem)
+{
+    IPCDivisiones* tmpD = dato;
+    IPCClasificado* tmpC = elem;
+
+    stringNCopy(tmpC->desc, tmpD->desc, CLASIFICADO_DESC_LEN);
+    cargarFecha(tmpC->fecha, tmpD->periodo);
+    cargarGrupo(tmpC->grupo, tmpD->desc);
+    stringNCopy(tmpC->indiceIPC, tmpD->indiceIPC, CLASIFICADO_IND_IPC_LEN);
+    stringNCopy(tmpC->region, tmpD->region, CLASIFICADO_REGION_LEN);
+
+    return tmpC;
 }
 
 int herramientaCalcularAlquilerIPCAperturas(Vector_t* aper)

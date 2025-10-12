@@ -1,6 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Werror -g -std=c99
-
+CFLAGS = -Wall -Werror -g -o1 -std=c99
 
 SRC_DIRS = master vector secuenciaPalabras proceso cadenas comunes
 SRC = $(foreach dir,$(SRC_DIRS),$(filter-out %/prueba.c %/pruebaVector.c,$(wildcard $(dir)/*.c)))
@@ -34,8 +33,11 @@ restaurarCSV:
 run:
 	./pruebaTP serie_ipc_divisiones.csv serie_ipc_aperturas.csv
 
-valgrind:
+memcheck:
 	valgrind --track-origins=yes --leak-check=full ./pruebaTP serie_ipc_divisiones.csv serie_ipc_aperturas.csv
+
+callgrind:
+	valgrind --tool=callgrind ./pruebaTP serie_ipc_divisiones.csv serie_ipc_aperturas.csv
 
 gdb:
 	gdb ./pruebaTP

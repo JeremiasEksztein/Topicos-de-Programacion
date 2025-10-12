@@ -34,14 +34,19 @@ int main(int argc, char* argv[])
 
     TRY(corregirCampos(&vecAperturas, corregirIPCAperturas));
 
-    herramientaAjustarMontosIPCDivisiones(&vecDivisiones);
+    vectorEscribirATexto(&vecDivisiones, "pruebaDivisiones.csv", parsearParaEscritura);
+    vectorEscribirATexto(&vecAperturas, "pruebaAperturas.csv", parsearParaEscritura2);
+
+//    herramientaAjustarMontosIPCDivisiones(&vecDivisiones);
+
+//    clasificarBySIPCDivisiones(&vecDivisiones);
 
     vectorDestruir(&vecDivisiones);
     vectorDestruir(&vecAperturas);
 
-    /*
+    return 0;
 
-    clasificarBySDivisiones(&vecDivisiones);
+    /*
 
     herramientaCalcularAlquiler(&vecAperturas);
 
