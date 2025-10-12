@@ -31,6 +31,15 @@ restaurarCSV:
 	cp $(dirBackup)/$(nomAperturas) ./
 	cp $(dirBackup)/$(nomDivisiones) ./
 
+run:
+	./pruebaTP serie_ipc_divisiones.csv serie_ipc_aperturas.csv
+
+valgrind:
+	valgrind --track-origins=yes --leak-check=full ./pruebaTP serie_ipc_divisiones.csv serie_ipc_aperturas.csv
+
+gdb:
+	gdb ./pruebaTP
+
 clean:
 	rm -f $(OBJ) $(TARGET)
 

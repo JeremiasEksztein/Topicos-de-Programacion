@@ -391,13 +391,15 @@ int memzero(void* ptr, size_t n)
 
 char* scanString(char* str, size_t n)
 {
-    char* i = str;
+    if(n <= 0 || !str){
+        return NULL;
+    } 
 
-    flushStdin();
+    if(fgets(str, n, stdin) == NULL){
+        return NULL;
+    }
 
-    fgets(i, n, stdin);
-
-    i[stringCSpan(str, "\n")] = '\0';
+    str[stringCSpan(str, "\n")] = '\0';
 
     return str;
 }

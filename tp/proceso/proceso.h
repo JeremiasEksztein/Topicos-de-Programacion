@@ -2,6 +2,7 @@
 #define PROCESO_INCLUDED
 
 #include <stdlib.h>
+#include <assert.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
@@ -15,7 +16,7 @@
 #define DIVISIONES_DESC_LEN 61
 #define DIVISIONES_CLASIF_LEN 40
 #define DIVISIONES_INDICES_LEN 18
-#define DIVISIONES_REGION_LEN 10
+#define DIVISIONES_REGION_LEN 15
 #define DIVISIONES_PERIODO_LEN 30
 
 #define APERTURAS_COD_LEN 15

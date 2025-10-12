@@ -194,7 +194,7 @@ int vectorEscribirABinario(Vector_t* vector, const char* nomArch)
 
 void* vectorObtener(Vector_t* vector, size_t pos)
 {
-    if(pos < 1 || pos > vector->cantElem){
+    if(pos < 0 || pos > vector->cantElem){
         return NULL;
     }
 

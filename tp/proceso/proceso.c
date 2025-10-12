@@ -313,6 +313,8 @@ int corregirFormatoFechaAperturas(IPCAperturas* reg)
     return EXITO;
 }
 
+/*Hay que agregar aca una interfaz de menu, pero el "backend" funciona*/
+
 int herramientaAjustarMontosIPCDivisiones(Vector_t* divs)
 {
     Vector_t* tmp;
@@ -322,13 +324,18 @@ int herramientaAjustarMontosIPCDivisiones(Vector_t* divs)
 
     tmp = filter(divs, filtrarIPCDivisiones, &ans);
 
+    if(!tmp || tmp->cantElem < 2){
+        printf("No se encontraron registros que coincidan con los parametros ingresados.\n");
+        return ERR_USUARIO;
+    }
+
     IPCDivisiones* i = vectorObtener(tmp, 0);
     IPCDivisiones* f = vectorObtener(tmp, 1);
 
-    double varPor = ((atof(f->indiceIPC) / atof((i->indiceIPC - 1)))) * 100;
-    double montoAjus = ans.monto * (1 + varPor);
+    double varPor = ((atof(f->indiceIPC) / atof((i->indiceIPC))) - 1) * 100;
+    double montoAjus = ans.monto + (ans.monto * varPor / 100);
 
-    printf("El monto %0.2lf en la region %s durante %s, ajustado en la misma region al %s vale %0.2lf\n", ans.monto, ans.region, ans.periodoIni, ans.periodoFin, montoAjus);
+    printf("El monto $ %0.2lf en la region %s durante %s, ajustado en la misma region al %s vario en un %%%0.2lf a un total de $ %0.2lf\n", ans.monto, ans.region, ans.periodoIni, ans.periodoFin, varPor, montoAjus);
 
     vectorDestruir(tmp);
 
@@ -363,9 +370,15 @@ Respuesta preguntarAjustarMonto(void)
 
     scanf("%lf", &(ans.monto));
 
+    flushStdin();
+
     scanString(ans.region, DIVISIONES_REGION_LEN);
+
     scanString(ans.periodoIni, DIVISIONES_PERIODO_LEN);
+
     scanString(ans.periodoFin, DIVISIONES_PERIODO_LEN);
+
+    //printf("%lf | %s | %s | %s\n", ans.monto, ans.region, ans.periodoIni, ans.periodoFin);
 
     return ans;
 }
@@ -375,7 +388,7 @@ int filtrarIPCDivisiones(void* dato, void* contexto)
     IPCDivisiones* tmpD = dato;
     Respuesta* tmpC = contexto;
 
-    if((!stringCmp(tmpD->periodo, tmpC->periodoIni) || !stringCmp(tmpD->periodo, tmpC->periodoFin)) && !stringCmp(tmpD->region, tmpC->region)){
+    if((!stringCmp(tmpD->periodo, tmpC->periodoIni) || !stringCmp(tmpD->periodo, tmpC->periodoFin)) && !stringCmp(tmpD->region, tmpC->region) && !stringCmp(tmpD->desc, "NIVEL GENERAL")){
         return 1;
     }
 
