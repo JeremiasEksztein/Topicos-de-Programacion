@@ -168,7 +168,9 @@ int vectorLeerDeBinario(Vector_t* vector, const char* nomArch)
         }
     }
 
-    fread(vector->data, tamArch * vector->tamElem, tamArch, arch);
+    if(!fread(vector->data, tamArch * vector->tamElem, tamArch, arch)){
+        return ERR_ARCH;
+    }
 
     fclose(arch);
 

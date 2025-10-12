@@ -32,6 +32,7 @@
 #define CLASIFICADO_REGION_LEN 15
 #define CLASIFICADO_GRUPO_LEN 15
 
+
 typedef struct{
     char cod[DIVISIONES_COD_LEN];
     char desc[DIVISIONES_DESC_LEN];
@@ -42,6 +43,13 @@ typedef struct{
     char region[DIVISIONES_REGION_LEN];
     char periodo[DIVISIONES_PERIODO_LEN];
 }IPCDivisiones;
+
+typedef struct{
+    double monto;
+    char region[DIVISIONES_REGION_LEN];
+    char periodoIni[DIVISIONES_PERIODO_LEN];
+    char periodoFin[DIVISIONES_PERIODO_LEN];
+}Respuesta;
 
 typedef struct{
     char fecha[CLASIFICADO_PERIODO_LEN];
@@ -83,6 +91,8 @@ int corregirFormatoFechaAperturas(IPCAperturas* reg);
 
 
 int herramientaAjustarMontosIPCDivisiones(Vector_t* vec);
+Respuesta preguntarAjustarMonto(void);
+int filtrarIPCDivisiones(void* dato, void* contexto);
 
 int clasificarBySIPCDivisiones(Vector_t* vec); //Mapeo el vector divisiones a vector por grupos
                                             //Calculo el promedio del ipc en sus campos, y lo convierto en el de nacional

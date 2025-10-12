@@ -34,9 +34,12 @@ int main(int argc, char* argv[])
 
     TRY(corregirCampos(&vecAperturas, corregirIPCAperturas));
 
-    /*
-
     herramientaAjustarMontosIPCDivisiones(&vecDivisiones);
+
+    vectorDestruir(&vecDivisiones);
+    vectorDestruir(&vecAperturas);
+
+    /*
 
     clasificarBySDivisiones(&vecDivisiones);
 

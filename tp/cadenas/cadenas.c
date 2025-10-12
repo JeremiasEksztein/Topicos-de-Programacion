@@ -388,3 +388,23 @@ int memzero(void* ptr, size_t n)
 
     return 0;
 }
+
+char* scanString(char* str, size_t n)
+{
+    char* i = str;
+
+    flushStdin();
+
+    fgets(i, n, stdin);
+
+    i[stringCSpan(str, "\n")] = '\0';
+
+    return str;
+}
+
+void flushStdin(void)
+{
+    int c;
+
+    while((c = getchar()) != '\n' && c != EOF);
+}

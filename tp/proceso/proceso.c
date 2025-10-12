@@ -1,5 +1,7 @@
 #include "proceso.h"
 
+
+
 int parsearIPCDivisiones(FILE* arch, void* reg)
 {
     IPCDivisiones* tmp = reg;
@@ -311,10 +313,27 @@ int corregirFormatoFechaAperturas(IPCAperturas* reg)
     return EXITO;
 }
 
+int herramientaAjustarMontosIPCDivisiones(Vector_t* divs)
+{
+    Vector_t* tmp;
+    Respuesta ans;
+
+    ans = preguntarAjustarMonto();
+
+    tmp = filter(divs, filtrarIPCDivisiones, &ans);
+
+    IPCDivisiones* i = vectorObtener(tmp, 0);
+    IPCDivisiones* f = vectorObtener(tmp, 1);
+
+    double varPor = ((atof(f->indiceIPC) / atof((i->indiceIPC - 1)))) * 100;
+    double montoAjus = ans.monto * (1 + varPor);
+
+    printf("El monto %0.2lf en la region %s durante %s, ajustado en la misma region al %s vale %0.2lf\n", ans.monto, ans.region, ans.periodoIni, ans.periodoFin, montoAjus);
+
+    vectorDestruir(tmp);
 
 
-int herramientaAjustarMontoIPCDivisiones(Vector_t* divs)
-{/*
+    /*
     Vector_t* tmp;
     MenuDinamico_t menuDeAjustar;
 
@@ -336,6 +355,31 @@ int herramientaAjustarMontoIPCDivisiones(Vector_t* divs)
     vectorDestruir(tmp);
 */
     return EXITO;
+}
+
+Respuesta preguntarAjustarMonto(void)
+{
+    Respuesta ans;
+
+    scanf("%lf", &(ans.monto));
+
+    scanString(ans.region, DIVISIONES_REGION_LEN);
+    scanString(ans.periodoIni, DIVISIONES_PERIODO_LEN);
+    scanString(ans.periodoFin, DIVISIONES_PERIODO_LEN);
+
+    return ans;
+}
+
+int filtrarIPCDivisiones(void* dato, void* contexto)
+{
+    IPCDivisiones* tmpD = dato;
+    Respuesta* tmpC = contexto;
+
+    if((!stringCmp(tmpD->periodo, tmpC->periodoIni) || !stringCmp(tmpD->periodo, tmpC->periodoFin)) && !stringCmp(tmpD->region, tmpC->region)){
+        return 1;
+    }
+
+    return 0;
 }
 
 int clasificarBySIPCDivisiones(Vector_t* divs)

@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Werror -O2 -std=c99
+CFLAGS = -Wall -Werror -g -std=c99
 
 
 SRC_DIRS = master vector secuenciaPalabras proceso cadenas comunes

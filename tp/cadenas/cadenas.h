@@ -1,6 +1,7 @@
 #ifndef CADENAS_H
 #define CADENAS_H
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
 #include <memory.h>
@@ -36,5 +37,8 @@ char* stringSubstring(char* dest, char* src);
 size_t stringLenght(char* str);
 
 int memzero(void* ptr, size_t n);
+
+char* scanString(char* str, size_t n);
+void flushStdin(void);
 
 #endif
