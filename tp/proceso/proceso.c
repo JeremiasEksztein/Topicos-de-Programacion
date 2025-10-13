@@ -261,6 +261,8 @@ int normalizarDescripcionDivisiones(IPCDivisiones* reg)
 
     secuenciaPalabrasCerrar(&escr);
 
+    stringNCopy(i, buf, DIVISIONES_DESC_LEN);
+
     return 0;
 }
 
@@ -411,7 +413,7 @@ int clasificarBySIPCDivisiones(Vector_t* divs)
 
     bienes = reducirVectorPorClave(bienes, obtenerPeriodo, compararPeriodo, reducirBySProm);
     servicios = reducirVectorPorClave(servicios, obtenerPeriodo, compararPeriodo, reducirBySProm);
-    
+
     nacional = unirVectores(bienes, servicios, unirBienesYServicios, sizeof(IPCPromedio));
 
     vectorEscribirATexto(nacional, "pruebaNacional.csv", parsearIPCPromedio);
@@ -531,8 +533,64 @@ int parsearIPCPromedio(FILE* arch, void* reg)
 
 int herramientaCalcularAlquilerIPCAperturas(Vector_t* aper)
 {
+
     return EXITO;
+/*
+    Vector_t* alquileres;
+    IPCAperturas* tmp;
+
+    tmp = preguntarAlquileres();
+
+    alquileres = filtrarVector(aper, filtrarAlquileres, tmp);
+
+    alquileres = mapearVector(alquileres, mapearAlquileres, sizeof(IPCAlquileres), tmp);
+
+    return EXITO;
+*/
 }
 
+/*
+int filtrarAlquileres(void* dato, void* contexto)
+{
+    IPCAperturas* tmpD = dato;
+    IPCAperturas* tmpC = contexto;
 
+    int d, m, a, t;
+
+    sscanf(tmpC->periodo, "%d-%d-%d\n", &a, &m, &d);
+    
+    a *= 10000;
+    m *= 100;
+    t = a + m + d;
+
+    sscanf(tmpD->periodo, "%d-%d-%d\n", &a, &m, &d);
+
+    a *= 10000;
+    m *= 100;
+    t = t - a - m - d;
+
+    if(!stringCmp(tmpD->cod, "4.1.1") && !stringCmp(tmpD->region, tmpC->region) && (t <= 0)){
+        return 1;
+    }
+
+    return 0;
+}
+
+void* mapearAlquileres(void* dato, void* tmp, void* contexto)
+{
+    IPCAperturas* tmpD = dato;
+    IPCAlquileres* tmpT = tmp;
+    IPCAperturas* tmpC = contexto;
+
+    stringNCopy(tmpT->desc, "Alquileres de la vivienda", APERTURAS_DESC_LEN);
+    stringNCopy(tmpT->periodo, tmpD->periodo, APERTURAS_PERIODO_LEN);
+    stringNCopy(tmpT->indiceIPC, tmpD->indiceIPC, APERTURAS_INDICES_LEN);
+    stringNCopy(tmpT->acumuladoIPC, tmpC->varAnualIPC, APERTURAS_INDICES_LEN);
+    snprintf(tmpT->montoAjustado, "%lf", atof(tmpC->varMensIPC) * 
+
+    tmpT->montoAjustado
+
+    return tmpT;
+}
+*/
 

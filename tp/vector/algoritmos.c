@@ -33,7 +33,7 @@ Vector_t* copiarVector(Vector_t* vector)
     return tmp;
 }
 
-Vector_t* mapearVector(Vector_t* vector, void* (*Mapear)(void* dato, void* elem), size_t n)
+Vector_t* mapearVector(Vector_t* vector, void* (*Mapear)(void* dato, void* tpm, void* contexto), size_t n, void* contexto)
 {
     Vector_t* tmp = malloc(sizeof(Vector_t));
 
@@ -53,7 +53,7 @@ Vector_t* mapearVector(Vector_t* vector, void* (*Mapear)(void* dato, void* elem)
     void* ult = vector->data + (vector->cantElem - 1) * vector->tamElem;
 
     for(; i < ult; i += vector->tamElem){
-        Mapear(i, elem);
+        Mapear(i, elem, contexto);
         vectorEmpujar(tmp, elem);
     }
 

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <locale.h>
 #include "../comunes/comunes.h"
 #include "../vector/vector.h"
 #include "../secuenciaPalabras/secuenciaPalabras.h"
@@ -21,6 +22,9 @@ int main(int argc, char* argv[])
         return ERR_USUARIO;
     }
 
+    setlocale(LC_ALL, "es_AR.UTF-8");
+    setlocale(LC_CTYPE, "es_AR.UTF-8");
+
     Vector_t vecDivisiones, vecAperturas;
 
     vectorCrear(&vecDivisiones, sizeof(IPCDivisiones));
@@ -33,12 +37,12 @@ int main(int argc, char* argv[])
     vectorCrear(&vecAperturas, sizeof(IPCAperturas));
     vectorLeerDeTexto(&vecAperturas, argv[ARG_APERTURAS_NOM], parsearIPCAperturas);
 
-    //vectorEliminarPos(&vecAperturas, 0);
+    vectorEliminarPos(&vecAperturas, 0);
 
     corregirCampos(&vecAperturas, corregirIPCAperturas);
 
-    vectorEscribirATexto(&vecDivisiones, "pruebaDivisiones.csv", parsearParaDivisiones);
-    vectorEscribirATexto(&vecAperturas, "pruebaAperturas.csv", parsearParaAperturas);
+    vectorEscribirATexto(&vecDivisiones, ARCH_DIVISIONES, parsearParaDivisiones);
+    vectorEscribirATexto(&vecAperturas, ARCH_APERTURAS, parsearParaAperturas);
 
 //    herramientaAjustarMontosIPCDivisiones(&vecDivisiones);
 
@@ -46,8 +50,6 @@ int main(int argc, char* argv[])
 
     vectorDestruir(&vecDivisiones);
     vectorDestruir(&vecAperturas);
-
-    return 0;
 
     /*
 

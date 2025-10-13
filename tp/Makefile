@@ -39,8 +39,11 @@ memcheck:
 callgrind:
 	valgrind --tool=callgrind ./pruebaTP serie_ipc_divisiones.csv serie_ipc_aperturas.csv
 
-gdb:
-	gdb ./pruebaTP
+gdb: 
+	gdb ./pruebaTP serie_ipc_divisiones.csv serie_ipc_aperturas.csv
+
+cloc:
+	cloc ./$(SRC_DIRS)
 
 clean:
 	rm -f $(OBJ) $(TARGET)

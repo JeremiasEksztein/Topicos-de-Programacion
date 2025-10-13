@@ -13,6 +13,12 @@
 #include "../secuenciaPalabras/secuenciaPalabras.h"
 #include "../cadenas/cadenas.h"
 
+#define ARCH_DIVISIONES "pruebaDivisiones.csv"
+#define ARCH_APERTURAS "pruebaAperturas.csv"
+#define ARCH_BIENES "pruebaBienes.csv"
+#define ARCH_SERVICIOS "pruebaServicios.csv"
+#define ARCH_NACIONAL "pruebaNacional.csv"
+
 #define DIVISIONES_COD_LEN 15
 #define DIVISIONES_DESC_LEN 61
 #define DIVISIONES_CLASIF_LEN 40
@@ -78,6 +84,14 @@ typedef struct{
     char varAnualIPC[APERTURAS_INDICES_LEN];
     char region[APERTURAS_REGION_LEN];
 }IPCAperturas;
+
+typedef struct{
+    char desc[APERTURAS_DESC_LEN];
+    char periodo[APERTURAS_PERIODO_LEN];
+    char indiceIPC[APERTURAS_INDICES_LEN];
+    char acumuladoIPC[APERTURAS_INDICES_LEN];
+    char montoAjustado[APERTURAS_INDICES_LEN];
+}IPCAlquileres;
 
 int parsearIPCDivisiones(FILE* arch, void* reg);
 int parsearIPCAperturas(FILE* arch, void* reg);
