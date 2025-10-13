@@ -62,6 +62,13 @@ typedef struct{
 }IPCClasificado;
 
 typedef struct{
+    char fecha[DIVISIONES_PERIODO_LEN];
+    char region[DIVISIONES_REGION_LEN];
+    char indiceBienes[DIVISIONES_INDICES_LEN];
+    char indiceServicios[DIVISIONES_INDICES_LEN];
+}IPCPromedio;
+
+typedef struct{
     char cod[APERTURAS_COD_LEN];
     char desc[APERTURAS_DESC_LEN];
     char clasif[APERTURAS_CLASIF_LEN];
@@ -95,10 +102,20 @@ int herramientaAjustarMontosIPCDivisiones(Vector_t* vec);
 Respuesta preguntarAjustarMonto(void);
 int filtrarIPCDivisiones(void* dato, void* contexto);
 
-int clasificarBySIPCDivisiones(Vector_t* vec); //Mapeo el vector divisiones a vector por grupos
-                                            //Calculo el promedio del ipc en sus campos, y lo convierto en el de nacional
-                                            //Guardo ambos pasos en disco
+int clasificarBySIPCDivisiones(Vector_t* vec);
 
+int filtrarBienes(void* dato, void* contexto);
+int filtrarServicios(void* dato, void* contexto);
+
+void* obtenerCod(void* elem);
+
+int compararCod(void* lhs, void* rhs);
+
+void* reducirBySProm(void* dato, void* acumulado);
+void* unirBienesYServicios(void* lhs, void* rhs, void* elem);
+
+int parsearIPCPromedio(FILE* arch, void* reg);
+                                            
 int herramientaCalcularAlquilerIPCAperturas(Vector_t* vec);
 
 

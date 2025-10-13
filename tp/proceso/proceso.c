@@ -1,5 +1,7 @@
 #include "proceso.h"
 
+int parsearParaEscritura(FILE* arch, void* reg);
+
 int parsearIPCDivisiones(FILE* arch, void* reg)
 {
     IPCDivisiones* tmp = reg;
@@ -394,47 +396,110 @@ int filtrarIPCDivisiones(void* dato, void* contexto)
     return 0;
 }
 
+/*Esto es muy costoso, de verdad, muy costoso*/
 int clasificarBySIPCDivisiones(Vector_t* divs)
 {
-    Vector_t* bienesYServicios;
+    Vector_t* bienes;
+    Vector_t* servicios;
     Vector_t* nacional;
 
-    bienesYServicios = filtrarVector(divs, filtrarBienesYServicios, NULL);
-    bienesYServicios = mapearVector(bienesYServicios, mapearBienesYServicios, sizeof(IPCClasificado));
+    bienes = filtrarVector(divs, filtrarBienes, NULL);
+    servicios = filtrarVector(divs, filtrarServicios, NULL);
 
-    
+    vectorEscribirATexto(bienes, "pruebaBienes.csv", parsearParaEscritura);
+    vectorEscribirATexto(servicios, "pruebaServicios.csv", parsearParaEscritura);
 
+    bienes = reducirVectorPorClave(bienes, obtenerCod, compararCod, reducirBySProm);
+    servicios = reducirVectorPorClave(servicios, obtenerCod, compararCod, reducirBySProm);
 
-    vectorEscribirATexto(bienesYServicios, "pruebaNacional.csv", parsearIPCNacional);
+    nacional = unirVectores(bienes, servicios, unirBienesYServicios, sizeof(IPCPromedio));
 
-    vectorDestruir(bienesYServicios);
+    vectorEscribirATexto(nacional, "pruebaNacional.csv", parsearIPCPromedio);
+
+    vectorDestruir(bienes);
+    vectorDestruir(servicios);
+    vectorDestruir(nacional);
 
     return EXITO;
 }
 
-int filtrarBienesYServicios(void* dato, void* contexto)
+int parsearParaEscritura(FILE* arch, void* reg)
+{
+    IPCDivisiones* tmp = reg;
+
+    fprintf(arch, "%s | %s | %s | %s | %s | %s | %s | %s\n", tmp->cod, tmp->desc, tmp->clasif, tmp->indiceIPC, tmp->varMensIPC, tmp->varAnualIPC, tmp->region, tmp->periodo);
+    return EXITO;
+}
+
+
+int filtrarBienes(void* dato, void* contexto)
 {
     IPCDivisiones* tmp = dato;
 
-    if(!stringCmp(tmp->desc, "NIVEL GENERAL") || !stringCmp(tmp->desc, "NA")){
-        return 0;
+    if(!stringCmp(tmp->cod, "01") || !stringCmp(tmp->cod, "02") || !stringCmp(tmp->cod, "03") || !stringCmp(tmp->cod, "03") || !stringCmp(tmp->cod, "05") || !stringCmp(tmp->cod, "12")){
+            return 1;
     }
 
-    return 1;
+    return 0;
 }
 
-void* mapearBienesYServicios(void* dato, void* elem)
+int filtrarServicios(void* dato, void* contexto)
 {
-    IPCDivisiones* tmpD = dato;
-    IPCClasificado* tmpC = elem;
+    IPCDivisiones* tmp = dato;
 
-    stringNCopy(tmpC->desc, tmpD->desc, CLASIFICADO_DESC_LEN);
-    cargarFecha(tmpC->fecha, tmpD->periodo);
-    cargarGrupo(tmpC->grupo, tmpD->desc);
-    stringNCopy(tmpC->indiceIPC, tmpD->indiceIPC, CLASIFICADO_IND_IPC_LEN);
-    stringNCopy(tmpC->region, tmpD->region, CLASIFICADO_REGION_LEN);
+    if(!stringCmp(tmp->cod, "04") || !stringCmp(tmp->cod, "06") || !stringCmp(tmp->cod, "07") || !stringCmp(tmp->cod, "08") || !stringCmp(tmp->cod, "09") || !stringCmp(tmp->cod, "10") || !stringCmp(tmp->cod, "11")){
+            return 1;
+    }
 
-    return tmpC;
+    return 0;
+}
+
+void* obtenerCod(void* elem)
+{
+    IPCDivisiones* tmp = elem;
+
+    return tmp->cod;
+}
+
+int compararCod(void* lhs, void* rhs)
+{
+    char* i = lhs;
+    char* j = rhs;
+
+    return stringCmp(i, j);
+}
+
+void* reducirBySProm(void* dato, void* acumulado)
+{
+    IPCDivisiones* tmp = dato;
+    IPCDivisiones* tmpA = acumulado;
+
+    snprintf(tmpA->indiceIPC, DIVISIONES_INDICES_LEN, "%lf", atof(tmp->indiceIPC) + atof(tmpA->indiceIPC));
+
+    return tmpA;    
+}
+
+void* unirBienesYServicios(void* lhs, void* rhs, void* elem)
+{
+    IPCDivisiones* tmpL = lhs;
+    IPCDivisiones* tmpR = rhs;
+    IPCPromedio* tmp = elem;
+
+    stringNCopy(tmp->fecha, tmpL->periodo, DIVISIONES_PERIODO_LEN);
+    snprintf(tmp->indiceBienes, DIVISIONES_INDICES_LEN, "%lf", atof(tmpL->indiceIPC) / 6.0f);
+    snprintf(tmp->indiceServicios, DIVISIONES_INDICES_LEN, "%lf", atof(tmpR->indiceIPC) / 7.0f);
+    stringNCopy(tmp->region, "Nacional", DIVISIONES_REGION_LEN);
+
+    return tmp;
+}
+
+int parsearIPCPromedio(FILE* arch, void* reg)
+{
+    IPCPromedio* i = reg;
+
+    fprintf(arch, "%s | %s | %s | %s\n", i->fecha, i->region, i->indiceBienes, i->indiceServicios);
+
+    return EXITO;
 }
 
 int herramientaCalcularAlquilerIPCAperturas(Vector_t* aper)

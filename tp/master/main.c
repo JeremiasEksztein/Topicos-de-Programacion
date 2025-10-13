@@ -5,7 +5,7 @@
 #include "../proceso/proceso.h"
 
 void imprimirRegistroDivisiones(void* reg);
-int parsearParaEscritura(FILE* arch, void* reg);
+//int parsearParaEscritura(FILE* arch, void* reg);
 int parsearParaEscritura2(FILE* arch, void* reg);
 
 
@@ -34,12 +34,12 @@ int main(int argc, char* argv[])
 
     TRY(corregirCampos(&vecAperturas, corregirIPCAperturas));
 
-    vectorEscribirATexto(&vecDivisiones, "pruebaDivisiones.csv", parsearParaEscritura);
-    vectorEscribirATexto(&vecAperturas, "pruebaAperturas.csv", parsearParaEscritura2);
+    //vectorEscribirATexto(&vecDivisiones, "pruebaDivisiones.csv", parsearParaEscritura);
+    //vectorEscribirATexto(&vecAperturas, "pruebaAperturas.csv", parsearParaEscritura2);
 
 //    herramientaAjustarMontosIPCDivisiones(&vecDivisiones);
 
-//    clasificarBySIPCDivisiones(&vecDivisiones);
+    clasificarBySIPCDivisiones(&vecDivisiones);
 
     vectorDestruir(&vecDivisiones);
     vectorDestruir(&vecAperturas);
@@ -65,14 +65,14 @@ void imprimirRegistroDivisiones(void* reg)
 
     printf("%s %s %s %s %s %s %s %s\n", tmp->cod, tmp->desc, tmp->clasif, tmp->indiceIPC, tmp->varMensIPC, tmp->varAnualIPC, tmp->region, tmp->periodo);
 }
-
+/*
 int parsearParaEscritura(FILE* arch, void* reg)
 {
     IPCDivisiones* tmp = reg;
 
     fprintf(arch, "%s | %s | %s | %s | %s | %s | %s | %s\n", tmp->cod, tmp->desc, tmp->clasif, tmp->indiceIPC, tmp->varMensIPC, tmp->varAnualIPC, tmp->region, tmp->periodo);
     return EXITO;
-}
+}*/
 
 int parsearParaEscritura2(FILE* arch, void* reg)
 {

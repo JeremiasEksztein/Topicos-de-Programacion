@@ -94,3 +94,62 @@ void* reducirVector(Vector_t* vector, void* (*Reducir)(void* dato, void* acumula
 
     return acumulador;
 }
+
+Vector_t* reducirVectorPorClave(Vector_t* vector, void* (*ObtenerClave)(void* elem), int (*CompararClave)(void* lhs, void* rhs), void* (*Reducir)(void* elem, void* acumulado))
+{
+    Vector_t* temp = malloc(sizeof(vector));
+
+    if(!temp){
+        return NULL;
+    }
+
+    vectorCrear(temp, vector->tamElem);
+
+    void* i = vector->data;
+    void* ult = vector->data + (vector->cantElem - 1) * vector->tamElem;
+    void* acumulador = NULL;
+    void* claveAnt = NULL;
+
+    while(i < ult){
+
+        acumulador = NULL;
+
+        claveAnt = ObtenerClave(i);
+
+        while(i < ult && !CompararClave(claveAnt, ObtenerClave(i))){
+            
+            acumulador = Reducir(i, acumulador);
+
+            i += vector->tamElem;
+        }
+
+        vectorEmpujar(temp, acumulador);
+    }
+
+    vectorDestruir(vector);
+
+    return temp;
+}
+
+Vector_t* unirVectores(Vector_t* lhs, Vector_t* rhs, void* (*Unir)(void* lhs, void* rhs, void* elem), size_t n)
+{
+    Vector_t* tmp = malloc(sizeof(Vector_t));
+
+    if(!tmp){
+        return NULL;
+    }
+
+    vectorCrear(tmp, n);
+
+    void* elem = malloc(n);
+    void* i = lhs->data;
+    void* j = rhs->data;
+    void* ult = lhs->data + (lhs->cantElem - 1) * lhs->tamElem;
+
+    for(; i < ult; i += lhs->tamElem, j += lhs->tamElem){
+        elem = Unir(i, j, elem);
+        vectorEmpujar(tmp, elem);
+    }
+
+    return tmp;
+}
