@@ -5,7 +5,7 @@ int parsearParaEscritura(FILE* arch, void* reg);
 int parsearIPCDivisiones(FILE* arch, void* reg)
 {
     IPCDivisiones* tmp = reg;
-    char buffer[500];
+    char buffer[500] = "";
     char* i = NULL;
 
     fgets(buffer, 500, arch);
@@ -77,14 +77,15 @@ int parsearIPCDivisiones(FILE* arch, void* reg)
     stringNCopy(tmp->cod, buffer, DIVISIONES_COD_LEN);
 
     //printf("%s %s %s %s %s %s %s %s\n", tmp->cod, tmp->desc, tmp->clasif, tmp->indiceIPC, tmp->varMensIPC, tmp->varAnualIPC, tmp->region, tmp->periodo);
-    
+    //getchar();
+
     return EXITO;
 }
 
 int parsearIPCAperturas(FILE* arch, void* reg)
 {
     IPCAperturas* tmp = reg;
-    char buffer[500];
+    char buffer[500] = "";
     char* i = NULL;
 
     fgets(buffer, 500, arch);
@@ -396,7 +397,6 @@ int filtrarIPCDivisiones(void* dato, void* contexto)
     return 0;
 }
 
-/*Esto es muy costoso, de verdad, muy costoso*/
 int clasificarBySIPCDivisiones(Vector_t* divs)
 {
     Vector_t* bienes;
@@ -406,12 +406,12 @@ int clasificarBySIPCDivisiones(Vector_t* divs)
     bienes = filtrarVector(divs, filtrarBienes, NULL);
     servicios = filtrarVector(divs, filtrarServicios, NULL);
 
-    bienes = reducirVectorPorClave(bienes, obtenerCod, compararCod, reducirBySProm);
-    servicios = reducirVectorPorClave(servicios, obtenerCod, compararCod, reducirBySProm);
-
     vectorEscribirATexto(bienes, "pruebaBienes.csv", parsearParaEscritura);
     vectorEscribirATexto(servicios, "pruebaServicios.csv", parsearParaEscritura);
 
+    bienes = reducirVectorPorClave(bienes, obtenerPeriodo, compararPeriodo, reducirBySProm);
+    servicios = reducirVectorPorClave(servicios, obtenerPeriodo, compararPeriodo, reducirBySProm);
+    
     nacional = unirVectores(bienes, servicios, unirBienesYServicios, sizeof(IPCPromedio));
 
     vectorEscribirATexto(nacional, "pruebaNacional.csv", parsearIPCPromedio);
@@ -436,7 +436,7 @@ int filtrarBienes(void* dato, void* contexto)
 {
     IPCDivisiones* tmp = dato;
 
-    if(!stringCmp(tmp->cod, "01") || !stringCmp(tmp->cod, "02") || !stringCmp(tmp->cod, "03") || !stringCmp(tmp->cod, "03") || !stringCmp(tmp->cod, "05") || !stringCmp(tmp->cod, "12")){
+    if((!stringCmp(tmp->cod, "01") || !stringCmp(tmp->cod, "02") || !stringCmp(tmp->cod, "03") || !stringCmp(tmp->cod, "05") || !stringCmp(tmp->cod, "12")) && stringCmp(tmp->region, "Nacional")){
             return 1;
     }
 
@@ -447,11 +447,18 @@ int filtrarServicios(void* dato, void* contexto)
 {
     IPCDivisiones* tmp = dato;
 
-    if(!stringCmp(tmp->cod, "04") || !stringCmp(tmp->cod, "06") || !stringCmp(tmp->cod, "07") || !stringCmp(tmp->cod, "08") || !stringCmp(tmp->cod, "09") || !stringCmp(tmp->cod, "10") || !stringCmp(tmp->cod, "11")){
+    if((!stringCmp(tmp->cod, "04") || !stringCmp(tmp->cod, "06") || !stringCmp(tmp->cod, "07") || !stringCmp(tmp->cod, "08") || !stringCmp(tmp->cod, "09") || !stringCmp(tmp->cod, "10") || !stringCmp(tmp->cod, "11")) && stringCmp(tmp->region, "Nacional")){
             return 1;
     }
 
     return 0;
+}
+
+void* obtenerPeriodo(void* elem)
+{
+    IPCDivisiones* tmp = elem;
+
+    return tmp->periodo;
 }
 
 void* obtenerCod(void* elem)
@@ -461,12 +468,28 @@ void* obtenerCod(void* elem)
     return tmp->cod;
 }
 
-int compararCod(void* lhs, void* rhs)
+int compararPeriodo(void* lhs, void* rhs)
 {
     char* i = lhs;
     char* j = rhs;
 
-    return stringCmp(i, j);
+    return stringNCmp(i, j, DIVISIONES_PERIODO_LEN);
+}
+
+int compararCodServicios(void* lhs, void* rhs)
+{
+    char* i = lhs;
+    char* j = rhs;
+
+    return (!filtrarServicios(i, NULL) && !filtrarServicios(j, NULL));
+}
+
+int compararCodBienes(void* lhs, void* rhs)
+{
+    char* i = lhs;
+    char* j = rhs;
+
+    return (!filtrarBienes(i, NULL) && !filtrarBienes(j, NULL));
 }
 
 void* reducirBySProm(void* dato, void* acumulado)
@@ -490,8 +513,8 @@ void* unirBienesYServicios(void* lhs, void* rhs, void* elem)
     IPCDivisiones* tmpR = rhs;
     IPCPromedio* tmp = elem;
     stringNCopy(tmp->fecha, tmpL->periodo, DIVISIONES_PERIODO_LEN);
-    snprintf(tmp->indiceBienes, DIVISIONES_INDICES_LEN, "%lf", atof(tmpL->indiceIPC) / 6.0f);
-    snprintf(tmp->indiceServicios, DIVISIONES_INDICES_LEN, "%lf", atof(tmpR->indiceIPC) / 7.0f);
+    snprintf(tmp->indiceBienes, DIVISIONES_INDICES_LEN, "%lf", atof(tmpL->indiceIPC) / 30.0f);
+    snprintf(tmp->indiceServicios, DIVISIONES_INDICES_LEN, "%lf", atof(tmpR->indiceIPC) / 42.0f);
     stringNCopy(tmp->region, "Nacional", DIVISIONES_REGION_LEN);
 
     return tmp;

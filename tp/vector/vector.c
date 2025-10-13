@@ -126,13 +126,16 @@ int vectorLeerDeTexto(Vector_t* vector, const char* nomArch, int (ParsearTexto)(
     FILE* arch = fopen(nomArch, "rt");
 
     if(!arch){
+        puts("A");
         return ERR_USUARIO;
     }
 
     void* tmp = malloc(vector->tamElem);
+    int err;
 
     if(!tmp){
         fclose(arch);
+        puts("B");
         return ERR_SIN_MEM;
     }
 
@@ -140,7 +143,11 @@ int vectorLeerDeTexto(Vector_t* vector, const char* nomArch, int (ParsearTexto)(
     vectorEmpujar(vector, tmp);
 
     while(!feof(arch)){
-        ParsearTexto(arch, tmp);
+        if((err = ParsearTexto(arch, tmp) != EXITO)){
+            free(tmp);
+            fclose(arch);
+            return err;
+        }
         vectorEmpujar(vector, tmp);
     }
 
@@ -248,7 +255,7 @@ int vectorInsertar(Vector_t* vector, size_t pos, void* elem)
 int vectorEmpujar(Vector_t* vector, void* elem)
 {
     if(vector->cantElem == vector->capacidad){
-        if(vectorRedimensionar(vector, FACTOR_INCR * vector->capacidad)){
+        if(vectorRedimensionar(vector, FACTOR_INCR * vector->capacidad) != EXITO){
             return ERR_SIN_MEM;
         }
     }

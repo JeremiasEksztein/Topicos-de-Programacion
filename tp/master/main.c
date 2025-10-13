@@ -5,9 +5,8 @@
 #include "../proceso/proceso.h"
 
 void imprimirRegistroDivisiones(void* reg);
-//int parsearParaEscritura(FILE* arch, void* reg);
-int parsearParaEscritura2(FILE* arch, void* reg);
-
+int parsearParaDivisiones(FILE* arch, void* reg);
+int parsearParaAperturas(FILE* arch, void* reg);
 
 #define CANT_ARGS 3
 
@@ -24,18 +23,22 @@ int main(int argc, char* argv[])
 
     Vector_t vecDivisiones, vecAperturas;
 
-    TRY(vectorCrear(&vecDivisiones, sizeof(IPCDivisiones)));
-    TRY(vectorLeerDeTexto(&vecDivisiones, argv[ARG_DIVISIONES_NOM], parsearIPCDivisiones));
+    vectorCrear(&vecDivisiones, sizeof(IPCDivisiones));
+    vectorLeerDeTexto(&vecDivisiones, argv[ARG_DIVISIONES_NOM], parsearIPCDivisiones);
 
-    TRY(corregirCampos(&vecDivisiones, corregirIPCDivisiones));
+    vectorEliminarPos(&vecDivisiones, 0);
 
-    TRY(vectorCrear(&vecAperturas, sizeof(IPCAperturas)));
-    TRY(vectorLeerDeTexto(&vecAperturas, argv[ARG_APERTURAS_NOM], parsearIPCAperturas));
+    corregirCampos(&vecDivisiones, corregirIPCDivisiones);
 
-    TRY(corregirCampos(&vecAperturas, corregirIPCAperturas));
+    vectorCrear(&vecAperturas, sizeof(IPCAperturas));
+    vectorLeerDeTexto(&vecAperturas, argv[ARG_APERTURAS_NOM], parsearIPCAperturas);
 
-    //vectorEscribirATexto(&vecDivisiones, "pruebaDivisiones.csv", parsearParaEscritura);
-    //vectorEscribirATexto(&vecAperturas, "pruebaAperturas.csv", parsearParaEscritura2);
+    //vectorEliminarPos(&vecAperturas, 0);
+
+    corregirCampos(&vecAperturas, corregirIPCAperturas);
+
+    vectorEscribirATexto(&vecDivisiones, "pruebaDivisiones.csv", parsearParaDivisiones);
+    vectorEscribirATexto(&vecAperturas, "pruebaAperturas.csv", parsearParaAperturas);
 
 //    herramientaAjustarMontosIPCDivisiones(&vecDivisiones);
 
@@ -65,16 +68,16 @@ void imprimirRegistroDivisiones(void* reg)
 
     printf("%s %s %s %s %s %s %s %s\n", tmp->cod, tmp->desc, tmp->clasif, tmp->indiceIPC, tmp->varMensIPC, tmp->varAnualIPC, tmp->region, tmp->periodo);
 }
-/*
-int parsearParaEscritura(FILE* arch, void* reg)
+
+int parsearParaDivisiones(FILE* arch, void* reg)
 {
     IPCDivisiones* tmp = reg;
 
     fprintf(arch, "%s | %s | %s | %s | %s | %s | %s | %s\n", tmp->cod, tmp->desc, tmp->clasif, tmp->indiceIPC, tmp->varMensIPC, tmp->varAnualIPC, tmp->region, tmp->periodo);
     return EXITO;
-}*/
+}
 
-int parsearParaEscritura2(FILE* arch, void* reg)
+int parsearParaAperturas(FILE* arch, void* reg)
 {
     IPCAperturas* tmp = reg;
 

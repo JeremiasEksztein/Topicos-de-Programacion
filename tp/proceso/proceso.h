@@ -107,9 +107,12 @@ int clasificarBySIPCDivisiones(Vector_t* vec);
 int filtrarBienes(void* dato, void* contexto);
 int filtrarServicios(void* dato, void* contexto);
 
+void* obtenerPeriodo(void* elem);
 void* obtenerCod(void* elem);
 
-int compararCod(void* lhs, void* rhs);
+int compararPeriodo(void* lhs, void* rhs);
+int compararCodBienes(void* lhs, void* rhs);
+int compararCodServicios(void* lhs, void* rhs);
 
 void* reducirBySProm(void* dato, void* acumulado);
 void* unirBienesYServicios(void* lhs, void* rhs, void* elem);

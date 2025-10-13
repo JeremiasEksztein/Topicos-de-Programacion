@@ -1,4 +1,3 @@
-Codigo | Descripcion | Clasificador | Indice_IPC | v_m_IPC | v_i_a_IPC | Region | Periodo_codificado
 0 | NIVEL GENERAL | Nivel general y divisiones COICOP | 100 | NA | NA | GBA | 2016 - Diciembre
 0 | NIVEL GENERAL | Nivel general y divisiones COICOP | 100 | NA | NA | Pampeana | 2016 - Diciembre
 0 | NIVEL GENERAL | Nivel general y divisiones COICOP | 100 | NA | NA | Noreste | 2016 - Diciembre
@@ -8,6 +7,7 @@ Codigo | Descripcion | Clasificador | Indice_IPC | v_m_IPC | v_i_a_IPC | Region 
 0 | NIVEL GENERAL | Nivel general y divisiones COICOP | 100 | NA | NA | Nacional | 2016 - Diciembre
 01 | Alimentos y bebidas no alcohólicas | Nivel general y divisiones COICOP | 100 | NA | NA | GBA | 2016 - Diciembre
 01 | Alimentos y bebidas no alcohólicas | Nivel general y divisiones COICOP | 100 | NA | NA | Pampeana | 2016 - Diciembre
+01 | Alimentos y bebidas no alcohólicas | Nivel general y divisiones COICOP | 100 | NA | NA | Noreste | 2016 - Diciembre
 01 | Alimentos y bebidas no alcohólicas | Nivel general y divisiones COICOP | 100 | NA | NA | Noroeste | 2016 - Diciembre
 01 | Alimentos y bebidas no alcohólicas | Nivel general y divisiones COICOP | 100 | NA | NA | Cuyo | 2016 - Diciembre
 01 | Alimentos y bebidas no alcohólicas | Nivel general y divisiones COICOP | 100 | NA | NA | Patagonia | 2016 - Diciembre
@@ -18,6 +18,7 @@ Codigo | Descripcion | Clasificador | Indice_IPC | v_m_IPC | v_i_a_IPC | Region 
 02 | Bebidas alcohólicas y tabaco | Nivel general y divisiones COICOP | 100 | NA | NA | Noroeste | 2016 - Diciembre
 02 | Bebidas alcohólicas y tabaco | Nivel general y divisiones COICOP | 100 | NA | NA | Cuyo | 2016 - Diciembre
 02 | Bebidas alcohólicas y tabaco | Nivel general y divisiones COICOP | 100 | NA | NA | Patagonia | 2016 - Diciembre
+02 | Bebidas alcohólicas y tabaco | Nivel general y divisiones COICOP | 100 | NA | NA | Nacional | 2016 - Diciembre
 03 | Prendas de vestir y calzado | Nivel general y divisiones COICOP | 100 | NA | NA | GBA | 2016 - Diciembre
 03 | Prendas de vestir y calzado | Nivel general y divisiones COICOP | 100 | NA | NA | Pampeana | 2016 - Diciembre
 03 | Prendas de vestir y calzado | Nivel general y divisiones COICOP | 100 | NA | NA | Noreste | 2016 - Diciembre
@@ -38,6 +39,7 @@ Codigo | Descripcion | Clasificador | Indice_IPC | v_m_IPC | v_i_a_IPC | Region 
 05 | Equipamiento y mantenimiento del hogar | Nivel general y divisiones COICOP | 100 | NA | NA | Noroeste | 2016 - Diciembre
 05 | Equipamiento y mantenimiento del hogar | Nivel general y divisiones COICOP | 100 | NA | NA | Cuyo | 2016 - Diciembre
 05 | Equipamiento y mantenimiento del hogar | Nivel general y divisiones COICOP | 100 | NA | NA | Patagonia | 2016 - Diciembre
+05 | Equipamiento y mantenimiento del hogar | Nivel general y divisiones COICOP | 100 | NA | NA | Nacional | 2016 - Diciembre
 06 | Salud | Nivel general y divisiones COICOP | 100 | NA | NA | GBA | 2016 - Diciembre
 06 | Salud | Nivel general y divisiones COICOP | 100 | NA | NA | Pampeana | 2016 - Diciembre
 06 | Salud | Nivel general y divisiones COICOP | 100 | NA | NA | Noreste | 2016 - Diciembre
@@ -78,6 +80,7 @@ Codigo | Descripcion | Clasificador | Indice_IPC | v_m_IPC | v_i_a_IPC | Region 
 11 | Restaurantes y hoteles | Nivel general y divisiones COICOP | 100 | NA | NA | Noreste | 2016 - Diciembre
 11 | Restaurantes y hoteles | Nivel general y divisiones COICOP | 100 | NA | NA | Noroeste | 2016 - Diciembre
 11 | Restaurantes y hoteles | Nivel general y divisiones COICOP | 100 | NA | NA | Cuyo | 2016 - Diciembre
+11 | Restaurantes y hoteles | Nivel general y divisiones COICOP | 100 | NA | NA | Patagonia | 2016 - Diciembre
 11 | Restaurantes y hoteles | Nivel general y divisiones COICOP | 100 | NA | NA | Nacional | 2016 - Diciembre
 12 | Bienes y servicios varios | Nivel general y divisiones COICOP | 100 | NA | NA | GBA | 2016 - Diciembre
 12 | Bienes y servicios varios | Nivel general y divisiones COICOP | 100 | NA | NA | Pampeana | 2016 - Diciembre
@@ -158,6 +161,7 @@ S | NA | Bienes y servicios | 100 | NA | NA | Nacional | 2016 - Diciembre
 04 | Vivienda, agua, electricidad, gas y otros combustibles | Nivel general y divisiones COICOP | 101.4784 | 1.5 | NA | Nacional | 2017 - Enero
 05 | Equipamiento y mantenimiento del hogar | Nivel general y divisiones COICOP | 100.8651 | 0.9 | NA | GBA | 2017 - Enero
 05 | Equipamiento y mantenimiento del hogar | Nivel general y divisiones COICOP | 100.8374 | 0.8 | NA | Pampeana | 2017 - Enero
+05 | Equipamiento y mantenimiento del hogar | Nivel general y divisiones COICOP | 101.4132 | 1.4 | NA | Noreste | 2017 - Enero
 05 | Equipamiento y mantenimiento del hogar | Nivel general y divisiones COICOP | 100.4121 | 0.4 | NA | Noroeste | 2017 - Enero
 05 | Equipamiento y mantenimiento del hogar | Nivel general y divisiones COICOP | 101.2098 | 1.2 | NA | Cuyo | 2017 - Enero
 05 | Equipamiento y mantenimiento del hogar | Nivel general y divisiones COICOP | 101.0684 | 1.1 | NA | Patagonia | 2017 - Enero
@@ -318,6 +322,7 @@ S | NA | Bienes y servicios | 102.4355 | 2.4 | NA | Nacional | 2017 - Enero
 09 | Recreación y cultura | Nivel general y divisiones COICOP | 103.7961 | 0.6 | NA | Nacional | 2017 - Febrero
 10 | Educación | Nivel general y divisiones COICOP | 104.936 | 4.4 | NA | GBA | 2017 - Febrero
 10 | Educación | Nivel general y divisiones COICOP | 102.0178 | 1.6 | NA | Pampeana | 2017 - Febrero
+10 | Educación | Nivel general y divisiones COICOP | 109.7825 | 8 | NA | Noreste | 2017 - Febrero
 10 | Educación | Nivel general y divisiones COICOP | 102.8592 | 2.3 | NA | Noroeste | 2017 - Febrero
 10 | Educación | Nivel general y divisiones COICOP | 102.6468 | 2.6 | NA | Cuyo | 2017 - Febrero
 10 | Educación | Nivel general y divisiones COICOP | 106.687 | -0.3 | NA | Patagonia | 2017 - Febrero
@@ -638,6 +643,7 @@ S | NA | Bienes y servicios | 112.0904 | 3.2 | NA | Nacional | 2017 - Abril
 01 | Alimentos y bebidas no alcohólicas | Nivel general y divisiones COICOP | 107.5956 | 2 | NA | Patagonia | 2017 - Mayo
 01 | Alimentos y bebidas no alcohólicas | Nivel general y divisiones COICOP | 109.7631 | 1.3 | NA | Nacional | 2017 - Mayo
 02 | Bebidas alcohólicas y tabaco | Nivel general y divisiones COICOP | 111.639 | 1.9 | NA | GBA | 2017 - Mayo
+02 | Bebidas alcohólicas y tabaco | Nivel general y divisiones COICOP | 111.9322 | 1.5 | NA | Pampeana | 2017 - Mayo
 02 | Bebidas alcohólicas y tabaco | Nivel general y divisiones COICOP | 111.5329 | 1.9 | NA | Noreste | 2017 - Mayo
 02 | Bebidas alcohólicas y tabaco | Nivel general y divisiones COICOP | 111.2548 | 1.8 | NA | Noroeste | 2017 - Mayo
 02 | Bebidas alcohólicas y tabaco | Nivel general y divisiones COICOP | 111.7646 | 1.2 | NA | Cuyo | 2017 - Mayo
@@ -1278,6 +1284,7 @@ S | NA | Bienes y servicios | 122.8259 | 1.9 | NA | Nacional | 2017 - Mayo
 03 | Prendas de vestir y calzado | Nivel general y divisiones COICOP | 109.2453 | 0.8 | NA | Noreste | 2017 - Octubre
 03 | Prendas de vestir y calzado | Nivel general y divisiones COICOP | 115.1964 | 3.1 | NA | Noroeste | 2017 - Octubre
 03 | Prendas de vestir y calzado | Nivel general y divisiones COICOP | 110.3406 | 2.2 | NA | Cuyo | 2017 - Octubre
+03 | Prendas de vestir y calzado | Nivel general y divisiones COICOP | 111.3727 | 1.1 | NA | Patagonia | 2017 - Octubre
 03 | Prendas de vestir y calzado | Nivel general y divisiones COICOP | 114.138 | 2.1 | NA | Nacional | 2017 - Octubre
 04 | Vivienda, agua, electricidad, gas y otros combustibles | Nivel general y divisiones COICOP | 128.9128 | 0.5 | NA | GBA | 2017 - Octubre
 04 | Vivienda, agua, electricidad, gas y otros combustibles | Nivel general y divisiones COICOP | 129.1378 | 1.1 | NA | Pampeana | 2017 - Octubre
@@ -2558,6 +2565,7 @@ S | NA | Bienes y servicios | 159.953 | 2.1 | 34.9 | Nacional | 2018 - Julio
 06 | Salud | Nivel general y divisiones COICOP | 155.4327 | 3 | 30.3 | Noreste | 2018 - Agosto
 06 | Salud | Nivel general y divisiones COICOP | 151.8923 | 3 | 28.2 | Noroeste | 2018 - Agosto
 06 | Salud | Nivel general y divisiones COICOP | 156.379 | 3 | 30.8 | Cuyo | 2018 - Agosto
+06 | Salud | Nivel general y divisiones COICOP | 156.336 | 3 | 30.9 | Patagonia | 2018 - Agosto
 06 | Salud | Nivel general y divisiones COICOP | 156.5273 | 4.1 | 31.5 | Nacional | 2018 - Agosto
 07 | Transporte | Nivel general y divisiones COICOP | 156.6031 | 3.3 | 43.3 | GBA | 2018 - Agosto
 07 | Transporte | Nivel general y divisiones COICOP | 163.9694 | 4.8 | 46 | Pampeana | 2018 - Agosto
@@ -5118,6 +5126,7 @@ S | NA | Bienes y servicios | 298.5626 | 3.5 | 39.2 | Nacional | 2020 - Marzo
 12 | Bienes y servicios varios | Nivel general y divisiones COICOP | 313.2099 | 0.8 | 48.7 | Pampeana | 2020 - Abril
 12 | Bienes y servicios varios | Nivel general y divisiones COICOP | 327.2234 | 1.1 | 54.2 | Noreste | 2020 - Abril
 12 | Bienes y servicios varios | Nivel general y divisiones COICOP | 313.9574 | 0.1 | 52.3 | Noroeste | 2020 - Abril
+12 | Bienes y servicios varios | Nivel general y divisiones COICOP | 320.7307 | 0.5 | 56.9 | Cuyo | 2020 - Abril
 12 | Bienes y servicios varios | Nivel general y divisiones COICOP | 322.9315 | -0.6 | 48.4 | Patagonia | 2020 - Abril
 12 | Bienes y servicios varios | Nivel general y divisiones COICOP | 308.9516 | 0.2 | 48.4 | Nacional | 2020 - Abril
 Estacional | NA | Categorias | 291.1675 | 4.7 | 60.3 | GBA | 2020 - Abril
@@ -10238,6 +10247,7 @@ S | NA | Bienes y servicios | 1630.3102 | 9.1 | 120.8 | Nacional | 2023 - Agosto
 05 | Equipamiento y mantenimiento del hogar | Nivel general y divisiones COICOP | 2415.264 | 14.5 | 146.5 | Patagonia | 2023 - Mayo
 05 | Equipamiento y mantenimiento del hogar | Nivel general y divisiones COICOP | 2342.3942 | 12.7 | 139 | Nacional | 2023 - Mayo
 06 | Salud | Nivel general y divisiones COICOP | 2308.6914 | 8 | 133.5 | GBA | 2023 - Mayo
+06 | Salud | Nivel general y divisiones COICOP | 2632.2472 | 10.3 | 142.3 | Pampeana | 2023 - Mayo
 06 | Salud | Nivel general y divisiones COICOP | 2751.5808 | 8.4 | 142.6 | Noreste | 2023 - Mayo
 06 | Salud | Nivel general y divisiones COICOP | 2692.115 | 11.8 | 146.4 | Noroeste | 2023 - Mayo
 06 | Salud | Nivel general y divisiones COICOP | 2832.9215 | 13.5 | 149.5 | Cuyo | 2023 - Mayo
@@ -13091,4 +13101,3 @@ S | NA | Bienes y servicios | 9365.9431 | 2.8 | 52 | Noreste | 2025 - Julio
 S | NA | Bienes y servicios | 9503.0467 | 2.7 | 63.2 | Noroeste | 2025 - Julio
 S | NA | Bienes y servicios | 9204.7477 | 3 | 56.1 | Cuyo | 2025 - Julio
 S | NA | Bienes y servicios | 9071.2836 | 3.1 | 75.6 | Patagonia | 2025 - Julio
-S | NA | Bienes y servicios | 8827.7358 | 3.1 | 58.5 | Nacional | 2025 - Julio

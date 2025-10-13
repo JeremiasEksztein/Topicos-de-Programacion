@@ -157,5 +157,7 @@ Vector_t* unirVectores(Vector_t* lhs, Vector_t* rhs, void* (*Unir)(void* lhs, vo
         vectorEmpujar(tmp, elem);
     }
 
+    free(elem);
+
     return tmp;
 }
