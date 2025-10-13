@@ -97,7 +97,7 @@ void* reducirVector(Vector_t* vector, void* (*Reducir)(void* dato, void* acumula
 
 Vector_t* reducirVectorPorClave(Vector_t* vector, void* (*ObtenerClave)(void* elem), int (*CompararClave)(void* lhs, void* rhs), void* (*Reducir)(void* elem, void* acumulado))
 {
-    Vector_t* temp = malloc(sizeof(vector));
+    Vector_t* temp = malloc(sizeof(Vector_t));
 
     if(!temp){
         return NULL;
@@ -105,14 +105,19 @@ Vector_t* reducirVectorPorClave(Vector_t* vector, void* (*ObtenerClave)(void* el
 
     vectorCrear(temp, vector->tamElem);
 
+    void* acumulador = malloc(vector->tamElem);
+
+    if(!acumulador){
+        return NULL;
+    }
+
     void* i = vector->data;
     void* ult = vector->data + (vector->cantElem - 1) * vector->tamElem;
-    void* acumulador = NULL;
     void* claveAnt = NULL;
 
     while(i < ult){
 
-        acumulador = NULL;
+        memset(acumulador, 0, vector->tamElem);
 
         claveAnt = ObtenerClave(i);
 
@@ -126,6 +131,7 @@ Vector_t* reducirVectorPorClave(Vector_t* vector, void* (*ObtenerClave)(void* el
         vectorEmpujar(temp, acumulador);
     }
 
+    free(acumulador);
     vectorDestruir(vector);
 
     return temp;

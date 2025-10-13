@@ -406,11 +406,11 @@ int clasificarBySIPCDivisiones(Vector_t* divs)
     bienes = filtrarVector(divs, filtrarBienes, NULL);
     servicios = filtrarVector(divs, filtrarServicios, NULL);
 
-    vectorEscribirATexto(bienes, "pruebaBienes.csv", parsearParaEscritura);
-    vectorEscribirATexto(servicios, "pruebaServicios.csv", parsearParaEscritura);
-
     bienes = reducirVectorPorClave(bienes, obtenerCod, compararCod, reducirBySProm);
     servicios = reducirVectorPorClave(servicios, obtenerCod, compararCod, reducirBySProm);
+
+    vectorEscribirATexto(bienes, "pruebaBienes.csv", parsearParaEscritura);
+    vectorEscribirATexto(servicios, "pruebaServicios.csv", parsearParaEscritura);
 
     nacional = unirVectores(bienes, servicios, unirBienesYServicios, sizeof(IPCPromedio));
 
@@ -474,6 +474,11 @@ void* reducirBySProm(void* dato, void* acumulado)
     IPCDivisiones* tmp = dato;
     IPCDivisiones* tmpA = acumulado;
 
+    stringNCopy(tmpA->cod, tmp->cod, DIVISIONES_COD_LEN);
+    stringNCopy(tmpA->desc, tmp->desc, DIVISIONES_DESC_LEN);
+    stringNCopy(tmpA->clasif, tmp->clasif, DIVISIONES_CLASIF_LEN);
+    stringNCopy(tmpA->region, "Nacional", DIVISIONES_REGION_LEN);
+    stringNCopy(tmpA->periodo, tmp->periodo, DIVISIONES_PERIODO_LEN);
     snprintf(tmpA->indiceIPC, DIVISIONES_INDICES_LEN, "%lf", atof(tmp->indiceIPC) + atof(tmpA->indiceIPC));
 
     return tmpA;    
@@ -484,7 +489,6 @@ void* unirBienesYServicios(void* lhs, void* rhs, void* elem)
     IPCDivisiones* tmpL = lhs;
     IPCDivisiones* tmpR = rhs;
     IPCPromedio* tmp = elem;
-
     stringNCopy(tmp->fecha, tmpL->periodo, DIVISIONES_PERIODO_LEN);
     snprintf(tmp->indiceBienes, DIVISIONES_INDICES_LEN, "%lf", atof(tmpL->indiceIPC) / 6.0f);
     snprintf(tmp->indiceServicios, DIVISIONES_INDICES_LEN, "%lf", atof(tmpR->indiceIPC) / 7.0f);
