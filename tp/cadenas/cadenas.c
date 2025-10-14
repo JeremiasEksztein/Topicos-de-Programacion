@@ -366,18 +366,6 @@ char* stringSubstring(char* dest, char* src)
 
 inline int stringLenght(const char* str)
 {
-    int cnt;
-
-    __asm__("cld\n"			/* Search forward.  */
-      /* Some old versions of gas need `repne' instead of `repnz'.  */
-      "repnz\n"			/* Look for a zero byte.  */
-      "scasb" /* %0, %1, %3 */ :
-      "=c" (cnt) : "D" (str), "0" (-1), "a" (0));
-
-    return -2 - cnt;
-
-
-    /*
     const char* tmp = str;
     size_t sum = 0;
 
@@ -387,8 +375,6 @@ inline int stringLenght(const char* str)
     }
 
     return ++sum;
-
-    */
 }
 
 

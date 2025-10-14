@@ -50,7 +50,6 @@ int main(int argc, char* argv[])
 
     vectorDestruir(&vecDivisiones);
     vectorDestruir(&vecAperturas);
-
     /*
 
     herramientaCalcularAlquiler(&vecAperturas);
