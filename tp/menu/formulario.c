@@ -30,12 +30,12 @@ typedef struct{
     const char title;
     InputMetadata metadatum[];
     int idAmount;
+    //InputMetadata metadatum[FORM_INPUT_AMOUNT]; esto lo soluciona todo
 }
 
 typedef struct Form_t{
     const char title[FORM_TITLE_LEN];
     Input inputs[FORM_INPUT_AMOUNT];
-    //InputMetadata metadatum[FORM_INPUT_AMOUNT]; esto lo soluciona todo
     int ids[FORM_INPUT_AMOUNT];
     char responses[FORM_INPUT_AMOUNT][FORM_RESPONSE_LEN];
     int inputAmount;

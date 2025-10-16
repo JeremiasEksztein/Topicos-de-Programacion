@@ -12,6 +12,7 @@
 #include "../vector/algoritmos.h"
 #include "../secuenciaPalabras/secuenciaPalabras.h"
 #include "../cadenas/cadenas.h"
+#include "../formulario/formulario.h"
 
 #define ARCH_DIVISIONES "pruebaDivisiones.csv"
 #define ARCH_APERTURAS "pruebaAperturas.csv"

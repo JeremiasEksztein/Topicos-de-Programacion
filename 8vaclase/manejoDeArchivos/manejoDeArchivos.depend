@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1584205424 source:c:\users\laboratorios\desktop\manejodearchivos\main.c
+
+1760015670 source:c:\users\laboratorios\desktop\manejodearchivos\manejodearchivos.c
+	"manejoDeArchivos.h"
+
+1760013529 c:\users\laboratorios\desktop\manejodearchivos\manejodearchivos.h
+	<stdio.h>
+	<stdlib.h>
+
