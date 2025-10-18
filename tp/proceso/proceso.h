@@ -100,38 +100,30 @@ int parsearIPCAperturas(FILE* arch, void* reg);
 int corregirCampos(Vector_t* vec, int (*Corrector)(void*));
 
 int corregirIPCDivisiones(void* reg);
-
 int decodificarFechaDivisiones(IPCDivisiones* reg, int* decod);
 int convertirFechaDivisiones(IPCDivisiones* reg);
 int normalizarDescripcionDivisiones(IPCDivisiones* reg);
-
 void palabraATitulo(Palabra_t* pal);
 void palabraAMinuscula(Palabra_t* pal);
 
 int corregirIPCAperturas(void* reg);
-
 int corregirFormatoFechaAperturas(IPCAperturas* reg);
-
 
 int herramientaAjustarMontosIPCDivisiones(Vector_t* vec);
 Respuesta preguntarAjustarMonto(void);
 int filtrarIPCDivisiones(void* dato, void* contexto);
-
 int clasificarBySIPCDivisiones(Vector_t* vec);
-
 int filtrarBienes(void* dato, void* contexto);
 int filtrarServicios(void* dato, void* contexto);
-
+int filtrarBienesDebug(void* dato, void* contexto);
+int filtrarServiciosDebug(void* dato, void* contexto);
 void* obtenerPeriodo(void* elem);
 void* obtenerCod(void* elem);
-
 int compararPeriodo(void* lhs, void* rhs);
 int compararCodBienes(void* lhs, void* rhs);
 int compararCodServicios(void* lhs, void* rhs);
-
 void* reducirBySProm(void* dato, void* acumulado);
 void* unirBienesYServicios(void* lhs, void* rhs, void* elem);
-
 int parsearIPCPromedio(FILE* arch, void* reg);
                                             
 int herramientaCalcularAlquilerIPCAperturas(Vector_t* vec);

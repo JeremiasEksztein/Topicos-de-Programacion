@@ -1,6 +1,9 @@
 #ifndef VECTOR_INCLUDED
 #define VECTOR_INCLUDED
 
+/// @file vector.h
+/// @brief Header con las principales funcionalidades del TDA Vector
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h> 
@@ -12,6 +15,10 @@
 
 #define DEFAULT_CAP 10
 
+/**
+ *  @struct Vector_t
+ *  @brief Struct del TDA Vector
+ */
 typedef struct vector
 {
     void* data;

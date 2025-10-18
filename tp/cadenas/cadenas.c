@@ -324,7 +324,7 @@ int stringSpan(char* dest, char* src)
     return sum;
 }
 
-char* stringPbreak(char* dest, char* src)
+char* stringPBreak(char* dest, char* src)
 {
     char* tmpD = dest;
     size_t len = stringLenght(dest) - 1;

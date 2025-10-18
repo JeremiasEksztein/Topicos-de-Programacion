@@ -2,7 +2,7 @@
 
 int transformarVector(Vector_t* vector, int (*Transformar)(void* dato, void* contexto), void* contexto)
 {
-    if(!vector || !Transformar || !contexto){
+    if(!vector || !Transformar){
         return ERR_USUARIO;
     }
 
@@ -56,6 +56,8 @@ Vector_t* mapearVector(Vector_t* vector, void* (*Mapear)(void* dato, void* tpm, 
         Mapear(i, elem, contexto);
         vectorEmpujar(tmp, elem);
     }
+
+    free(elem);
 
     return tmp;
 }

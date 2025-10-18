@@ -418,6 +418,7 @@ int clasificarBySIPCDivisiones(Vector_t* divs)
 
     vectorEscribirATexto(nacional, "pruebaNacional.csv", parsearIPCPromedio);
 
+    
     vectorDestruir(bienes);
     vectorDestruir(servicios);
     vectorDestruir(nacional);
@@ -450,6 +451,28 @@ int filtrarServicios(void* dato, void* contexto)
     IPCDivisiones* tmp = dato;
 
     if((!stringCmp(tmp->cod, "04") || !stringCmp(tmp->cod, "06") || !stringCmp(tmp->cod, "07") || !stringCmp(tmp->cod, "08") || !stringCmp(tmp->cod, "09") || !stringCmp(tmp->cod, "10") || !stringCmp(tmp->cod, "11")) && stringCmp(tmp->region, "Nacional")){
+            return 1;
+    }
+
+    return 0;
+}
+
+int filtrarBienesDebug(void* dato, void* contexto)
+{
+    IPCDivisiones* tmp = dato;
+
+    if((!stringCmp(tmp->cod, "04") || !stringCmp(tmp->cod, "06") || !stringCmp(tmp->cod, "07") || !stringCmp(tmp->cod, "08") || !stringCmp(tmp->cod, "09") || !stringCmp(tmp->cod, "10") || !stringCmp(tmp->cod, "11")) && !stringCmp(tmp->region, "GBA")){
+            return 1;
+    }
+
+    return 0;
+}
+
+int filtrarServiciosDebug(void* dato, void* contexto)
+{
+    IPCDivisiones* tmp = dato;
+
+    if((!stringCmp(tmp->cod, "04") || !stringCmp(tmp->cod, "06") || !stringCmp(tmp->cod, "07") || !stringCmp(tmp->cod, "08") || !stringCmp(tmp->cod, "09") || !stringCmp(tmp->cod, "10") || !stringCmp(tmp->cod, "11")) || !stringCmp(tmp->region, "GBA")){
             return 1;
     }
 
@@ -533,9 +556,6 @@ int parsearIPCPromedio(FILE* arch, void* reg)
 
 int herramientaCalcularAlquilerIPCAperturas(Vector_t* aper)
 {
-
-    return EXITO;
-/*
     Vector_t* alquileres;
     IPCAperturas* tmp;
 
@@ -546,10 +566,8 @@ int herramientaCalcularAlquilerIPCAperturas(Vector_t* aper)
     alquileres = mapearVector(alquileres, mapearAlquileres, sizeof(IPCAlquileres), tmp);
 
     return EXITO;
-*/
 }
 
-/*
 int filtrarAlquileres(void* dato, void* contexto)
 {
     IPCAperturas* tmpD = dato;
@@ -592,5 +610,5 @@ void* mapearAlquileres(void* dato, void* tmp, void* contexto)
 
     return tmpT;
 }
-*/
+
 
