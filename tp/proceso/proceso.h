@@ -87,7 +87,12 @@ typedef struct{
 }IPCAperturas;
 
 typedef struct{
-    char desc[APERTURAS_DESC_LEN];
+    char periodo[APERTURAS_PERIODO_LEN];
+    char monto[APERTURAS_INDICES_LEN];
+    char region[APERTURAS_REGION_LEN];
+}RespuestaAlquileres;
+
+typedef struct{
     char periodo[APERTURAS_PERIODO_LEN];
     char indiceIPC[APERTURAS_INDICES_LEN];
     char acumuladoIPC[APERTURAS_INDICES_LEN];

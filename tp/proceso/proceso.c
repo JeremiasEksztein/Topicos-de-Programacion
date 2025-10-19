@@ -557,21 +557,40 @@ int parsearIPCPromedio(FILE* arch, void* reg)
 int herramientaCalcularAlquilerIPCAperturas(Vector_t* aper)
 {
     Vector_t* alquileres;
-    IPCAperturas* tmp;
+    RespuestaAlquileres* tmp;
 
-    tmp = preguntarAlquileres();
+    preguntarAlquileres(tmp); 
 
     alquileres = filtrarVector(aper, filtrarAlquileres, tmp);
 
     alquileres = mapearVector(alquileres, mapearAlquileres, sizeof(IPCAlquileres), tmp);
 
+    //Tengo que mostrar el monto inicial del alquiler, el monto ajustado por inflacion la dia de la fecha.
+    // y la variacion porcentual hasta la fecha
+
+    //Tengo que mostrar una tabla con la informacion del vector alquileres
+
+    IPCAlquileres* tmpAlq = vectorObtener(alquileres, vectorCantElem(alquileres) - 1);
+    printf("El alquiler original de $ %0.2lf a la fecha %s en la region %s, ha variado en un %% %0.2lf hacia un total ajustado de $ %0.2lf al periodo %s\n", tmp->monto, tmp->periodo, tmp->region, tmpAlq->acumuladoIPC, tmpAlq->montoAjustado, tmpAlq->periodo);
+
+    mostrarVector(alquileres, mostrarAlquileres);
+
+    vectorEscribirABinario(alquileres, "pruebaAlquileres.dat");
+
+    vectorDestruir(alquileres);
+
     return EXITO;
+}
+
+RespuestaAlquileres preguntarAlquileres(void)
+{
+    //Aca pregunto por el monto inicial del alquiler. La region del contrato, y el periodo de inicio del contrato
 }
 
 int filtrarAlquileres(void* dato, void* contexto)
 {
     IPCAperturas* tmpD = dato;
-    IPCAperturas* tmpC = contexto;
+    RespuestaAlquileres* tmpC = contexto;
 
     int d, m, a, t;
 
@@ -598,17 +617,31 @@ void* mapearAlquileres(void* dato, void* tmp, void* contexto)
 {
     IPCAperturas* tmpD = dato;
     IPCAlquileres* tmpT = tmp;
-    IPCAperturas* tmpC = contexto;
+    RespuestaAlquileres* tmpC = contexto;
 
-    stringNCopy(tmpT->desc, "Alquileres de la vivienda", APERTURAS_DESC_LEN);
     stringNCopy(tmpT->periodo, tmpD->periodo, APERTURAS_PERIODO_LEN);
     stringNCopy(tmpT->indiceIPC, tmpD->indiceIPC, APERTURAS_INDICES_LEN);
-    stringNCopy(tmpT->acumuladoIPC, tmpC->varAnualIPC, APERTURAS_INDICES_LEN);
-    snprintf(tmpT->montoAjustado, "%lf", atof(tmpC->varMensIPC) * 
+    stringNCopy(tmpT->acumuladoIPC, tmpC->periodo, APERTURAS_INDICES_LEN); // Guardo el acumulado del IPC en el periodo del dato de contexto
+    stringNCopy(tmpT->montoAjustado, tmpC->monto, APERTURAS_INDICES_LEN); // Guardo el monto ajustado en el monto del dato de contexto
 
-    tmpT->montoAjustado
+    snprintf(tmpC->monto, APERTURAS_INDICES_LEN, "%lf", atof(tmpC->monto) * (1 + (atof(tmpD->indiceIPC) / 100.0f)));
+    snprintf(tmpC->periodo, APERTURAS_PERIODO_LEN, "%lf", atof(tmpC->periodo) + atof(tmpD->))
+    //Tiene que quedar como en la tabla que se muestra
+    //Periodo es sencillo, copia el periodo leido y listo
+    //El indice IPC no es tan sencillo, tengo que guardar en algun lugar el acumulado del IPC hasta el momento y copiarlo
+    //La variacion no es sencilla, tengo que calcular la variacion porcentual hasta la fecha
+    //El monto ajustado no es sencillo
+
+    /*Periodo - Indice IPC - Variacion mensual - Monto ajustado*/
 
     return tmpT;
+}
+
+void mostrarAlquileres(const void* elem)
+{
+    IPCAlquileres* tmp = elem;
+
+    printf("%s - %lf - %lf - %lf\n", tmp->periodo, tmp->acumuladoIPC, tmp->indiceIPC tmp->montoAjustado);
 }
 
 

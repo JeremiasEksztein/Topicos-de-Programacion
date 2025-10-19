@@ -18,7 +18,7 @@ int parsearParaAperturas(FILE* arch, void* reg);
 
 int main(int argc, char* argv[])
 {
-    if(argc != CANT_ARGS){
+    if(argc != CANT_ARGS){  // Si no se ingresa la cantidad correcta de argumentos salimos
         return ERR_USUARIO;
     }
 
@@ -27,39 +27,33 @@ int main(int argc, char* argv[])
 
     Vector_t vecDivisiones, vecAperturas;
 
-    vectorCrear(&vecDivisiones, sizeof(IPCDivisiones));
-    vectorLeerDeTexto(&vecDivisiones, argv[ARG_DIVISIONES_NOM], parsearIPCDivisiones);
+    vectorCrear(&vecDivisiones, sizeof(IPCDivisiones)); // Creamos el vector de divisiones
+    vectorLeerDeTexto(&vecDivisiones, argv[ARG_DIVISIONES_NOM], parsearIPCDivisiones); // Leemos y parseamos al vector serie_ipc_divisiones.csv
 
-    vectorEliminarPos(&vecDivisiones, 0);
+    vectorEliminarPos(&vecDivisiones, 0); // Eliminamos el titulo del vector
 
-    corregirCampos(&vecDivisiones, corregirIPCDivisiones);
+    corregirCampos(&vecDivisiones, corregirIPCDivisiones); // Corregimos los campos del vector
 
-    vectorCrear(&vecAperturas, sizeof(IPCAperturas));
-    vectorLeerDeTexto(&vecAperturas, argv[ARG_APERTURAS_NOM], parsearIPCAperturas);
-
-    vectorEliminarPos(&vecAperturas, 0);
-
-    corregirCampos(&vecAperturas, corregirIPCAperturas);
-
-    vectorEscribirATexto(&vecDivisiones, ARCH_DIVISIONES, parsearParaDivisiones);
+    vectorCrear(&vecAperturas, sizeof(IPCAperturas)); // Creamos el vector de aperturas
+    vectorLeerDeTexto(&vecAperturas, argv[ARG_APERTURAS_NOM], parsearIPCAperturas); // Leemos y parseamos al vector serie_ipc_aperturas.csv
+ 
+    vectorEliminarPos(&vecAperturas, 0); // Eliminamos el titulo del vector
+ 
+    corregirCampos(&vecAperturas, corregirIPCAperturas); // Corregimos los campos del vector
+ 
+    vectorEscribirATexto(&vecDivisiones, ARCH_DIVISIONES, parsearParaDivisiones); // Guardamos los contenidos de los vectores en archivos .csv
     vectorEscribirATexto(&vecAperturas, ARCH_APERTURAS, parsearParaAperturas);
 
-//    herramientaAjustarMontosIPCDivisiones(&vecDivisiones);
+    herramientaAjustarMontosIPCDivisiones(&vecDivisiones); // Usamos la herramienta de calcular montos ajustados del punto 5
 
-    clasificarBySIPCDivisiones(&vecDivisiones);
+    clasificarBySIPCDivisiones(&vecDivisiones); // Ejecutamos la clasificacion pedida por el punto 6 en bienes y servicios
 
-    vectorDestruir(&vecDivisiones);
-    vectorDestruir(&vecAperturas);
-    /*
+    herramientaCalcularAlquilerIPCAperturas(&vecAperturas); // Usamos la herramienta de calcular alquiler ajustado por inflacion del punto 9
 
-    herramientaCalcularAlquiler(&vecAperturas);
-
-    vectorDestruir(&vecDivisiones);
+    vectorDestruir(&vecDivisiones); // Liberamos la memoria alocada para los vectores
     vectorDestruir(&vecAperturas);
 
-    return EXITO;
-
-    */
+    return EXITO; // Salimos
 }
 
 
