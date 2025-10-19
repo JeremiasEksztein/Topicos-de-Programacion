@@ -1,6 +1,10 @@
 #include "proceso.h"
 
+void imprimirRegistroDivisiones(void* reg);
 int parsearParaEscritura(FILE* arch, void* reg);
+int parsearParaAlquileres(FILE* arch, void* reg);
+int parsearParaDivisiones(FILE* arch, void* reg);
+int parsearParaAperturas(FILE* arch, void* reg);
 
 int parsearIPCDivisiones(FILE* arch, void* reg)
 {
@@ -266,9 +270,9 @@ int normalizarDescripcionDivisiones(IPCDivisiones* reg)
     return 0;
 }
 
-void palabraATitulo(Palabra_t* pal)
+void palabraATitulo(char* pal)
 {  
-    char* i = pal->cadena;
+    char* i = pal;
 
     *i = toupper(*i);
     i++;
@@ -280,9 +284,9 @@ void palabraATitulo(Palabra_t* pal)
 
 }
 
-void palabraAMinuscula(Palabra_t* pal)
+void palabraAMinuscula(char* pal)
 {
-    char* i = pal->cadena;
+    char* i = pal;
 
     while(*i){
         *i = tolower(*i);
@@ -319,10 +323,12 @@ int corregirFormatoFechaAperturas(IPCAperturas* reg)
 /*Hay que agregar aca una interfaz de menu y en general emprolijarlo todo
  pero como prueba de concepto parece funcionar*/
 
+/*Ejercicio 5*/
+
 int herramientaAjustarMontosIPCDivisiones(Vector_t* divs)
 {
     Vector_t* tmp;
-    Respuesta ans;
+    RespuestaMontos ans;
 
     ans = preguntarAjustarMonto();
 
@@ -343,34 +349,12 @@ int herramientaAjustarMontosIPCDivisiones(Vector_t* divs)
 
     vectorDestruir(tmp);
 
-
-    /*
-    Vector_t* tmp;
-    MenuDinamico_t menuDeAjustar;
-
-    menuDinamicoCrear(&menuDeAjustar, ...);
-
-    void* respuestas = menuPreguntar();
-
-    tmp = filter(&divs, filtrarIPCDivisiones, respuestas);
-
-    IPCDivisiones* i = vectorObtener(tmp, 0);
-    IPCDivisiones* f = vectorObtener(tmp, 1);
-
-    double varPor = ((atof(f->indiceIPC) / atof((i->indiceIPC - 1)))) * 100;
-    double montoAjus = respuestas.monto * (1 + varPor);
-
-    printf("El monto %0.2lf en la region %s durante %s, ajustado en la misma region al %s vale %0.2lf\n", respuestas.monto, respuestas.region, respuestas.periodoIni, respuestas.periodoFin);
-
-    menuDinamicoDestruir(&menuDeAjustar);
-    vectorDestruir(tmp);
-*/
     return EXITO;
 }
 
-Respuesta preguntarAjustarMonto(void)
+RespuestaMontos preguntarAjustarMonto(void)
 {
-    Respuesta ans;
+    RespuestaMontos ans;
 
     scanf("%lf", &(ans.monto));
 
@@ -390,7 +374,7 @@ Respuesta preguntarAjustarMonto(void)
 int filtrarIPCDivisiones(void* dato, void* contexto)
 {
     IPCDivisiones* tmpD = dato;
-    Respuesta* tmpC = contexto;
+    RespuestaMontos* tmpC = contexto;
 
     if((!stringCmp(tmpD->periodo, tmpC->periodoIni) || !stringCmp(tmpD->periodo, tmpC->periodoFin)) && !stringCmp(tmpD->region, tmpC->region) && !stringCmp(tmpD->desc, "NIVEL GENERAL")){
         return 1;
@@ -398,6 +382,8 @@ int filtrarIPCDivisiones(void* dato, void* contexto)
 
     return 0;
 }
+
+/*Ejercicio 6*/
 
 int clasificarBySIPCDivisiones(Vector_t* divs)
 {
@@ -418,7 +404,6 @@ int clasificarBySIPCDivisiones(Vector_t* divs)
 
     vectorEscribirATexto(nacional, "pruebaNacional.csv", parsearIPCPromedio);
 
-    
     vectorDestruir(bienes);
     vectorDestruir(servicios);
     vectorDestruir(nacional);
@@ -433,7 +418,6 @@ int parsearParaEscritura(FILE* arch, void* reg)
     fprintf(arch, "%s | %s | %s | %s | %s | %s | %s | %s\n", tmp->cod, tmp->desc, tmp->clasif, tmp->indiceIPC, tmp->varMensIPC, tmp->varAnualIPC, tmp->region, tmp->periodo);
     return EXITO;
 }
-
 
 int filtrarBienes(void* dato, void* contexto)
 {
@@ -554,38 +538,42 @@ int parsearIPCPromedio(FILE* arch, void* reg)
     return EXITO;
 }
 
+/*Ejercicio 9*/
+
 int herramientaCalcularAlquilerIPCAperturas(Vector_t* aper)
 {
     Vector_t* alquileres;
-    RespuestaAlquileres* tmp;
+    RespuestaAlquileres tmp = {.monto = "30000", .periodo = "2024-09-01", .region = "GBA"};
+    char region[APERTURAS_REGION_LEN] = "";
 
-    preguntarAlquileres(tmp); 
+    //tmp = preguntaAlquileres();
 
-    alquileres = filtrarVector(aper, filtrarAlquileres, tmp);
+    alquileres = filtrarVector(aper, filtrarAlquileres, &tmp);
 
-    alquileres = mapearVector(alquileres, mapearAlquileres, sizeof(IPCAlquileres), tmp);
+    stringNCopy(region, tmp.region, APERTURAS_REGION_LEN);
+    snprintf(tmp.acumulado, APERTURAS_PERIODO_LEN, "%s", ((IPCAperturas*)vectorObtener(alquileres, 0))->indiceIPC);
 
-    //Tengo que mostrar el monto inicial del alquiler, el monto ajustado por inflacion la dia de la fecha.
-    // y la variacion porcentual hasta la fecha
+    alquileres = mapearVector(alquileres, mapearAlquileres, sizeof(IPCAlquileres), &tmp);
 
-    //Tengo que mostrar una tabla con la informacion del vector alquileres
+    vectorEscribirATexto(alquileres, "PruebaAlquileres.csv", parsearParaAlquileres); 
 
     IPCAlquileres* tmpAlq = vectorObtener(alquileres, vectorCantElem(alquileres) - 1);
-    printf("El alquiler original de $ %0.2lf a la fecha %s en la region %s, ha variado en un %% %0.2lf hacia un total ajustado de $ %0.2lf al periodo %s\n", tmp->monto, tmp->periodo, tmp->region, tmpAlq->acumuladoIPC, tmpAlq->montoAjustado, tmpAlq->periodo);
-
+    printf("El alquiler original de $ %s a la fecha %s en la region %s, ha variado en un %% %s hacia un total ajustado de $ %s al periodo %s\n", tmp.monto, tmp.periodo, region, tmpAlq->acumuladoIPC, tmpAlq->montoAjustado, tmpAlq->periodo);
     mostrarVector(alquileres, mostrarAlquileres);
 
-    vectorEscribirABinario(alquileres, "pruebaAlquileres.dat");
+    vectorEscribirABinario(alquileres, ARCH_ALQUILERES);
 
     vectorDestruir(alquileres);
 
     return EXITO;
 }
 
+/*
 RespuestaAlquileres preguntarAlquileres(void)
 {
-    //Aca pregunto por el monto inicial del alquiler. La region del contrato, y el periodo de inicio del contrato
+    Fo
 }
+*/
 
 int filtrarAlquileres(void* dato, void* contexto)
 {
@@ -604,9 +592,12 @@ int filtrarAlquileres(void* dato, void* contexto)
 
     a *= 10000;
     m *= 100;
+
     t = t - a - m - d;
 
-    if(!stringCmp(tmpD->cod, "4.1.1") && !stringCmp(tmpD->region, tmpC->region) && (t <= 0)){
+    stringReplace(tmpD->region, '\r', '\0'); // Reemplazo el retorno de carro por caracter nulo
+
+    if(!stringCmp(tmpD->cod, "04.1.1") && !stringCmp(tmpC->region, tmpD->region) && (t <= 0)){
         return 1;
     }
 
@@ -618,30 +609,30 @@ void* mapearAlquileres(void* dato, void* tmp, void* contexto)
     IPCAperturas* tmpD = dato;
     IPCAlquileres* tmpT = tmp;
     RespuestaAlquileres* tmpC = contexto;
+ 
+    stringNCopy(tmpT->periodo, tmpD->periodo, APERTURAS_PERIODO_LEN); //Guardo el periodo
+    stringNCopy(tmpT->indiceIPC, tmpD->indiceIPC, APERTURAS_INDICES_LEN); // Guardo el indice
 
-    stringNCopy(tmpT->periodo, tmpD->periodo, APERTURAS_PERIODO_LEN);
-    stringNCopy(tmpT->indiceIPC, tmpD->indiceIPC, APERTURAS_INDICES_LEN);
-    stringNCopy(tmpT->acumuladoIPC, tmpC->periodo, APERTURAS_INDICES_LEN); // Guardo el acumulado del IPC en el periodo del dato de contexto
-    stringNCopy(tmpT->montoAjustado, tmpC->monto, APERTURAS_INDICES_LEN); // Guardo el monto ajustado en el monto del dato de contexto
-
-    snprintf(tmpC->monto, APERTURAS_INDICES_LEN, "%lf", atof(tmpC->monto) * (1 + (atof(tmpD->indiceIPC) / 100.0f)));
-    snprintf(tmpC->periodo, APERTURAS_PERIODO_LEN, "%lf", atof(tmpC->periodo) + atof(tmpD->))
-    //Tiene que quedar como en la tabla que se muestra
-    //Periodo es sencillo, copia el periodo leido y listo
-    //El indice IPC no es tan sencillo, tengo que guardar en algun lugar el acumulado del IPC hasta el momento y copiarlo
-    //La variacion no es sencilla, tengo que calcular la variacion porcentual hasta la fecha
-    //El monto ajustado no es sencillo
-
-    /*Periodo - Indice IPC - Variacion mensual - Monto ajustado*/
+    snprintf(tmpT->acumuladoIPC, APERTURAS_INDICES_LEN, "%0.2lf", (atof(tmpD->indiceIPC) / atof(tmpC->acumulado) - 1) * 100.0f); //En periodo guardo el acumulado
+    snprintf(tmpT->montoAjustado, APERTURAS_INDICES_LEN, "%0.2lf", atof(tmpC->monto) * (atof(tmpD->indiceIPC) / atof(tmpC->acumulado))); 
 
     return tmpT;
 }
 
-void mostrarAlquileres(const void* elem)
+void mostrarAlquileres(void* elem)
 {
     IPCAlquileres* tmp = elem;
 
-    printf("%s - %lf - %lf - %lf\n", tmp->periodo, tmp->acumuladoIPC, tmp->indiceIPC tmp->montoAjustado);
+    printf("%s - %s - %s - %s\n", tmp->periodo, tmp->indiceIPC, tmp->acumuladoIPC, tmp->montoAjustado);
+}
+
+int parsearParaAlquileres(FILE* arch, void* reg)
+{
+    IPCAlquileres* tmp = reg;
+
+    fprintf(arch, "%s | %s | %s | %s\n", tmp->periodo, tmp->indiceIPC, tmp->acumuladoIPC, tmp->montoAjustado);
+
+    return 0;
 }
 
 

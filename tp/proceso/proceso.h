@@ -19,6 +19,7 @@
 #define ARCH_BIENES "pruebaBienes.csv"
 #define ARCH_SERVICIOS "pruebaServicios.csv"
 #define ARCH_NACIONAL "pruebaNacional.csv"
+#define ARCH_ALQUILERES "pruebaAlquileres.dat"
 
 #define DIVISIONES_COD_LEN 15
 #define DIVISIONES_DESC_LEN 61
@@ -58,15 +59,7 @@ typedef struct{
     char region[DIVISIONES_REGION_LEN];
     char periodoIni[DIVISIONES_PERIODO_LEN];
     char periodoFin[DIVISIONES_PERIODO_LEN];
-}Respuesta;
-
-typedef struct{
-    char fecha[CLASIFICADO_PERIODO_LEN];
-    char desc[CLASIFICADO_DESC_LEN];
-    char indiceIPC[CLASIFICADO_IND_IPC_LEN];
-    char region[CLASIFICADO_REGION_LEN];
-    char grupo[CLASIFICADO_GRUPO_LEN];
-}IPCClasificado;
+}RespuestaMontos;
 
 typedef struct{
     char fecha[DIVISIONES_PERIODO_LEN];
@@ -89,7 +82,10 @@ typedef struct{
 typedef struct{
     char periodo[APERTURAS_PERIODO_LEN];
     char monto[APERTURAS_INDICES_LEN];
-    char region[APERTURAS_REGION_LEN];
+    union{
+        char region[APERTURAS_REGION_LEN];
+        char acumulado[APERTURAS_INDICES_LEN];
+    };
 }RespuestaAlquileres;
 
 typedef struct{
@@ -108,15 +104,16 @@ int corregirIPCDivisiones(void* reg);
 int decodificarFechaDivisiones(IPCDivisiones* reg, int* decod);
 int convertirFechaDivisiones(IPCDivisiones* reg);
 int normalizarDescripcionDivisiones(IPCDivisiones* reg);
-void palabraATitulo(Palabra_t* pal);
-void palabraAMinuscula(Palabra_t* pal);
+void palabraATitulo(char* pal);
+void palabraAMinuscula(char* pal);
 
 int corregirIPCAperturas(void* reg);
 int corregirFormatoFechaAperturas(IPCAperturas* reg);
 
 int herramientaAjustarMontosIPCDivisiones(Vector_t* vec);
-Respuesta preguntarAjustarMonto(void);
+RespuestaMontos preguntarAjustarMonto(void);
 int filtrarIPCDivisiones(void* dato, void* contexto);
+
 int clasificarBySIPCDivisiones(Vector_t* vec);
 int filtrarBienes(void* dato, void* contexto);
 int filtrarServicios(void* dato, void* contexto);
@@ -132,6 +129,11 @@ void* unirBienesYServicios(void* lhs, void* rhs, void* elem);
 int parsearIPCPromedio(FILE* arch, void* reg);
                                             
 int herramientaCalcularAlquilerIPCAperturas(Vector_t* vec);
+int filtrarAlquileres(void* dato, void* contexto);
+//IPCAlquileres* calcularIPCAlquileres(Vector_t* vec, RespuestaAlquileres* req);
+//int parsearIPCAlquileres(FILE* arch, void* reg);
+void* mapearAlquileres(void* dato, void* contexto, void* elem);
+void mostrarAlquileres(void* reg);
 
 
 #endif // PROCESO_INCLUDED

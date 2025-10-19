@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
     vectorDestruir(&vecDivisiones); // Liberamos la memoria alocada para los vectores
     vectorDestruir(&vecAperturas);
 
-    return EXITO; // Salimos
+    return EXITO; // Salimos gente.
 }
 
 

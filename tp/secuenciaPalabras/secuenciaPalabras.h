@@ -24,7 +24,7 @@ int secuenciaPalabrasEscribirCaract(SecuenciaPalabras_t* sec, int ch);
 int secuenciaPalabrasCerrar(SecuenciaPalabras_t* sec);
 bool secuenciaPalabrasEsFin(SecuenciaPalabras_t* sec);
 
-int palabraModificar(Palabra_t* pal, void (*Modificar)(Palabra_t*));
+int palabraModificar(Palabra_t* pal, void (*Modificar)(char*));
 void palabraMostrar(Palabra_t* pal);
 
 #endif

@@ -64,13 +64,13 @@ bool secuenciaPalabrasEsFin(SecuenciaPalabras_t* sec)
     return sec->finDeCadena;
 }
 
-int palabraModificar(Palabra_t* pal, void (*Modificar)(Palabra_t*))
+int palabraModificar(Palabra_t* pal, void (*Modificar)(char*))
 {
     if(Modificar == NULL){
         return false;
     }
 
-    Modificar(pal);
+    Modificar(pal->cadena);
 
     return true;
 }
