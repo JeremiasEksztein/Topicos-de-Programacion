@@ -320,9 +320,6 @@ int corregirFormatoFechaAperturas(IPCAperturas* reg)
     return EXITO;
 }
 
-/*Hay que agregar aca una interfaz de menu y en general emprolijarlo todo
- pero como prueba de concepto parece funcionar*/
-
 /*Ejercicio 5*/
 
 int herramientaAjustarMontosIPCDivisiones(Vector_t* divs)
@@ -342,10 +339,10 @@ int herramientaAjustarMontosIPCDivisiones(Vector_t* divs)
     IPCDivisiones* i = vectorObtener(tmp, 0);
     IPCDivisiones* f = vectorObtener(tmp, 1);
 
-    double varPor = ((atof(f->indiceIPC) / atof((i->indiceIPC))) - 1) * 100;
-    double montoAjus = ans.monto + (ans.monto * varPor / 100);
+    double varPor = ((atof(f->indiceIPC) / atof((i->indiceIPC))) - 1.0f) * 100.0f;
+    double montoAjus = ans.monto + (ans.monto * varPor / 100.0f);
 
-    printf("El monto $ %0.2lf en la region %s durante %s, ajustado en la misma region al %s vario en un %%%0.2lf a un total de $ %0.2lf\n", ans.monto, ans.region, ans.periodoIni, ans.periodoFin, varPor, montoAjus);
+    printf("El monto $ %0.2lf en la region %s durante %s, ajustado en la misma region al %s vario en un %%%0.1lf a un total de $ %0.1lf\n", ans.monto, ans.region, ans.periodoIni, ans.periodoFin, varPor, montoAjus);
 
     vectorDestruir(tmp);
 
@@ -457,7 +454,7 @@ int filtrarIPCDivisiones(void* dato, void* contexto)
     IPCDivisiones* tmpD = dato;
     RespuestaMontos* tmpC = contexto;
 
-    if((!stringCmp(tmpD->periodo, tmpC->periodoIni) || !stringCmp(tmpD->periodo, tmpC->periodoFin)) && !stringCmp(tmpD->region, tmpC->region) && !stringCmp(tmpD->desc, "Nivel General")){
+    if((!stringCmp(tmpD->periodo, tmpC->periodoIni) || !stringCmp(tmpD->periodo, tmpC->periodoFin)) && !stringCmp(tmpD->region, tmpC->region) && !stringCmp(tmpD->desc, "Nivel general ")){
         return 1;
     }
 

@@ -113,7 +113,7 @@ int vectorRedimensionar(Vector_t* vector, size_t nuevaCap)
         return ERR_SIN_MEM;
     }
 
-    printf("Realocacion exitosa de %zu a %zu bytes\n", vector->capacidad * vector->tamElem, nuevaCap * vector->tamElem);
+    //printf("Realocacion exitosa de %zu a %zu bytes\n", vector->capacidad * vector->tamElem, nuevaCap * vector->tamElem);
 
     vector->data = nuevaData;
     vector->capacidad = nuevaCap;
