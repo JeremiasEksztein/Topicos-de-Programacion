@@ -3,6 +3,7 @@
 
 #include <stddef.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include <stdlib.h>
 #include "../cadenas/cadenas.h"
 

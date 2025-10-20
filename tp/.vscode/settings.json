@@ -63,6 +63,7 @@
     "ncurses.h": "c",
     "form.h": "c",
     "formulario.h": "c",
-    "graphics.h": "c"
+    "graphics.h": "c",
+    "comunes.h": "c"
   }
 }

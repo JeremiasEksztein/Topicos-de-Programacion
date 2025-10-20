@@ -1,50 +1,75 @@
 #ifndef FORMULARIO_H_INCLUDED
 #define FORMULARIO_H_INCLUDED
 
+#include "../comunes/comunes.h"
+
+#define ENTRADA_ETIQUETA_LEN 32
+#define ENTRADA_HINT_LEN 32
+#define ENTRADA_BUFFER_LEN 128
+#define ENTRADA_OPCIONES_LEN 32
+
 #define FORMULARIO_TITULO_LEN 64
-#define CAMPO_ETIQUETA_LEN 64
-#define RESPUESTA_LEN 128
-#define FORMULARIO_CAMPOS_NUM 64
+#define FORMULARIO_ENTRADA_CANT 32
 
-typedef struct{
-    char etiqueta[CAMPO_ETIQUETA_LEN];
-    char respuesta[RESPUESTA_LEN];
+#define ENTRADA_TIPO_NUMERICO 0
+#define ENTRADA_TIPO_TEXTO 1
+#define ENTRADA_TIPO_RADIO 2
+#define ENTRADA_TIPO_CHECKLIST 3 
+
+typedef struct EntradaNumerico{
+    double min;
+    double max;
+}EntradaNumerico;
+
+typedef struct EntradaTexto{
+    int len;
+}EntradaTexto;
+
+typedef struct EntradaRadio{
+    char* opciones[ENTRADA_OPCIONES_LEN];
+    int cantOpciones;
+}EntradaRadio;
+
+typedef struct EntradaChecklist{
+    char* opciones[ENTRADA_OPCIONES_LEN];
+    int cantOpciones;
+    int cantSelecciones;
+}EntradaChecklist;
+
+typedef struct Entrada_t{
+    const char etiqueta[ENTRADA_ETIQUETA_LEN];
+    const char hint[ENTRADA_HINT_LEN];
+    char* buffer;
     int tipo;
-    void* datos;
-}Campo_t;
+    void* info;
+}Entrada_t;
 
-typedef struct{
-    char titulo[FORMULARIO_TITULO_LEN];
-    Campo_t* campos[FORMULARIO_CAMPOS_NUM];
-    int camposCant;
+typedef struct Formulario_t{
+    const char titulo[FORMULARIO_TITULO_LEN];
+    Entrada_t entradas[FORMULARIO_ENTRADA_CANT];
+    int cantEntradas;
 }Formulario_t;
 
-#define CAMPO_ENTERO 0
-#define CAMPO_NUMERICO 1
-#define CAMPO_TEXTO 2
-#define CAMPO_RADIO 3
-#define CAMPO_CHECKLIST 4
-#define CAMPO_FECHA 5
+int formularioCrear(Formulario_t* forma, const char* titulo);
 
-Formulario_t* formularioCrear(Formulario_t* forma, const char* titulo);
+char* formualarioSetGetTitulo(Formulario_t* forma, const char* titulo);
+Entrada_t* formularioSetGetEntradas(Formulario_t* forma, Entrada_t* entradas, int n);
+int formularioCantEntradas(Formulario_t* forma);
 
-int formularioAgregarCampos(Formulario_t* forma, Campo_t* campos, int cantCampos);
 int formularioPublicar(Formulario_t* forma);
 
 int formularioDestruir(Formulario_t* forma);
 
+int entradaCrear(Entrada_t* entrada, const char* etiqueta, const char* hint);
 
-Campo_t* campoCrear(Campo_t* campo, const char* etiqueta);
+int entradaSetGetTipo(Entrada_t* entrada, int tipo, void* info);
+char* entradaSetGetEtiqueta(Entrada_t* entrada, const char* etiqueta);
+char* entradaSetGetHint(Entrada_t* entrada, const char* hint);
 
-int campoFijarEntero(Campo_t* campo, char* hint, int max, int min);
-int campoFijarNumerico(Campo_t* campo, char* hint, double max, double min);
-int campoFijarTexto(Campo_t* campo, char* hint, int tamanio);
-int campoFijarRadio(Campo_t* campo, char* hint, char** elems, int cantElem);
-int campoFijarChecklist(Campo_t* campo, char* hint, char** elems, int cantElem);
-int campoFijarFecha(Campo_t* campo, char* hint, char* max, char* min);
+int entradaPublicar(Entrada_t* entrada);
 
-char* campoBuffer(Campo_t* campo);
+char* entradaRespuesta(Entrada_t* entrada);
 
-int campoDestruir(Campo_t* campo);
+int entradaDestruir(Entrada_t* entrada);
 
 #endif

@@ -1,0 +1,6 @@
+Esta es una biblioteca para la creacion de formularios dinamicos por terminal
+
+Form_t formulario;
+
+formCrear(&formulario, "Preguntas");
+

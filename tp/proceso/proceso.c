@@ -355,7 +355,32 @@ int herramientaAjustarMontosIPCDivisiones(Vector_t* divs)
 RespuestaMontos preguntarAjustarMonto(void)
 {
     RespuestaMontos ans;
+    /*
+    Formulario_t form;
+    Entrada_t campos[4];
 
+    formularioCrear(&form, "Herramienta de monto ajustados por IPC");
+
+    entradaCrear(campo[0], );
+    eCrear(entrada[1], entrada_RADIO);
+    entradaCrear(entrada[2], entrada_TEXTO);
+    entradaCrear(entrada[3], entrada_TEXTO);
+
+    formularioAgregarentradas(&form, entradas);
+    
+    formularioPublicar(&form);
+
+    ans.monto = entradaRespuesta(entrada[0]);
+    ans.region = entradaRespuesta(entrada[1]);
+    ans.periodoIni = entradaRespuesta(entrada[2]);
+    ans.periodoFin = entradaRespuesta(entrada[3]);
+
+    formularioDestruir(&form);
+    entradaDestruir(entrada[0]);
+    entradaDestruir(entrada[1]);
+    entradaDestruir(entrada[2]);
+    entradaDestruir(entrada[3]);
+    */
     scanf("%lf", &(ans.monto));
 
     flushStdin();
