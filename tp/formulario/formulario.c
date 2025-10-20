@@ -1,5 +1,6 @@
 #include "formulario.h"
 #include "graficos.h"
+#include <stdarg.h>
 
 void imprimirTitulo(const char* titulo);
 
@@ -8,10 +9,44 @@ int leerEntradaTexto(char* buffer, void* info);
 int leerEntradaRadio(char* buffer, void* info);
 int leerEntradaChecklist(char* buffer, void* info);
 
+typedef struct EntradaEntero{
+    int min;
+    int max;
+}EntradaEntero;
+
+typedef struct EntradaNumerico{
+    double min;
+    double max;
+}EntradaNumerico;
+
+typedef struct EntradaTexto{
+    int len;
+}EntradaTexto;
+
+typedef struct EntradaEnum{
+    char** opciones;
+    int cantOpciones;
+    int esUnico;
+}EntradaEnum;
+
 void imprimirTitulo(const char* titulo)
 {
     CLEAR_SCREEN;
     PRINT_BIG_PRETTY(titulo);
+}
+
+int leerEntradaEntero(char* buffer, void* info)
+{
+    EntradaEntero* tmp = info;
+    int buf;
+
+    fgets((buf = atoi(buffer)) == 0 || (buf < tmp->min) || (buf > tmp->max)){
+        return ERR_USUARIO;
+    }
+
+    buffer[stringCSpan(buffer, "\n") - 1] = '\0';
+
+    return EXITO;
 }
 
 int leerEntradaNumerica(char* buffer, void* info)
@@ -49,6 +84,12 @@ int leerEntradaTexto(char* buffer, void* info)
     buffer[stringCSpan(buffer, "\n") - 1] = '\0';
 
     return EXITO;
+}
+
+int leerEntradaEnum(char* buffer, void* info)
+{
+    EntradaEnum* tmp = info;
+    
 }
 
 int leerEntradaRadio(char* buffer, void* info)
@@ -105,7 +146,7 @@ int formularioCrear(Formulario_t* forma, const char* titulo)
     return EXITO;
 }
 
-char* formualarioSetGetTitulo(Formulario_t* forma, const char* titulo)
+char* formularioSetGetTitulo(Formulario_t* forma, const char* titulo)
 {
     if(!titulo){
         return (char*)forma->titulo;
@@ -175,14 +216,72 @@ int entradaCrear(Entrada_t* entrada, const char* etiqueta, const char* hint)
     return EXITO;
 }
 
-int entradaSetGetTipo(Entrada_t* entrada, int tipo, void* info)
+int entradaSetTipo(Entrada_t* entrada, int tipo, ...)
 {
-    if(tipo < -1 || info == NULL){
-        return entrada->tipo;
+    va_list ap;
+
+    va_start(ap, tipo);
+
+    switch(tipo){
+        case ENTRADA_TIPO_ENTERO:
+            EntradaEntero* tmpI = malloc(sizeof(EntradaEntero));
+
+            if(!tmpI){
+                return ERR_SIN_MEM;
+            }
+
+            tmpI->min = va_arg(ap, int);
+            tmpI->max = va_arg(ap, int);
+
+            entrada->info = tmpI;
+
+            break;
+        case ENTRADA_TIPO_NUMERICO:
+            EntradaNumerico* tmpJ = malloc(sizeof(EntradaNumerico));
+
+            if(!tmpJ){
+                return ERR_SIN_MEM;
+            }
+
+            tmpJ->min = va_arg(ap, double);
+            tmpJ->max = va_arg(ap, double);
+
+            entrada->info = tmpJ;
+
+            break;
+        case ENTRADA_TIPO_TEXTO:
+            EntradaTexto* tmpK = malloc(sizeof(EntradaTexto));
+        
+            if(!tmpK){
+                return ERR_SIN_MEM;
+            }
+
+            tmpK->len = va_arg(ap, int);
+
+            entrada->info = tmpK;
+
+            break;
+        case ENTRADA_TIPO_ENUM:
+            EntradaEnum* tmpW = malloc(sizeof(EntradaEnum));
+
+            if(!tmpW){
+                return ERR_SIN_MEM;
+            }
+
+            tmpW->opciones = va_arg(ap, char**);
+            tmpW->cantOpciones = va_arg(ap, int);
+            tmpW->esUnico = va_arg(ap, int);
+
+            entrada->info = tmpW;
+
+            break;
+        default:
+            return -1;
     }
 
+    va_end(ap);
+
     entrada->tipo = tipo;
-    entrada->info = info;
 
     return EXITO;
 }
@@ -215,16 +314,22 @@ int entradaPublicar(Entrada_t* entrada)
     //PRINT_HINT_PRETTY(entrada->hint);
 
     switch(entrada->tipo){
+        case ENTRADA_TIPO_ENTERO:
+            leerEntradaEntero(entrada->buffer, entrada->info);
+            break;
         case ENTRADA_TIPO_NUMERICO:
             leerEntradaNumerica(entrada->buffer, entrada->info);
+            break;
         case ENTRADA_TIPO_TEXTO:
             leerEntradaTexto(entrada->buffer, entrada->info);
-        case ENTRADA_TIPO_RADIO:
-            leerEntradaRadio(entrada->buffer, entrada->info);
-        case ENTRADA_TIPO_CHECKLIST:
-            leerEntradaChecklist(entrada->buffer, entrada->info);
+            break;
+        case ENTRADA_TIPO_ENUM:
+            leerEntradaEnum(entrada->buffer, entrada->info);
+            break;
         default:
-            return -1;
+            fgets(entrada->buffer, ENTRADA_BUFFER_LEN, stdin);
+            (entrada->buffer)[stringCSpan(entrada->buffer, "\n") - 1] = '\0';
+            return ERR_USUARIO;
     }
 
     return 0;
@@ -242,6 +347,10 @@ char* entradaRespuesta(Entrada_t* entrada)
 int entradaDestruir(Entrada_t* entrada)
 {
     free(entrada->buffer);
+    
+    if(entrada->info){
+        free(entrada->info);
+    }
 
     return EXITO; 
 }

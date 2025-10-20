@@ -332,7 +332,7 @@ int herramientaAjustarMontosIPCDivisiones(Vector_t* divs)
 
     ans = preguntarAjustarMonto();
 
-    tmp = filter(divs, filtrarIPCDivisiones, &ans);
+    tmp = filtrarVector(divs, filtrarIPCDivisiones, &ans);
 
     if(!tmp || tmp->cantElem < 2){
         printf("No se encontraron registros que coincidan con los parametros ingresados.\n");
@@ -357,30 +357,84 @@ RespuestaMontos preguntarAjustarMonto(void)
     RespuestaMontos ans;
     /*
     Formulario_t form;
-    Entrada_t campos[4];
+    Entrada_t entrada[4];
 
     formularioCrear(&form, "Herramienta de monto ajustados por IPC");
 
-    entradaCrear(campo[0], );
-    eCrear(entrada[1], entrada_RADIO);
-    entradaCrear(entrada[2], entrada_TEXTO);
-    entradaCrear(entrada[3], entrada_TEXTO);
+    entradaCrear(&entrada[0], "Monto", "El monto a ajustar");
+    entradaCrear(&entrada[1], "Region", "La region a evaluar");
+    entradaCrear(&entrada[2], "Periodo de inicio", "Periodo de inicio del analisis");
+    entradaCrear(&entrada[3], "Periodo de fin", "Periodo final del analisis");
 
-    formularioAgregarentradas(&form, entradas);
+    entradaSetGetTipo(&entrada[0], ENTRADA_TIPO_NUMERICO, &((EntradaNumerico){.min = 0, .max = 9999999.9f}));
+    entradaSetGetTipo(&entrada[1], ENTRADA_TIPO_RADIO, &((EntradaRadio){.opciones = {"GBA", "Pampeana", "Noroeste", "Noreste", "Patagonia", "Cuyo"}, .cantOpciones = 6}));
+    entradaSetGetTipo(&entrada[2], ENTRADA_TIPO_NUMERICO, &((EntradaNumerico){.min = 0, .max = 9999999.9f}));
+    entradaSetGetTipo(&entrada[3], ENTRADA_TIPO_NUMERICO, &((EntradaNumerico){.min = 0, .max = 9999999.9f}));
+
+    formularioSetGetEntradas(&form, entrada, 4);
     
     formularioPublicar(&form);
 
-    ans.monto = entradaRespuesta(entrada[0]);
-    ans.region = entradaRespuesta(entrada[1]);
-    ans.periodoIni = entradaRespuesta(entrada[2]);
-    ans.periodoFin = entradaRespuesta(entrada[3]);
+    ans.monto = atof(entradaRespuesta(&entrada[0]));
+
+    stringNCopy(ans.region, entradaRespuesta(&entrada[1]), DIVISIONES_REGION_LEN);
+    stringNCopy(ans.periodoIni, entradaRespuesta(&entrada[2]), DIVISIONES_PERIODO_LEN);
+    stringNCopy(ans.periodoFin, entradaRespuesta(&entrada[3]), DIVISIONES_PERIODO_LEN);
 
     formularioDestruir(&form);
-    entradaDestruir(entrada[0]);
-    entradaDestruir(entrada[1]);
-    entradaDestruir(entrada[2]);
-    entradaDestruir(entrada[3]);
+    entradaDestruir(&entrada[0]);
+    entradaDestruir(&entrada[1]);
+    entradaDestruir(&entrada[2]);
+    entradaDestruir(&entrada[3]);
+
     */
+
+    int tmp;
+
+    do{
+        printf("Ingrese monto para evaluar: ");
+        scanf("%lf", &(ans.monto));
+    }while(ans.monto <= 0);
+
+    do{
+        printf("Seleccione region de analisis: \n");
+        printf("1 - GBA\n2 - Pampeana\n3 - Noroeste\n4 - Noreste\n5 - Cuyo\n6 - Patagonia\n");
+        scanf("%d", &tmp);
+
+        switch(tmp){
+            case 1:
+                stringNCopy(ans.region, "GBA", DIVISIONES_REGION_LEN);
+                break;
+            case 2:
+                stringNCopy(ans.region, "Pampeana", DIVISIONES_REGION_LEN);
+                break;
+            case 3:
+                stringNCopy(ans.region, "Noroeste", DIVISIONES_REGION_LEN); 
+                break;
+            case 4:
+                stringNCopy(ans.region, "Noreste", DIVISIONES_REGION_LEN);
+                break;
+            case 5:
+                stringNCopy(ans.region, "Cuyo", DIVISIONES_REGION_LEN);
+                break;
+            case 6:
+                stringNCopy(ans.region, "Patagonia", DIVISIONES_REGION_LEN);
+                break;
+            default:
+                printf("Opcion invalida.\n");
+        }
+
+    }while(tmp < 1 || tmp > 6);
+
+    flushStdin();
+
+    printf("Ingrese periodo inicial (AAAA - Mes): ");
+    scanString(ans.periodoIni, DIVISIONES_PERIODO_LEN);
+
+    printf("Ingrese periodo final (AAAA - Mes): ");
+    scanString(ans.periodoFin, DIVISIONES_PERIODO_LEN);
+
+    /*
     scanf("%lf", &(ans.monto));
 
     flushStdin();
@@ -391,7 +445,9 @@ RespuestaMontos preguntarAjustarMonto(void)
 
     scanString(ans.periodoFin, DIVISIONES_PERIODO_LEN);
 
-    //printf("%lf | %s | %s | %s\n", ans.monto, ans.region, ans.periodoIni, ans.periodoFin);
+    */
+
+    printf("Su seleccion: %lf | %s | %s | %s\n", ans.monto, ans.region, ans.periodoIni, ans.periodoFin);
 
     return ans;
 }
@@ -401,7 +457,7 @@ int filtrarIPCDivisiones(void* dato, void* contexto)
     IPCDivisiones* tmpD = dato;
     RespuestaMontos* tmpC = contexto;
 
-    if((!stringCmp(tmpD->periodo, tmpC->periodoIni) || !stringCmp(tmpD->periodo, tmpC->periodoFin)) && !stringCmp(tmpD->region, tmpC->region) && !stringCmp(tmpD->desc, "NIVEL GENERAL")){
+    if((!stringCmp(tmpD->periodo, tmpC->periodoIni) || !stringCmp(tmpD->periodo, tmpC->periodoFin)) && !stringCmp(tmpD->region, tmpC->region) && !stringCmp(tmpD->desc, "Nivel General")){
         return 1;
     }
 
