@@ -621,10 +621,11 @@ int parsearIPCPromedio(FILE* arch, void* reg)
 int herramientaCalcularAlquilerIPCAperturas(Vector_t* aper)
 {
     Vector_t* alquileres;
-    RespuestaAlquileres tmp = {.monto = "30000", .periodo = "2024-09-01", .region = "GBA"};
+    //RespuestaAlquileres tmp = {.monto = "30000", .periodo = "2024-09-01", .region = "GBA"};
+    RespuestaAlquileres tmp;
     char region[APERTURAS_REGION_LEN] = "";
 
-    //tmp = preguntaAlquileres();
+    tmp = preguntarAlquileres();
 
     alquileres = filtrarVector(aper, filtrarAlquileres, &tmp);
 
@@ -646,12 +647,58 @@ int herramientaCalcularAlquilerIPCAperturas(Vector_t* aper)
     return EXITO;
 }
 
-/*
 RespuestaAlquileres preguntarAlquileres(void)
 {
-    Fo
+    RespuestaAlquileres ans;
+
+    int tmp;
+
+    flushStdin();
+
+    do{
+        printf("Ingrese monto para evaluar: ");
+        scanString(ans.monto, APERTURAS_INDICES_LEN);
+    }while((atof(ans.monto)) <= 0);
+
+    do{
+        printf("Seleccione region de analisis: \n");
+        printf("1 - GBA\n2 - Pampeana\n3 - Noroeste\n4 - Noreste\n5 - Cuyo\n6 - Patagonia\n");
+        scanf("%d", &tmp);
+
+        switch(tmp){
+            case 1:
+                stringNCopy(ans.region, "GBA", DIVISIONES_REGION_LEN);
+                break;
+            case 2:
+                stringNCopy(ans.region, "Pampeana", DIVISIONES_REGION_LEN);
+                break;
+            case 3:
+                stringNCopy(ans.region, "Noroeste", DIVISIONES_REGION_LEN); 
+                break;
+            case 4:
+                stringNCopy(ans.region, "Noreste", DIVISIONES_REGION_LEN);
+                break;
+            case 5:
+                stringNCopy(ans.region, "Cuyo", DIVISIONES_REGION_LEN);
+                break;
+            case 6:
+                stringNCopy(ans.region, "Patagonia", DIVISIONES_REGION_LEN);
+                break;
+            default:
+                printf("Opcion invalida.\n");
+        }
+
+    }while(tmp < 1 || tmp > 6);
+
+    flushStdin();
+
+    printf("Ingrese periodo de inicio del contraro (AAAA-MM-DD): ");
+    scanString(ans.periodo, DIVISIONES_PERIODO_LEN);
+
+    printf("Su seleccion: %s | %s | %s\n", ans.monto, ans.region, ans.periodo);
+
+    return ans;
 }
-*/
 
 int filtrarAlquileres(void* dato, void* contexto)
 {

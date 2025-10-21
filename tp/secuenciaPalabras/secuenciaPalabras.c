@@ -10,7 +10,7 @@ int secuenciaPalabrasCrear(SecuenciaPalabras_t* sec, char* cadena)
 
 bool secuenciaPalabrasLeer(SecuenciaPalabras_t* sec, Palabra_t* pal)
 {
-    while(*(sec->cadena) != '\0' && !isalpha(*(sec->cadena))){
+    while(*(sec->cadena) != '\0' && !isprint(*(sec->cadena))){
         (sec->cadena)++;
     }
 
@@ -25,7 +25,7 @@ bool secuenciaPalabrasLeer(SecuenciaPalabras_t* sec, Palabra_t* pal)
         *tmp = *(sec->cadena);
         tmp++;
         (sec->cadena)++;
-    }while(*(sec->cadena) != '\0' && isalpha(*(sec->cadena)));
+    }while(*(sec->cadena) != '\0' && isprint(*(sec->cadena)));
 
     *tmp = '\0';
 
@@ -62,6 +62,11 @@ int secuenciaPalabrasCerrar(SecuenciaPalabras_t* sec)
 bool secuenciaPalabrasEsFin(SecuenciaPalabras_t* sec)
 {
     return sec->finDeCadena;
+}
+
+int esLetra(int ch)
+{
+    return ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z'));
 }
 
 int palabraModificar(Palabra_t* pal, void (*Modificar)(char*))

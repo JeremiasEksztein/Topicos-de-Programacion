@@ -129,6 +129,7 @@ void* unirBienesYServicios(void* lhs, void* rhs, void* elem);
 int parsearIPCPromedio(FILE* arch, void* reg);
                                             
 int herramientaCalcularAlquilerIPCAperturas(Vector_t* vec);
+RespuestaAlquileres preguntarAlquileres(void);
 int filtrarAlquileres(void* dato, void* contexto);
 //IPCAlquileres* calcularIPCAlquileres(Vector_t* vec, RespuestaAlquileres* req);
 //int parsearIPCAlquileres(FILE* arch, void* reg);

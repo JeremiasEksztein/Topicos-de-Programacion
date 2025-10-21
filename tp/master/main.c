@@ -21,9 +21,9 @@ int main(int argc, char* argv[])
     if(argc != CANT_ARGS){  // Si no se ingresa la cantidad correcta de argumentos salimos
         return ERR_USUARIO;
     }
-
+    
     setlocale(LC_ALL, "es_AR.UTF-8");
-    setlocale(LC_CTYPE, "es_AR.UTF-8");
+    puts("Ñ");
 
     Vector_t vecDivisiones, vecAperturas;
 

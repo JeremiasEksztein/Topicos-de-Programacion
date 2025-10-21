@@ -65,6 +65,10 @@
     "formulario.h": "c",
     "graphics.h": "c",
     "comunes.h": "c",
-    "cadenas.h": "c"
+    "cadenas.h": "c",
+    "wctype.h": "c",
+    "stdbool.h": "c",
+    "wchar.h": "c",
+    "locale.h": "c"
   }
 }

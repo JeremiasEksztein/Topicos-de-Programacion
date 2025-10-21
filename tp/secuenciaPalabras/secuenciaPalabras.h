@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include <ctype.h>
+#include <wchar.h>
+#include <wctype.h>
 #include <stdbool.h>
 #include "../comunes/comunes.h"
 
@@ -23,6 +25,8 @@ int secuenciaPalabrasEscribir(SecuenciaPalabras_t* sec, Palabra_t* pal);
 int secuenciaPalabrasEscribirCaract(SecuenciaPalabras_t* sec, int ch);
 int secuenciaPalabrasCerrar(SecuenciaPalabras_t* sec);
 bool secuenciaPalabrasEsFin(SecuenciaPalabras_t* sec);
+
+int esLetra(int ch);
 
 int palabraModificar(Palabra_t* pal, void (*Modificar)(char*));
 void palabraMostrar(Palabra_t* pal);

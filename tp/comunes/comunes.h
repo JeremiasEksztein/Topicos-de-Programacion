@@ -7,13 +7,13 @@
 #include <stdlib.h>
 #include "../cadenas/cadenas.h"
 
-#define EXITO 100
-#define ERR_PUNTERO_NULO 0
-#define ERR_SIN_MEM 1
-#define ERR_ARCH 2
-#define ERR_BUFFER_CORTO 3
-#define ERR_REGISTRO 4
-#define ERR_USUARIO 5
+#define EXITO 0
+#define ERR_PUNTERO_NULO 1
+#define ERR_SIN_MEM 2
+#define ERR_ARCH 3
+#define ERR_BUFFER_CORTO 4
+#define ERR_REGISTRO 5
+#define ERR_USUARIO 6
 
 #define TRY(stmt) do{           \
                 if((stmt) != EXITO){ \
