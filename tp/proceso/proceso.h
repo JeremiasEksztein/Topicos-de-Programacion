@@ -1,5 +1,5 @@
-#ifndef PROCESO_INCLUDED
-#define PROCESO_INCLUDED
+#ifndef PROCESO_H_INCLUDED
+#define PROCESO_H_INCLUDED
 
 #include <stdlib.h>
 #include <assert.h>
@@ -42,7 +42,6 @@
 #define CLASIFICADO_REGION_LEN 15
 #define CLASIFICADO_GRUPO_LEN 15
 
-
 typedef struct{
     char cod[DIVISIONES_COD_LEN];
     char desc[DIVISIONES_DESC_LEN];
@@ -82,7 +81,7 @@ typedef struct{
 typedef struct{
     char periodo[APERTURAS_PERIODO_LEN];
     char monto[APERTURAS_INDICES_LEN];
-    union{
+    union{ //Algo medio feo, pero sirve para aprovechar el espacio, uso  tmp.region si queres usar region, tmp.acumulado si queres usar acumulado. La escritura sobre uno sobreescribe el otro.
         char region[APERTURAS_REGION_LEN];
         char acumulado[APERTURAS_INDICES_LEN];
     };
@@ -136,5 +135,4 @@ int filtrarAlquileres(void* dato, void* contexto);
 void* mapearAlquileres(void* dato, void* contexto, void* elem);
 void mostrarAlquileres(void* reg);
 
-
-#endif // PROCESO_INCLUDED
+#endif // PROCESO_H_INCLUDED

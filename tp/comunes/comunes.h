@@ -1,5 +1,5 @@
-#ifndef COMUNES_INCLUDED
-#define COMUNES_INCLUDED
+#ifndef COMUNES_H_INCLUDED
+#define COMUNES_H_INCLUDED
 
 #include <stddef.h>
 #include <stdio.h>
@@ -14,14 +14,15 @@
 #define ERR_BUFFER_CORTO 4
 #define ERR_REGISTRO 5
 #define ERR_USUARIO 6
+#define ERR_ARGS 7
 
-#define TRY(stmt) do{           \
-                if((stmt) != EXITO){ \
-                    logError((stmt), __FILE__, __LINE__, (char*)__func__);               \
-                               \
-}}while(0);      \
-                                \
-
+#define LOG(stmt) do{   \
+    int err = (stmt);   \
+    if(err != EXITO){   \
+        logError(err, __FILE__, __LINE__, (char*)__func__); \
+    }   \
+}while(0)
+                                
 int logError(int cod, char* file, int line, char* func);
 
 void* malloc_s(size_t n); 
@@ -29,4 +30,4 @@ void* calloc_s(size_t n, size_t tam);
 void* realloc_s(void* ptr, size_t n);
 int free_s(void* ptr);
 
-#endif
+#endif // COMUNES_H_INCLUDED

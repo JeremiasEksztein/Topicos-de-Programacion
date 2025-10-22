@@ -7,6 +7,11 @@
 #define ITER_ACT 2
 #define ITER_FIN 3
 
+
+/**
+ *  @struct Iterador_t
+ *  @brief Struct del TDA Iterador para el vector
+ */
 typedef struct{
     Vector_t* vec;
     void* ini;

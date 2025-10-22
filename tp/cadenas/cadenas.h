@@ -1,5 +1,5 @@
-#ifndef CADENAS_H
-#define CADENAS_H
+#ifndef CADENAS_H_INCLUDED
+#define CADENAS_H_INCLUDED
 
 ///@file cadenas.h
 ///@brief Biblioteca para la manipulacion y examen de cadenas de caracteres
@@ -211,14 +211,14 @@ int stringLenght(const char* str);
 /**
  *  @fn int memzero(void* ptr, size_t n)
  *  @brief Convierte los n bytes desde apuntados por ptr a 0.
- *  @param ptr Puntero la informacion.
+ *  @param ptr Puntero a la informacion.
  *  @param n Cantidad de bytes a convertir en 0.
  */
 int memzero(void* ptr, size_t n);
 
 /**
  *  @fn char* scanString(char* str, size_t n)
- *  @brief Escanea de stdin la hasta n caracteres, los cuales guarda en str, luego sanitiza la cadena.
+ *  @brief Escanea de stdin hasta n caracteres, los cuales guarda en str, luego sanitiza la cadena.
  *  @param str Cadena donde se guardara la informacion escaneada.
  *  @param n Cantidad de n caracteres a leer de stdin.
  */
@@ -230,4 +230,4 @@ char* scanString(char* str, size_t n);
  */
 void flushStdin(void);
 
-#endif
+#endif // CADENAS_H_INCLUDED

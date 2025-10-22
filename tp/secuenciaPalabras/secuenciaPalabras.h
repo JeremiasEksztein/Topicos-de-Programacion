@@ -1,6 +1,9 @@
 #ifndef SECUENCIA_PALABRAS_INCLUDED
 #define SECUENCIA_PALABRAS_INCLUDED
 
+/// @file secuenciaPalabras.h
+/// @brief Header con las principales funcionalidades del TDA SecuenciaPalabras y Palabra
+
 #include <stdio.h>
 #include <ctype.h>
 #include <wchar.h>
@@ -10,11 +13,19 @@
 
 #define DEFAULT_PAL_TAM 50
 
+/**
+ *  @struct SecuenciaPalabras_t
+ *  @brief Struct del TDA SecuenciaPalabras 
+ */
 typedef struct{
     char* cadena;
     bool finDeCadena;
 }SecuenciaPalabras_t;
 
+/**
+ *  @struct Palabra_t
+ *  @brief Struct del TDA Palabra
+ */
 typedef struct{
     char cadena[DEFAULT_PAL_TAM];
 }Palabra_t;

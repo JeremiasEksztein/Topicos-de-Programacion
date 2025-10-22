@@ -81,6 +81,10 @@ void* reduce(Vector_t* vector, void* (*Reductor)(void* dato, void* estado))
 
 int vectorCrear(Vector_t* vector, size_t tamElem)
 {
+    if(!vector){
+        return ERR_USUARIO;
+    }
+
     vector->data = malloc(tamElem * DEFAULT_CAP);
 
     if(!(vector->data)){
@@ -117,6 +121,15 @@ int vectorRedimensionar(Vector_t* vector, size_t nuevaCap)
 
     vector->data = nuevaData;
     vector->capacidad = nuevaCap;
+
+    return EXITO;
+}
+
+int vectorReservar(Vector_t* vector, size_t nElem)
+{
+    if(nElem > vector->capacidad){
+        return vectorRedimensionar(vector, nElem);
+    }
 
     return EXITO;
 }
@@ -164,7 +177,7 @@ int vectorEscribirATexto(Vector_t* vector, const char* nomArch, int (ParsearText
     }
 
     void* i = vector->data;
-    void* ult = vector->data + (vector->cantElem - 1) * vector->tamElem;
+    void* ult = vector->data + (vector->cantElem) * vector->tamElem;
 
     for(; i < ult; i += vector->tamElem){
         ParsearTexto(arch, i);
@@ -199,6 +212,7 @@ int vectorLeerDeBinario(Vector_t* vector, const char* nomArch)
         return ERR_ARCH;
     }
 
+    vector->cantElem = tamArch;
     fclose(arch);
 
     return EXITO;
@@ -426,3 +440,4 @@ void mostrarVector(Vector_t* vector, void (*Mostrar)(void*))
         Mostrar(i);
     }
 }
+

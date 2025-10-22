@@ -17,7 +17,9 @@ int parsearIPCDivisiones(FILE* arch, void* reg)
     stringRemove(buffer, '"');
 
     if(!(i = stringRChar(buffer, '\n'))){
-        return ERR_BUFFER_CORTO;
+        if(!(i = stringRChar(buffer,  EOF))){
+            return ERR_BUFFER_CORTO;
+        }
     }
 
     *i = '\0';
@@ -170,7 +172,7 @@ int corregirCampos(Vector_t* vec, int (*Corrector)(void*))
     void* tmp = NULL;
 
     while((tmp = iteradorSiguiente(&iter))){
-        TRY(Corrector(tmp));
+        LOG(Corrector(tmp));
     }
 
     iteradorDestruir(&iter);
@@ -233,13 +235,25 @@ int convertirFechaDivisiones(IPCDivisiones* reg)
         return ERR_REGISTRO;
     }
     
-    snprintf(reg->periodo, DIVISIONES_PERIODO_LEN, "%s - %s", a, meses[mes - 1]);
+    snprintf(reg->periodo, DIVISIONES_PERIODO_LEN, "%s - %s", meses[mes - 1], a);
 
     return EXITO;
 }
 
 int normalizarDescripcionDivisiones(IPCDivisiones* reg)
 {
+    char* i = reg->desc;
+	*i = toupper(*i);
+
+	i++;
+	while (*i) {
+		if (isalpha(*i)) {
+			*i = tolower(*i);
+		}
+		++i;
+	}
+	return EXITO;
+    /*
     SecuenciaPalabras_t lect, escr;
     Palabra_t pal;
 
@@ -268,6 +282,7 @@ int normalizarDescripcionDivisiones(IPCDivisiones* reg)
     stringNCopy(i, buf, DIVISIONES_DESC_LEN);
 
     return 0;
+    */
 }
 
 void palabraATitulo(char* pal)
@@ -325,7 +340,7 @@ int corregirFormatoFechaAperturas(IPCAperturas* reg)
 int herramientaAjustarMontosIPCDivisiones(Vector_t* divs)
 {
     Vector_t* tmp;
-    RespuestaMontos ans = {.monto = 30000.0f, .region = "GBA", .periodoIni = "2022 - Diciembre", .periodoFin = "2024 - Enero"};
+    RespuestaMontos ans = {.monto = 30000.0f, .region = "GBA", .periodoIni = "Diciembre - 2022", .periodoFin = "Enero - 2024"};
 
     //ans = preguntarAjustarMonto();
     printf("Su seleccion: %lf | %s | %s | %s\n", ans.monto, ans.region, ans.periodoIni, ans.periodoFin);
@@ -455,7 +470,7 @@ int filtrarIPCDivisiones(void* dato, void* contexto)
     IPCDivisiones* tmpD = dato;
     RespuestaMontos* tmpC = contexto;
 
-    if((!stringCmp(tmpD->periodo, tmpC->periodoIni) || !stringCmp(tmpD->periodo, tmpC->periodoFin)) && !stringCmp(tmpD->region, tmpC->region) && !stringCmp(tmpD->desc, "Nivel general ")){
+    if((!stringCmp(tmpD->periodo, tmpC->periodoIni) || !stringCmp(tmpD->periodo, tmpC->periodoFin)) && !stringCmp(tmpD->region, tmpC->region) && !stringCmp(tmpD->desc, "Nivel general")){
         return 1;
     }
 
@@ -642,6 +657,11 @@ int herramientaCalcularAlquilerIPCAperturas(Vector_t* aper)
     mostrarVector(alquileres, mostrarAlquileres);
 
     vectorEscribirABinario(alquileres, ARCH_ALQUILERES);
+    vectorLeerDeBinario(alquileres, ARCH_ALQUILERES);
+
+    printf("Registros leidos desde el archivo binario:\n");
+    
+    mostrarVector(alquileres, mostrarAlquileres);
 
     vectorDestruir(alquileres);
 

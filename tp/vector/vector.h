@@ -36,6 +36,7 @@ int vectorCrear(Vector_t* vector, size_t tamElem);
 int vectorDestruir(Vector_t* vector);
 
 int vectorRedimensionar(Vector_t* vector, size_t nuevaCap);
+int vectorReservar(Vector_t* vector, size_t nElem); 
 
 int vectorLeerDeTexto(Vector_t* vector, const char* nomArch, int (*ParsearTxt)(FILE*, void*));
 int vectorEscribirATexto(Vector_t* vector, const char* nomArch, int (*ParsearTxt)(FILE*, void*));

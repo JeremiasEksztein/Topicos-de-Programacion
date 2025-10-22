@@ -7,7 +7,7 @@ int transformarVector(Vector_t* vector, int (*Transformar)(void* dato, void* con
     }
 
     char* i = vector->data;
-    char* ult = (char*)vector->data + (vector->cantElem - 1) * vector->tamElem;
+    char* ult = (char*)vector->data + (vector->cantElem) * vector->tamElem;
 
     for(; i < ult; i += vector->tamElem){
         Transformar(i, (!contexto ? NULL : contexto));
@@ -50,7 +50,7 @@ Vector_t* mapearVector(Vector_t* vector, void* (*Mapear)(void* dato, void* tpm, 
     }
 
     char* i = vector->data;
-    char* ult = (char*)vector->data + (vector->cantElem - 1) * vector->tamElem;
+    char* ult = (char*)vector->data + (vector->cantElem) * vector->tamElem;
 
     for(; i < ult; i += vector->tamElem){
         Mapear(i, elem, contexto);
@@ -73,7 +73,7 @@ Vector_t* filtrarVector(Vector_t* vector, int (*Filtrar)(void* dato, void* conte
     vectorCrear(tmp, vector->tamElem);
 
     char* i = vector->data;
-    char* ult = vector->data + (vector->cantElem - 1) * vector->tamElem;
+    char* ult = vector->data + (vector->cantElem) * vector->tamElem;
 
     for(; i < ult; i += vector->tamElem){
         if(Filtrar(i, contexto)){
@@ -88,7 +88,7 @@ void* reducirVector(Vector_t* vector, void* (*Reducir)(void* dato, void* acumula
 {
     void* acumulador;
     char* i = vector->data;
-    char* ult = (char*)vector->data + (vector->cantElem - 1) * vector->tamElem;
+    char* ult = (char*)vector->data + (vector->cantElem) * vector->tamElem;
 
     for(; i < ult; i += vector->tamElem){
         acumulador = Reducir(i, acumulador);
@@ -113,8 +113,8 @@ Vector_t* reducirVectorPorClave(Vector_t* vector, void* (*ObtenerClave)(void* el
         return NULL;
     }
 
-    char* i = vector->data;
-    char* ult = (char*)vector->data + (vector->cantElem - 1) * vector->tamElem;
+    void* i = vector->data;
+    void* ult = vector->data + (vector->cantElem) * vector->tamElem;
     void* claveAnt = NULL;
 
     while(i < ult){
@@ -122,6 +122,7 @@ Vector_t* reducirVectorPorClave(Vector_t* vector, void* (*ObtenerClave)(void* el
         memset(acumulador, 0, vector->tamElem);
 
         claveAnt = ObtenerClave(i);
+        i += vector->tamElem;
 
         while(i < ult && !CompararClave(claveAnt, ObtenerClave(i))){
             
@@ -152,7 +153,7 @@ Vector_t* unirVectores(Vector_t* lhs, Vector_t* rhs, void* (*Unir)(void* lhs, vo
     void* elem = malloc(n);
     char* i = lhs->data;
     char* j = rhs->data;
-    char* ult = (char*)lhs->data + (lhs->cantElem - 1) * lhs->tamElem;
+    char* ult = (char*)lhs->data + (lhs->cantElem) * lhs->tamElem;
 
     for(; i < ult; i += lhs->tamElem, j += lhs->tamElem){
         elem = Unir(i, j, elem);
