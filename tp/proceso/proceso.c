@@ -182,7 +182,7 @@ int corregirIPCDivisiones(void* reg)
 {
     IPCDivisiones* tmp = reg;
 
-    int decodificador[10] = {'4', '6', '8', '7', '1', '5', '5', '0', '3', '2'};
+    int decodificador[10] = {'4', '6', '8', '7', '1', '9', '5', '0', '3', '2'}; // tal vez para el digito 5 le corresponde un 9
 
     decodificarFechaDivisiones(tmp, decodificador);
     convertirFechaDivisiones(tmp);
@@ -325,9 +325,10 @@ int corregirFormatoFechaAperturas(IPCAperturas* reg)
 int herramientaAjustarMontosIPCDivisiones(Vector_t* divs)
 {
     Vector_t* tmp;
-    RespuestaMontos ans;
+    RespuestaMontos ans = {.monto = 30000.0f, .region = "GBA", .periodoIni = "2022 - Diciembre", .periodoFin = "2024 - Enero"};
 
-    ans = preguntarAjustarMonto();
+    //ans = preguntarAjustarMonto();
+    printf("Su seleccion: %lf | %s | %s | %s\n", ans.monto, ans.region, ans.periodoIni, ans.periodoFin);
 
     tmp = filtrarVector(divs, filtrarIPCDivisiones, &ans);
 
@@ -454,7 +455,7 @@ int filtrarIPCDivisiones(void* dato, void* contexto)
     IPCDivisiones* tmpD = dato;
     RespuestaMontos* tmpC = contexto;
 
-    if((!stringCmp(tmpD->periodo, tmpC->periodoIni) || !stringCmp(tmpD->periodo, tmpC->periodoFin)) && !stringCmp(tmpD->region, tmpC->region) && !stringCmp(tmpD->desc, "Nivel general")){
+    if((!stringCmp(tmpD->periodo, tmpC->periodoIni) || !stringCmp(tmpD->periodo, tmpC->periodoFin)) && !stringCmp(tmpD->region, tmpC->region) && !stringCmp(tmpD->desc, "Nivel general ")){
         return 1;
     }
 
@@ -621,11 +622,11 @@ int parsearIPCPromedio(FILE* arch, void* reg)
 int herramientaCalcularAlquilerIPCAperturas(Vector_t* aper)
 {
     Vector_t* alquileres;
-    //RespuestaAlquileres tmp = {.monto = "30000", .periodo = "2024-09-01", .region = "GBA"};
-    RespuestaAlquileres tmp;
+    RespuestaAlquileres tmp = {.monto = "30000", .periodo = "2024-09-01", .region = "GBA"};
+    //RespuestaAlquileres tmp;
     char region[APERTURAS_REGION_LEN] = "";
 
-    tmp = preguntarAlquileres();
+    //tmp = preguntarAlquileres();
 
     alquileres = filtrarVector(aper, filtrarAlquileres, &tmp);
 

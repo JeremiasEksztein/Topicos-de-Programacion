@@ -73,7 +73,7 @@ Vector_t* filtrarVector(Vector_t* vector, int (*Filtrar)(void* dato, void* conte
     vectorCrear(tmp, vector->tamElem);
 
     char* i = vector->data;
-    char* ult = (char*)vector->data + (vector->cantElem - 1) * vector->tamElem;
+    char* ult = vector->data + (vector->cantElem - 1) * vector->tamElem;
 
     for(; i < ult; i += vector->tamElem){
         if(Filtrar(i, contexto)){

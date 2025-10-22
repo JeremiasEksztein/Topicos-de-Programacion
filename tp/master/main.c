@@ -43,11 +43,11 @@ int main(int argc, char* argv[])
     vectorEscribirATexto(&vecDivisiones, ARCH_DIVISIONES, parsearParaDivisiones); // Guardamos los contenidos de los vectores en archivos .csv
     vectorEscribirATexto(&vecAperturas, ARCH_APERTURAS, parsearParaAperturas);
 
-    //herramientaAjustarMontosIPCDivisiones(&vecDivisiones); // Usamos la herramienta de calcular montos ajustados del punto 5
+    herramientaAjustarMontosIPCDivisiones(&vecDivisiones); // Usamos la herramienta de calcular montos ajustados del punto 5
 
     clasificarBySIPCDivisiones(&vecDivisiones); // Ejecutamos la clasificacion pedida por el punto 6 en bienes y servicios
 
-    //herramientaCalcularAlquilerIPCAperturas(&vecAperturas); // Usamos la herramienta de calcular alquiler ajustado por inflacion del punto 9
+    herramientaCalcularAlquilerIPCAperturas(&vecAperturas); // Usamos la herramienta de calcular alquiler ajustado por inflacion del punto 9
 
     vectorDestruir(&vecDivisiones); // Liberamos la memoria alocada para los vectores
     vectorDestruir(&vecAperturas);
