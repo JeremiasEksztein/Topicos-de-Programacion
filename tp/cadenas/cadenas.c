@@ -1,26 +1,26 @@
 #include "cadenas.h"
 
-int stringCmp(char* dest, char* src)
+int stringCmp(char*  dest, char*  src)
 {
     char* tmpD = dest;
     char* tmpS = src;
 
     while(!(*tmpD - *tmpS) && *tmpD && *tmpS){
-        tmpD++; 
-        tmpS++;        
+        ++tmpD; 
+        ++tmpS;        
     }
 
     return (*tmpD - *tmpS);
 }
 
-int stringNCmp(char* dest, char* src, size_t n)
+int stringNCmp(char* dest, char* src, int n)
 {
     char* tmpD = dest;
     char* tmpS = src;
 
     while(!(*tmpD - *tmpS) && *tmpD && *tmpS && n){
-        tmpD++;
-        tmpS++;
+        ++tmpD;
+        ++tmpS;
     }
 
     return (*tmpD - *tmpS);
@@ -68,16 +68,16 @@ char* stringCopy(char* dest, char* src)
     return dest;
 }
 
-char* stringNCopy(char* dest, char* src, size_t n)
+char* stringNCopy(char*  dest, char*  src, int n)
 {
     char* tmpD = dest;
     char* tmpS = src;
 
     while(*tmpS && n){
         *tmpD = *tmpS;
-        tmpD++;
-        tmpS++;
-        n--;
+        ++tmpD;
+        ++tmpS;
+        --n;
     }
 
     *tmpD = '\0';
@@ -195,23 +195,23 @@ char* stringReverse(char* str)
     return str;
 }
 
-char* stringRemove(char* str, int ch)
+char* stringRemove(char*  str, int ch)
 {
     char* i = str;
-    int len = stringLenght(str);
+    register int len = stringLenght(str);
 
     while(*i){
         if(*i == ch){
             memmove(i, i + 1, len - (i - str));
         }
 
-        i++;
+        ++i;
     }
 
     return str;
 }
 
-char* stringReplace(char* str, int ori, int new)
+char* stringReplace(char*  str, int ori, int new)
 {
     char* i = str;
 
@@ -219,7 +219,7 @@ char* stringReplace(char* str, int ori, int new)
         if(*i == ori){
             *i = new;
         }
-        i++;
+        ++i;
     }
 
     return str;
@@ -258,7 +258,7 @@ char* stringChar(char* dest, int ch)
     return NULL;
 }
 
-char* stringRChar(char* dest, int ch)
+char* stringRChar(char*  dest, int ch)
 {
     char* tmpD = dest + stringLenght(dest) - 1;
 
@@ -267,7 +267,7 @@ char* stringRChar(char* dest, int ch)
             return tmpD;
         }
 
-        tmpD--;
+        --tmpD;
     }
 
     return NULL;
@@ -275,23 +275,23 @@ char* stringRChar(char* dest, int ch)
 
 // dest = "1234ABCD" src = "ABCDEFGH"
 // stringCSpan(dest, src) = 4
-int stringCSpan(char* dest, char* src)
+int stringCSpan(char*  dest, char*  src)
 {
     char* tmpD = dest;
     char* tmpS = src;
-    int sum = 0;
+    register int sum = 0;
 
     while(*tmpD){
         while(*tmpS != *tmpD && *tmpS){
-            tmpS++;
+            ++tmpS;
         }
 
         if(*tmpS == *tmpD){
             return sum;
         }
 
-        sum++;
-        tmpD++;
+        ++sum;
+        ++tmpD;
         tmpS = src;
     }
 
@@ -367,7 +367,7 @@ char* stringSubstring(char* dest, char* src)
 inline int stringLenght(const char* str)
 {
     const char* tmp = str;
-    size_t sum = 0;
+    register int sum = 0;
 
     while(*tmp){
         ++sum;

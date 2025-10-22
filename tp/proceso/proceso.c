@@ -26,7 +26,7 @@ int parsearIPCDivisiones(FILE* arch, void* reg)
         return ERR_REGISTRO;
     }
 
-    i++;
+    ++i;
     stringNCopy(tmp->periodo, i, DIVISIONES_PERIODO_LEN);
     *(--i) = '\0';
 
@@ -34,7 +34,7 @@ int parsearIPCDivisiones(FILE* arch, void* reg)
         return ERR_REGISTRO;
     }
 
-    i++;
+    ++i;
     stringNCopy(tmp->region, i, DIVISIONES_REGION_LEN);
     *(--i) = '\0';
 
@@ -42,7 +42,7 @@ int parsearIPCDivisiones(FILE* arch, void* reg)
         return ERR_REGISTRO;
     }
 
-    i++;
+    ++i;
     stringNCopy(tmp->varAnualIPC, i, DIVISIONES_INDICES_LEN);
     *(--i) = '\0';
 
@@ -50,7 +50,7 @@ int parsearIPCDivisiones(FILE* arch, void* reg)
         return ERR_REGISTRO;
     }
 
-    i++;
+    ++i;
     stringNCopy(tmp->varMensIPC, i, DIVISIONES_INDICES_LEN);
     *(--i) = '\0';
 
@@ -58,7 +58,7 @@ int parsearIPCDivisiones(FILE* arch, void* reg)
         return ERR_REGISTRO;
     }
 
-    i++;
+    ++i;
     stringNCopy(tmp->indiceIPC, i, DIVISIONES_INDICES_LEN);
     *(--i) = '\0';
 
@@ -66,7 +66,7 @@ int parsearIPCDivisiones(FILE* arch, void* reg)
         return ERR_REGISTRO;
     }
 
-    i++;
+    ++i;
     stringNCopy(tmp->clasif, i, DIVISIONES_CLASIF_LEN);
     *(--i) = '\0';
 
@@ -74,7 +74,7 @@ int parsearIPCDivisiones(FILE* arch, void* reg)
         return ERR_REGISTRO;
     }
 
-    i++;
+    ++i;
     stringNCopy(tmp->desc, i, DIVISIONES_DESC_LEN);
     *(--i) = '\0';
 
@@ -104,7 +104,7 @@ int parsearIPCAperturas(FILE* arch, void* reg)
         return ERR_REGISTRO;
     }
 
-    i++;
+    ++i;
     stringNCopy(tmp->region, i, APERTURAS_REGION_LEN);
     *(--i) = '\0';
 
@@ -112,7 +112,7 @@ int parsearIPCAperturas(FILE* arch, void* reg)
         return ERR_REGISTRO;
     }
 
-    i++;
+    ++i;
     stringNCopy(tmp->varAnualIPC, i, APERTURAS_INDICES_LEN);
     *(--i) = '\0';
 
@@ -120,7 +120,7 @@ int parsearIPCAperturas(FILE* arch, void* reg)
         return ERR_REGISTRO;
     }
 
-    i++;
+    ++i;
     stringNCopy(tmp->varMensIPC, i, APERTURAS_INDICES_LEN);
     *(--i) = '\0';
 
@@ -128,7 +128,7 @@ int parsearIPCAperturas(FILE* arch, void* reg)
         return ERR_REGISTRO;
     }
 
-    i++;
+    ++i;
     stringNCopy(tmp->indiceIPC, i, APERTURAS_INDICES_LEN);
     *(--i) = '\0';
 
@@ -136,7 +136,7 @@ int parsearIPCAperturas(FILE* arch, void* reg)
         return ERR_REGISTRO;
     }
 
-    i++;
+    ++i;
     stringNCopy(tmp->periodo, i, APERTURAS_PERIODO_LEN);
     *(--i) = '\0';
 
@@ -144,7 +144,7 @@ int parsearIPCAperturas(FILE* arch, void* reg)
         return ERR_REGISTRO;
     }
 
-    i++;
+    ++i;
     stringNCopy(tmp->clasif, i, APERTURAS_CLASIF_LEN);
     *(--i) = '\0';
 
@@ -152,7 +152,7 @@ int parsearIPCAperturas(FILE* arch, void* reg)
         return ERR_REGISTRO;
     }
 
-    i++;
+    ++i;
     stringNCopy(tmp->desc, i, APERTURAS_DESC_LEN);
     *(--i) = '\0';
 
@@ -204,7 +204,7 @@ int decodificarFechaDivisiones(IPCDivisiones* reg, int* decod)
         } else {
             return ERR_REGISTRO;
         }
-        i++;
+        ++i;
     }      
 
     return EXITO;   
@@ -259,8 +259,8 @@ int normalizarDescripcionDivisiones(IPCDivisiones* reg)
     while(!secuenciaPalabrasEsFin(&lect)){
         palabraModificar(&pal, palabraAMinuscula);
         secuenciaPalabrasEscribir(&escr, &pal);
-        secuenciaPalabrasEscribirCaract(&escr, ' ');
         secuenciaPalabrasLeer(&lect, &pal);
+        secuenciaPalabrasEscribirCaract(&escr, ' ');
     }
 
     secuenciaPalabrasCerrar(&escr);
@@ -454,7 +454,7 @@ int filtrarIPCDivisiones(void* dato, void* contexto)
     IPCDivisiones* tmpD = dato;
     RespuestaMontos* tmpC = contexto;
 
-    if((!stringCmp(tmpD->periodo, tmpC->periodoIni) || !stringCmp(tmpD->periodo, tmpC->periodoFin)) && !stringCmp(tmpD->region, tmpC->region) && !stringCmp(tmpD->desc, "Nivel general ")){
+    if((!stringCmp(tmpD->periodo, tmpC->periodoIni) || !stringCmp(tmpD->periodo, tmpC->periodoFin)) && !stringCmp(tmpD->region, tmpC->region) && !stringCmp(tmpD->desc, "Nivel general")){
         return 1;
     }
 

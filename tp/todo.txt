@@ -1,0 +1,5 @@
+Falta corregir el espacio extra que se le agrega por normalizar y que considere los caracteres especiales
+Ademas tengo que meter el formulario generico
+Emprolijar el codigo
+Comentar y documentar
+optimizar

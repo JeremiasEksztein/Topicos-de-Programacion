@@ -22,13 +22,13 @@
 char* stringCopy(char* dest, char* src);
 
 /**
-*   @fn char* stringNCopy(char* dest, char* src, size_t n)
+*   @fn char* stringNCopy(char* dest, char* src, int n)
 *   @brief Realiza la copia de hasta n caracteres, inclusive, de una cadena a otra
 *   @param dest Cadenas de destino de la operacion
 *   @param src Cadena de fuente de la operacion
 *   @param n Cantidad de caracteres a copiar
  */
-char* stringNCopy(char* dest, char* src, size_t n);
+char* stringNCopy(char* dest, char* src, int n);
 
 /**
  *  @fn char* stringDup(char* dest, char* src, size_t n)
@@ -91,7 +91,7 @@ char* stringReverse(char* str);
  *  @param str Cadena a evaluar
  *  @param ch Caracter a remover
  */
-char* stringRemove(char* str, int ch);
+char* stringRemove(char*  str, int ch);
 
 /**
  *  @fn stringReplace(char* str, int ori, int new)
@@ -100,7 +100,7 @@ char* stringRemove(char* str, int ch);
  *  @param ori Caracter a reemplazar
  *  @param new Caracter reemplazante
  */
-char* stringReplace(char* str, int ori, int new);
+char* stringReplace(char*  str, int ori, int new);
 
 /**
  *  @fn char* stringTrim(char* dest, char* str, int i, int j)
@@ -121,7 +121,7 @@ char* stringTrim(char* dest, char* str, int i, int j);
  *  @param lhs Cadena a la izquierda de la comparacion
  *  @param rhs Cadena a la derecha de la comparacion
  */
-int stringCmp(char* lhs, char* rhs);
+int stringCmp(char*  lhs, char* rhs);
 
 /**
  *  @fn int stringNCmp(char* lhs, char* rhs, size_t n)
@@ -130,7 +130,7 @@ int stringCmp(char* lhs, char* rhs);
  *  @param rhs Cadena a la derecha de la comparacion
  *  @param n Cantidad de caracteres a evaluar
  */
-int stringNCmp(char* lhs, char* rhs, size_t n);
+int stringNCmp(char* lhs, char* rhs, int n);
 
 /**
  *  @fn int stringCmpi(char* lhs, char* rhs)
@@ -173,7 +173,7 @@ char* stringRChar(char* dest, int ch);
  *  @param dest Cadena a evaluar
  *  @param src Cadena con caracteres a buscar
  */
-int stringCSpan(char* dest, char* src);
+int stringCSpan(char*  dest, char*  src);
 
 /**
  *  @fn int stringSpan(char* dest, char* src)

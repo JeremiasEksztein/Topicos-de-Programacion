@@ -37,7 +37,9 @@ memcheck:
 	valgrind --track-origins=yes --leak-check=full ./pruebaTP serie_ipc_divisiones.csv serie_ipc_aperturas.csv
 
 callgrind:
-	valgrind --tool=callgrind ./pruebaTP serie_ipc_divisiones.csv serie_ipc_aperturas.csv
+	rm callgrind.out.*
+	valgrind --tool=callgrind --dump-instr=yes ./pruebaTP serie_ipc_divisiones.csv serie_ipc_aperturas.csv
+	kcachegrind callgrind.out.*
 
 gdb: 
 	gdb ./pruebaTP serie_ipc_divisiones.csv serie_ipc_aperturas.csv

@@ -126,7 +126,6 @@ int vectorLeerDeTexto(Vector_t* vector, const char* nomArch, int (ParsearTexto)(
     FILE* arch = fopen(nomArch, "rt");
 
     if(!arch){
-        puts("A");
         return ERR_USUARIO;
     }
 
@@ -135,7 +134,6 @@ int vectorLeerDeTexto(Vector_t* vector, const char* nomArch, int (ParsearTexto)(
 
     if(!tmp){
         fclose(arch);
-        puts("B");
         return ERR_SIN_MEM;
     }
 
