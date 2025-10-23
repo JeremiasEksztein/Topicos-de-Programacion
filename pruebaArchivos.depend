@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1761226643 source:c:\users\laboratorios\desktop\pruebaarchivos\main.c
+	<stdio.h>
+	<stdlib.h>
+	"vector9.h"
+	"archivosPan.h"
+
+1761223006 source:c:\users\laboratorios\desktop\pruebaarchivos\vector9.c
+	"vector9.h"
+
+1761226142 c:\users\laboratorios\desktop\pruebaarchivos\vector9.h
+	<stdio.h>
+	<stdbool.h>
+	<stdlib.h>
+	<string.h>
+	<stddef.h>
+
+1761225770 c:\users\laboratorios\desktop\pruebaarchivos\archivospan.h
+	<stdio.h>
+
+1761226708 source:c:\users\laboratorios\desktop\pruebaarchivos\archivospan.c
+	<stdlib.h>
+	<string.h>
+	"archivosPan.h"
+	"vector9.h"
+
