@@ -1,203 +1,57 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include "vector9.h"
-#include "archivosPan.h"
+#include <locale.h>
+#include "comunes.h"
+#include "vector.h"
+#include "parseo.h"
+#include "herramientas.h"
 
-typedef struct{
-    char codigo[11];
-    char desc[51];
-    float precio;
-}Producto;
+#define CANT_ARGS 3
 
-typedef struct{
-    char codigo[11];
-    unsigned offset;
-}IdxProducto;
+#define ARG_DIVISIONES_NOM 1
+#define ARG_APERTURAS_NOM 2
 
-#define ARG_PORCENTAJE 2
-#define ARG_NOM_ARCH 1
+#define ESTIMACION_TAM_DIVISIONES 14000
+#define ESTIMACION_TAM_APERTURAS 28000
 
-#define EXITO 0
-#define ERR_ARCH 1
+// main.c ./archivos/serie_ipc_divisiones.csv ./archivos/serie_ipc_aperturas.csv
 
-int cambiarReg(void* reg, unsigned n, void* idx);
-int cmpProds(void* lhs, void* rhs);
-int generarArchivo(const char* nomArchProds);
-int actualizarPreciosProductos(const char* nomArchProds, float per);
-int mostrarArchProds(const char* nomArchProds);
-int mostrarArchIdx(const char* nomArchProds);
-
-
-// ActualizadorPreciosProductos.exe Productos.dat 10.5
-
-int main(int argc, char** argv)
+int main(int argc, char* argv[])
 {
-    generarArchivo(argv[ARG_NOM_ARCH]);
-    //crearIndice(argv[ARG_NOM_ARCH], sizeof(Producto), sizeof(IdxProducto), cambiarReg, cmpProds);
-    float per = atof(argv[ARG_PORCENTAJE]);
-
-    int ret;
-
-    ret = mostrarArchProds(argv[ARG_NOM_ARCH]);
-    //mostrarArchIdx("Productos.idx");
-
-    ret = actualizarPreciosProductos(argv[ARG_NOM_ARCH], per);
-    ret = actualizarPreciosProductos(argv[ARG_NOM_ARCH], per);
-
-    ret = mostrarArchProds(argv[ARG_NOM_ARCH]);
-
-    return ret;
-}
-
-int cambiarReg(void* reg, unsigned n, void* idx)
-{
-    Producto* p = reg;
-    IdxProducto* i = idx;
-
-    strcpy(i->codigo, p->codigo);
-    i->offset = n;
-    return EXITO;
-}
-
-int cmpProds(void* lhs, void* rhs)
-{
-    IdxProducto* l = lhs;
-    IdxProducto* r = rhs;
-
-    return strcmp(l->codigo, r->codigo);
-}
-
-int generarArchivo(const char* nomArchProds)
-{
-    Producto prods[] =
-    {
-        {"PERA", "PERA WILLIAMS", 120.50},
-        {"MANZANA", "MANZANA ROJA", 100.75},
-        {"NARANJA", "NARANJA VALENCIA", 80.20},
-        {"BANANA", "BANANA CAVENDISH", 90.00},
-        {"KIWI", "KIWI VERDE", 150.30},
-        {"FRUTILLA", "FRUTILLA FRESCA", 200.10},
-        {"UVA", "UVA RED GLOBE", 110.40},
-        {"MANDARINA", "MANDARINA TANGERINA", 70.60},
-        {"CEREZA", "CEREZA BING", 250.00},
-        {"MANGO", "MANGO ATAULFO", 180.80}
-    };
-
-    FILE* fp = fopen(nomArchProds, "wb");
-
-    if(!fp){
-        return ERR_ARCH;
+    if(argc != CANT_ARGS){  // Si no se ingresa la cantidad correcta de argumentos salimos
+        LOG(ERR_ARGS);
     }
 
-    fwrite(&prods, sizeof(prods), 1, fp);
-    fclose(fp);
+    //setlocale(LC_ALL, ""); // Fijamos el locale del programa al locale argentino
 
-    return EXITO;
-}
+    Vector_t vecDivisiones, vecAperturas;
 
-int actualizarPreciosProductos(const char* nomArchProds, float per)
-{
-    FILE* archProds = fopen(nomArchProds, "rb+");
+    LOG(vectorCrear(&vecDivisiones, sizeof(IPCDivisiones))); // Creamos el vector de divisiones
+    LOG(vectorReservar(&vecDivisiones, 14000)); // Reservamos espacio para 14000 elementos
+    LOG(vectorLeerDeTexto(&vecDivisiones, argv[ARG_DIVISIONES_NOM], parsearIPCDivisiones)); // Leemos y parseamos al vector serie_ipc_divisiones.csv
 
-    if(!archProds){
-        return ERR_ARCH;
-    }
+    LOG(vectorEliminarPos(&vecDivisiones, 0));// Eliminamos el titulo del vector
 
-    float incr = 1.0f + (per / 100.0f);
-    Producto prod;
+    LOG(corregirCampos(&vecDivisiones, corregirIPCDivisiones));// Corregimos los campos del vector
 
-    while(fread(&prod, sizeof(Producto), 1, archProds)){
-        prod.precio *= incr;
-        fseek(archProds, -(long)sizeof(Producto), SEEK_CUR);
-        fwrite(&prod, sizeof(Producto), 1, archProds);
-        fflush(archProds);
-    }
+    LOG(vectorCrear(&vecAperturas, sizeof(IPCAperturas))); // Creamos el vector de aperturas
+    LOG(vectorReservar(&vecAperturas, 28000)); // Reservamos espacio para 28000 elementos
+    LOG(vectorLeerDeTexto(&vecAperturas, argv[ARG_APERTURAS_NOM], parsearIPCAperturas)); // Leemos y parseamos al vector serie_ipc_aperturas.csv
 
-    fclose(archProds);
+    LOG(vectorEliminarPos(&vecAperturas, 0)); // Eliminamos el titulo del vector
 
-    return EXITO;
-}
+    LOG(corregirCampos(&vecAperturas, corregirIPCAperturas)); // Corregimos los campos del vector
 
-int actualizarPrecio1Producto(const char* nomArchProds, const char* codProd, float porc)
-{
-    FILE* archProds = fopen(nomArchProds, "r+b");
+    LOG(vectorEscribirATexto(&vecDivisiones, ARCH_DIVISIONES, parsearParaDivisiones)); // Guardamos los contenidos de los vectores en archivos .csv
+    LOG(vectorEscribirATexto(&vecAperturas, ARCH_APERTURAS, parsearParaAperturas));
 
-    if(!archProds)
-    {
-        return ERR_ARCHIVO;
-    }
+    LOG(herramientaAjustarMontosIPCDivisiones(&vecDivisiones)); // Usamos la herramienta de calcular montos ajustados del punto 5
 
-    char nomArchProdsIdx[201];
-    cambiarExtension(nomArchProds, "idx", nomArchProdsIdx);
+    LOG(clasificarBySIPCDivisiones(&vecDivisiones)); // Ejecutamos la clasificacion pedida por el punto 6 en bienes y servicios
 
-    Vector vProdIdx;
-    if(vectorCrearDeArchivo(&vProdIdx, sizeof(ProductoIdx), nomArchProdsIdx))
-    {
-        fclose(archProds);
-        return ERR_SIN_MEM;
-    }
+    LOG(herramientaCalcularAlquilerIPCAperturas(&vecAperturas)); // Usamos la herramienta de calcular alquiler ajustado por inflacion del punto 9
 
-    ProductoIdx prodIdx;
-    strcpy(prodIdx.codigo, codProd);
+    vectorDestruir(&vecDivisiones); // Liberamos la memoria alocada para los vectores
+    vectorDestruir(&vecAperturas);
 
-    if(vectorOrdBuscar(&vProdIdx, &prodIdx, cmpProductoIdx) == -1)
-    {
-        fclose(archProds);
-        vectorDestruir(&vProdIdx);
-        return ERR_COD_INEX;
-    }
-
-    float factorIncr = 1 + porc / 100;
-
-    Producto prod;
-    fseek(archProds, prodIdx.nroReg * sizeof(Producto), SEEK_SET);
-    fread(&prod, sizeof(Producto), 1, archProds);
-    prod.precio *= factorIncr;
-    fseek(archProds, prodIdx.nroReg * sizeof(Producto), SEEK_SET);
-    fwrite(&prod, sizeof(Producto), 1, archProds);
-
-    fclose(archProds);
-    vectorDestruir(&vProdIdx);
-
-    return TODO_OK;
-}
-
-
-int mostrarArchProds(const char* nomArchProds)
-{
-    FILE* fp = fopen(nomArchProds, "rb");
-
-    if(!fp){
-        return ERR_ARCH;
-    }
-
-    Producto prod;
-
-    while(fread(&prod, sizeof(Producto), 1, fp)){
-        printf("%s - %s - %0.2f\n", prod.codigo, prod.desc, prod.precio);
-    }
-
-    fclose(fp);
-
-    return EXITO;
-}
-
-int mostrarArchIdx(const char* nomArchProds)
-{
-    FILE* fp = fopen(nomArchProds, "rb");
-
-    if(!fp){
-        return ERR_ARCH;
-    }
-
-    IdxProducto prod;
-
-    while(fread(&prod, sizeof(IdxProducto), 1, fp)){
-        printf("%s - %d\n", prod.codigo, prod.offset);
-        //printf("%s - %s - %0.2f\n", prod.codigo, prod.desc, prod.precio);
-    }
-
-    fclose(fp);
-
-    return EXITO;
+    return EXITO; // Salimos gente.
 }

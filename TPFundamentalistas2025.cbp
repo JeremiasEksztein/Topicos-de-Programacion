@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="TPFundamentalistas2025" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Option virtualFolders="form/;proceso/;cadenas/;vector/;secuenciaPalabras/;comunes/;master/" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/TPFundamentalistas2025" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option parameters="./archivos/serie_ipc_divisiones.csv ./archivos/serie_ipc_aperturas.csv" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/TPFundamentalistas2025" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="algoritmos.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="vector/" />
+		</Unit>
+		<Unit filename="algoritmos.h">
+			<Option virtualFolder="vector/" />
+		</Unit>
+		<Unit filename="cadenas.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="cadenas/" />
+		</Unit>
+		<Unit filename="cadenas.h">
+			<Option virtualFolder="cadenas/" />
+		</Unit>
+		<Unit filename="comunes.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="comunes/" />
+		</Unit>
+		<Unit filename="comunes.h">
+			<Option virtualFolder="comunes/" />
+		</Unit>
+		<Unit filename="documentacion.h" />
+		<Unit filename="form.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="form/" />
+		</Unit>
+		<Unit filename="form.h">
+			<Option virtualFolder="form/" />
+		</Unit>
+		<Unit filename="herramientas.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="proceso/" />
+		</Unit>
+		<Unit filename="herramientas.h">
+			<Option virtualFolder="proceso/" />
+		</Unit>
+		<Unit filename="iterador.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="vector/" />
+		</Unit>
+		<Unit filename="iterador.h">
+			<Option virtualFolder="vector/" />
+		</Unit>
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="master/" />
+		</Unit>
+		<Unit filename="parseo.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="proceso/" />
+		</Unit>
+		<Unit filename="parseo.h">
+			<Option virtualFolder="proceso/" />
+		</Unit>
+		<Unit filename="secuenciaPalabras.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="secuenciaPalabras/" />
+		</Unit>
+		<Unit filename="secuenciaPalabras.h">
+			<Option virtualFolder="secuenciaPalabras/" />
+		</Unit>
+		<Unit filename="vector.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="vector/" />
+		</Unit>
+		<Unit filename="vector.h">
+			<Option virtualFolder="vector/" />
+		</Unit>
+		<Extensions>
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build extract_all="1" />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general use_at_in_tags="1" />
+			</DoxyBlocks>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,95 @@
+# depslib dependency file v1.0
+1761180120 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\algoritmos.c
+	"algoritmos.h"
+
+1761161121 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\algoritmos.h
+	"vector.h"
+
+1761161544 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\vector.h
+	<stdio.h>
+	<stdbool.h>
+	<stdlib.h>
+	<memory.h>
+	<stddef.h>
+	"comunes.h"
+
+1761165582 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\comunes.h
+	<stddef.h>
+	<stdio.h>
+	<stdbool.h>
+	<stdlib.h>
+	"cadenas.h"
+
+1761166727 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\cadenas.h
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<memory.h>
+	<ctype.h>
+	<string.h>
+	"comunes.h"
+
+1761160468 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\comunes.c
+	"comunes.h"
+
+1761160523 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\form.c
+	"form.h"
+
+1761165533 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\form.h
+	"comunes.h"
+	<string.h>
+
+1761180318 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\herramientas.c
+	"herramientas.h"
+
+1761161091 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\iterador.c
+	"iterador.h"
+
+1761165434 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\iterador.h
+	"vector.h"
+
+1761180318 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\parseo.c
+	"parseo.h"
+
+1761160598 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\secuenciapalabras.c
+	"secuenciaPalabras.h"
+
+1761165434 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\secuenciapalabras.h
+	<stdio.h>
+	<ctype.h>
+	<wchar.h>
+	<wctype.h>
+	<stdbool.h>
+	"comunes.h"
+
+1761160793 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\cadenas.c
+	"cadenas.h"
+
+1761167403 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\parseo.h
+	<stdlib.h>
+	<assert.h>
+	<stdio.h>
+	<string.h>
+	<stdbool.h>
+	"comunes.h"
+	"vector.h"
+	"iterador.h"
+	"secuenciaPalabras.h"
+	"cadenas.h"
+
+1761180359 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\vector.c
+	"vector.h"
+
+1761178545 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\main.c
+	<stdio.h>
+	<locale.h>
+	"comunes.h"
+	"vector.h"
+	"parseo.h"
+	"herramientas.h"
+
+1761180318 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\herramientas.h
+	"parseo.h"
+	"algoritmos.h"
+	"vector.h"
+
