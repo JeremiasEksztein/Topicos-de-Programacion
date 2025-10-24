@@ -1,4 +1,5 @@
 #include "proceso.h"
+#include <stdbool.h>
 
 void imprimirRegistroDivisiones(void* reg);
 int parsearParaEscritura(FILE* arch, void* reg);
@@ -96,10 +97,12 @@ int parsearIPCAperturas(FILE* arch, void* reg)
 
     fgets(buffer, 500, arch);
 
-    if(!(i = strrchr(buffer, '\n'))){
-        return ERR_BUFFER_CORTO;
+    if(!(i = stringRChar(buffer, '\n'))){
+        if(!(i = stringRChar(buffer,  EOF))){
+            return ERR_BUFFER_CORTO;
+        }
     }
-
+    
     *i = '\0';
 
     if(!(i = strrchr(buffer, ';'))){

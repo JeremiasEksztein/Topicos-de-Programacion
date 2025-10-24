@@ -211,3 +211,13 @@
 1 | master/main.c:41 | Oct 22 2025 | 18:20:57 | main | Error con operacion con punteros dinamicos.
 1 | master/main.c:33 | Oct 22 2025 | 20:42:33 | main | Error con operacion con punteros dinamicos.
 1 | master/main.c:41 | Oct 22 2025 | 20:42:33 | main | Error con operacion con punteros dinamicos.
+1 | master/main.c:33 | Oct 22 2025 | 20:42:33 | main | Error con operacion con punteros dinamicos.
+1 | master/main.c:41 | Oct 22 2025 | 20:42:33 | main | Error con operacion con punteros dinamicos.
+1 | master/main.c:33 | Oct 22 2025 | 20:42:33 | main | Error con operacion con punteros dinamicos.
+1 | master/main.c:41 | Oct 22 2025 | 20:42:33 | main | Error con operacion con punteros dinamicos.
+1 | master/main.c:33 | Oct 22 2025 | 20:42:33 | main | Error con operacion con punteros dinamicos.
+1 | master/main.c:41 | Oct 22 2025 | 20:42:33 | main | Error con operacion con punteros dinamicos.
+1 | master/main.c:33 | Oct 22 2025 | 20:42:33 | main | Error con operacion con punteros dinamicos.
+1 | master/main.c:41 | Oct 22 2025 | 20:42:33 | main | Error con operacion con punteros dinamicos.
+1 | master/main.c:33 | Oct 22 2025 | 20:42:33 | main | Error con operacion con punteros dinamicos.
+1 | master/main.c:41 | Oct 22 2025 | 20:42:33 | main | Error con operacion con punteros dinamicos.
