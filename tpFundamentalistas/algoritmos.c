@@ -1,3 +1,9 @@
+/** @ingroup algoritmos 
+ * @{ */
+
+/** @file algoritmos.c
+ * @brief Implementacion de algoritmos varios sobre vectores, inspirados en los algoritmos de C++ */
+
 #include "algoritmos.h"
 
 int transformarVector(Vector_t* vector, int (*Transformar)(void* dato, void* contexto), void* contexto)
@@ -72,8 +78,8 @@ Vector_t* filtrarVector(Vector_t* vector, int (*Filtrar)(void* dato, void* conte
 
     vectorCrear(tmp, vector->tamElem);
 
-    char* i = vector->data;
-    char* ult = vector->data + vector->cantElem * vector->tamElem;
+    char* i = (char*)vector->data;
+    char* ult = (char*)vector->data + vector->cantElem * vector->tamElem;
 
     for(; i < ult; i += vector->tamElem){
         if(Filtrar(i, contexto)){
@@ -163,3 +169,5 @@ Vector_t* unirVectores(Vector_t* lhs, Vector_t* rhs, void* (*Unir)(void* lhs, vo
 
     return tmp;
 }
+
+/** }@ */

@@ -1,24 +1,25 @@
+/** @defgroup vector */
+/** @ingroup ModuloVector */
+/** @{  */
+
 #ifndef VECTOR_INCLUDED
 #define VECTOR_INCLUDED
 
-/// @file vector.h
-/// @brief Header con las principales funcionalidades del TDA Vector
+/** @file vector.h */
+/** @brief Header con las principales funcionalidades del TDA Vector */
 
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <memory.h>
 #include <stddef.h>
-#include "comunes.h"
+#include "errores.h"
 
-#define FACTOR_INCR 2
+#define FACTOR_INCR 2  /** @brief Factor de incremento de la capacidad del vector */
+#define DEFAULT_CAP 10 /** @brief Capacidad por default del vector */
+#define MAX_CAPACIDAD 100000000 /** @brief 100MB */
 
-#define DEFAULT_CAP 10
-
-/**
- *  @struct Vector_t
- *  @brief Struct del TDA Vector
- */
+/** @brief Struct con los elementos del TDA vector */
 typedef struct
 {
     void* data;
@@ -27,17 +28,11 @@ typedef struct
     size_t capacidad;
 }Vector_t;
 
-// Estos tienen que volar de aca
-int transform(Vector_t* vector, int (*Mapear)(void*));
-Vector_t* map(Vector_t* vector, void* (*Mapear)(void*), size_t n);
-Vector_t* filter(Vector_t* vector, int (*Predicado)(void*, void*), void* contexto);
-void* reduce(Vector_t* vector, void* (*Reductor)(void*, void*));
-
 int vectorCrear(Vector_t* vector, size_t tamElem);
+int vectorCrearConCapacidad(Vector_t* vector, size_t tamElem, size_t capacidad);
 int vectorDestruir(Vector_t* vector);
 
 int vectorRedimensionar(Vector_t* vector, size_t nuevaCap);
-int vectorReservar(Vector_t* vector, size_t nElem);
 
 int vectorLeerDeTexto(Vector_t* vector, const char* nomArch, int (*ParsearTxt)(FILE*, void*));
 int vectorEscribirATexto(Vector_t* vector, const char* nomArch, int (*ParsearTxt)(FILE*, void*));
@@ -65,4 +60,6 @@ bool vectorVacio(Vector_t* vector);
 
 void mostrarVector(Vector_t* vector, void (*Mostrar)(void*));
 
-#endif
+#endif /* VECTOR_H_INCLUDED */
+
+/** }@ */

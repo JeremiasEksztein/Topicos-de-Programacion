@@ -1,3 +1,9 @@
+/** @ingroup iterador 
+ * @{ */
+
+/** @file iterador.c 
+ * @brief Implementacion del iterador sobre Vector_t */
+
 #include "iterador.h"
 
 void iteradorCrear(Iterador_t* iterador, Vector_t* vector)
@@ -6,7 +12,7 @@ void iteradorCrear(Iterador_t* iterador, Vector_t* vector)
 
     iterador->ini = vector->data;
     iterador->cursor = iterador->ini;
-    iterador->fin = vector->data + (vector->cantElem - 1) * vector->tamElem;
+    iterador->fin = (char*)vector->data + (vector->cantElem - 1) * vector->tamElem;
 }
 
 void iteradorDestruir(Iterador_t* iterador)
@@ -19,21 +25,9 @@ void iteradorDestruir(Iterador_t* iterador)
 
 void iteradorActualizar(Iterador_t* iterador)
 {
-    Vector_t* v = iterador->vec;
-
-    int ce;
-
-    if(v->data != iterador->ini){
-        iterador->ini = v->data;
-        iterador->cursor = iterador->ini;
-        iterador->fin = v->data + (v->cantElem - 1) * v->tamElem;
-    }else if((v->cantElem != (ce= ((iterador->fin - iterador->ini)) / v->tamElem)) && v->cantElem){
-        iterador->fin = v->data + (v->cantElem - 1) * v->tamElem;
-        iterador->cursor = (ce < v->cantElem) ? iterador->fin : iterador->cursor;
-    }else if(v->cantElem == 0){
-        iterador->cursor = iterador->ini;
-        iterador->fin = iterador->ini;
-    }
+    iterador->ini = iterador->vec->data;
+    iterador->cursor = iterador->ini;
+    iterador->fin = (char*)iterador->vec->data + (iterador->vec->cantElem - 1) * iterador->vec->tamElem;
 }
 
 void* iteradorSiguiente(Iterador_t* iterador)
@@ -43,7 +37,7 @@ void* iteradorSiguiente(Iterador_t* iterador)
     }
 
     void* tmp = iterador->cursor;
-    iterador->cursor += iterador->vec->tamElem;
+    iterador->cursor = (char*)iterador->cursor + iterador->vec->tamElem;
 
     return tmp;
 }
@@ -78,17 +72,19 @@ int iteradorMoverCursor(Iterador_t* iterador, size_t cant, int offset)
             return -1;
     }
 
-    iterador->cursor = origen + cant * iterador->vec->tamElem;
+    iterador->cursor = (char*)origen + cant * iterador->vec->tamElem;
 
     return EXITO;
 }
 
 size_t iteradorPosCursor(Iterador_t* iterador)
 {
-    return ((iterador->cursor - iterador->ini) / iterador->vec->tamElem);
+    return (((char*)iterador->cursor - (char*)iterador->ini) / iterador->vec->tamElem);
 }
 
 bool iteradorEsFin(Iterador_t* iterador)
 {
     return (iterador->cursor == iterador->fin) ? true : false;
 }
+
+/** }@ */

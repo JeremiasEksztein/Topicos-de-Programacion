@@ -1,3 +1,9 @@
+/** @ingroup ModuloSecuenciaPalabras 
+ * @{ */
+
+/** @file secuenciaPalabras.c 
+ * @brief Implementacion de secuenciaPalabras.h */
+
 #include "secuenciaPalabras.h"
 
 int secuenciaPalabrasCrear(SecuenciaPalabras_t* sec, char* cadena)
@@ -84,3 +90,29 @@ void palabraMostrar(Palabra_t* pal)
 {
     puts(pal->cadena);
 }
+
+void palabraATitulo(char* pal)
+{
+    char* i = pal;
+
+    *i = toupper(*i);
+    i++;
+
+    while(*i){
+        *i = tolower(*i);
+        i++;
+    }
+
+}
+
+void palabraAMinuscula(char* pal)
+{
+    char* i = pal;
+
+    while(*i){
+        *i = tolower(*i);
+        i++;
+    }
+}
+
+/** }@ */

@@ -1,38 +1,104 @@
+/** @ingroup ModuloComunes
+ * @{ */
+
 #ifndef COMUNES_H_INCLUDED
 #define COMUNES_H_INCLUDED
 
-/// @file comunes.h
-/// @brief Header con definiciones de codigos de error y macros para su manejo
+/** @file comunes.h
+ * @brief Header con definiciones usadas en el proceso del programa */
 
-#include <stddef.h>
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include "cadenas.h"
+#include "errores.h"
+#include "vector.h"
+#include "iterador.h"
 
-#define LOG_FILE_NOM "errorlog.txt"
+/** @brief Funcion del tipo Corrector */
+typedef int (*Corrector)(void*);
 
-#define EXITO 0
-#define ERR_PUNTERO_NULO 1
-#define ERR_SIN_MEM 2
-#define ERR_ARCH 3
-#define ERR_BUFFER_CORTO 4
-#define ERR_REGISTRO 5
-#define ERR_USUARIO 6
-#define ERR_ARGS 7
+/** @brief Funcion generica para corregir los campos de ambos vectores */
+int corregirCampos(Vector_t* vec, int (*Corrector)(void*));
 
-#define LOG(stmt) do{   \
-    int err = (stmt);   \
-    if(err != EXITO){   \
-        logError(err, __FILE__, __LINE__,(char*)__func__); \
-    }   \
-}while(0)
+#define ARCH_DIVISIONES "./archivos/pruebaDivisiones.csv"
+#define ARCH_BIENES "./archivos/pruebaBienes.csv"
+#define ARCH_SERVICIOS "./archivos/pruebaServicios.csv"
+#define ARCH_NACIONAL "./archivos/pruebaNacional.csv"
 
-int logError(int cod, char* file, int line, char* func);
+#define DIVISIONES_COD_LEN 15
+#define DIVISIONES_DESC_LEN 61
+#define DIVISIONES_CLASIF_LEN 40
+#define DIVISIONES_INDICES_LEN 18
+#define DIVISIONES_REGION_LEN 15
+#define DIVISIONES_PERIODO_LEN 30
 
-void* malloc_s(size_t n);
-void* calloc_s(size_t n, size_t tam);
-void* realloc_s(void* ptr, size_t n);
-int free_s(void* ptr);
+typedef struct{
+    char cod[DIVISIONES_COD_LEN];
+    char desc[DIVISIONES_DESC_LEN];
+    char clasif[DIVISIONES_CLASIF_LEN];
+    char indiceIPC[DIVISIONES_INDICES_LEN];
+    char varMensIPC[DIVISIONES_INDICES_LEN];
+    char varAnualIPC[DIVISIONES_INDICES_LEN];
+    char region[DIVISIONES_REGION_LEN];
+    char periodo[DIVISIONES_PERIODO_LEN];
+}IPCDivisiones;
 
-#endif // COMUNES_H_INCLUDED
+typedef struct{
+    double monto;
+    char region[DIVISIONES_REGION_LEN];
+    char periodoIni[DIVISIONES_PERIODO_LEN];
+    char periodoFin[DIVISIONES_PERIODO_LEN];
+}RespuestaMontos;
+
+typedef struct{
+    char fecha[DIVISIONES_PERIODO_LEN];
+    char region[DIVISIONES_REGION_LEN];
+    char indiceBienes[DIVISIONES_INDICES_LEN];
+    char indiceServicios[DIVISIONES_INDICES_LEN];
+}IPCPromedio;
+
+int parsearEscrDivisiones(FILE* arch, void* reg);
+
+int parsearEscrPromedio(FILE* arch, void* reg);
+
+#define ARCH_APERTURAS "./archivos/pruebaAperturas.csv"
+#define ARCH_ALQUILERES_CSV "./archivos/pruebaAlquileres.csv"
+#define ARCH_ALQUILERES_DAT "./archivos/pruebaAlquileres.dat"
+
+#define APERTURAS_COD_LEN 15
+#define APERTURAS_DESC_LEN 61
+#define APERTURAS_CLASIF_LEN 40
+#define APERTURAS_INDICES_LEN 18
+#define APERTURAS_PERIODO_LEN 30
+#define APERTURAS_REGION_LEN 15
+
+
+typedef struct{
+    char cod[APERTURAS_COD_LEN];
+    char desc[APERTURAS_DESC_LEN];
+    char clasif[APERTURAS_CLASIF_LEN];
+    char periodo[APERTURAS_PERIODO_LEN];
+    char indiceIPC[APERTURAS_INDICES_LEN];
+    char varMensIPC[APERTURAS_INDICES_LEN];
+    char varAnualIPC[APERTURAS_INDICES_LEN];
+    char region[APERTURAS_REGION_LEN];
+}IPCAperturas;
+
+typedef struct{
+    char periodo[APERTURAS_PERIODO_LEN];
+    char monto[APERTURAS_INDICES_LEN];
+    char region[APERTURAS_REGION_LEN];
+    char acumulado[APERTURAS_INDICES_LEN];
+}RespuestaAlquileres;
+
+typedef struct{
+    char periodo[APERTURAS_PERIODO_LEN];
+    char indiceIPC[APERTURAS_INDICES_LEN];
+    char acumuladoIPC[APERTURAS_INDICES_LEN];
+    char montoAjustado[APERTURAS_INDICES_LEN];
+}IPCAlquileres;
+
+int parsearEscrAperturas(FILE* arch, void* reg);
+
+int parsearEscrAlquileres(FILE* arch, void* reg);
+
+#endif /* COMUNES_H_INCLUDED */
+
+/** }@ */

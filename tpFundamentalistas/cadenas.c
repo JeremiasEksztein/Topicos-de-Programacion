@@ -1,3 +1,8 @@
+/**
+ *  @ingroup ModuloCadenas
+ *  @{
+ */
+
 #include "cadenas.h"
 
 int stringCmp(char*  dest, char*  src)
@@ -181,7 +186,7 @@ char* stringToLower(char* str)
 char* stringReverse(char* str)
 {
     char* i = str;
-    char* j = str + stringLenght(str) - 2; // -1 es '\0'
+    char* j = str + stringLenght(str) - 2; /* -1 es '\0' */
     char tmp;
 
     while(i <= j){
@@ -225,24 +230,6 @@ char* stringReplace(char*  str, int ori, int new)
     return str;
 }
 
-char* stringTrim(char* dest, char* src, int i, int j)
-{
-    char* d = dest;
-    char* s = src + i;
-
-    while(i < j && *s){
-        *d = *s;
-        d++;
-        s++;
-        i++;
-    }
-
-    *d = '\0';
-
-    return dest;
-}
-
-
 char* stringChar(char* dest, int ch)
 {
     char* tmpD = dest;
@@ -273,8 +260,8 @@ char* stringRChar(char*  dest, int ch)
     return NULL;
 }
 
-// dest = "1234ABCD" src = "ABCDEFGH"
-// stringCSpan(dest, src) = 4
+/* dest = "1234ABCD" src = "ABCDEFGH" */
+/* stringCSpan(dest, src) = 4 */
 int stringCSpan(char*  dest, char*  src)
 {
     char* tmpD = dest;
@@ -299,8 +286,8 @@ int stringCSpan(char*  dest, char*  src)
 }
 
 
-// dest = "1234ABCD" src = "123456789"
-// stringSpan(dest, src) = 4
+/* dest = "1234ABCD" src = "123456789" */
+/* stringSpan(dest, src) = 4 */
 int stringSpan(char* dest, char* src)
 {
     char* tmpD = dest;
@@ -364,7 +351,7 @@ char* stringSubstring(char* dest, char* src)
     return NULL;
 }
 
-inline int stringLenght(const char* str)
+int stringLenght(const char* str)
 {
     const char* tmp = str;
     register int sum = 0;
@@ -419,3 +406,5 @@ void flushStdin(void)
 
     while((c = getchar()) != '\n' && c != EOF);
 }
+
+/**  }@ */

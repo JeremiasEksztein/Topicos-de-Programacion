@@ -1,3 +1,10 @@
+/** @ingroup vector
+ *  @{ 
+ */
+
+/** @file vector.c 
+ * @brief Implementacion de vector.h */
+
 #include "vector.h"
 
 int vectorCrear(Vector_t* vector, size_t tamElem)
@@ -15,6 +22,29 @@ int vectorCrear(Vector_t* vector, size_t tamElem)
     vector->cantElem = 0;
     vector->tamElem = tamElem;
     vector->capacidad = DEFAULT_CAP;
+
+    return EXITO;
+}
+
+int vectorCrearConCapacidad(Vector_t* vector, size_t tamElem, size_t capacidad)
+{
+    if(!vector){
+        return ERR_PUNTERO_NULO;
+    }
+
+    if(capacidad < 0 || capacidad > MAX_CAPACIDAD){
+        return ERR_USUARIO;
+    }
+
+    vector->data = malloc(tamElem * capacidad);
+
+    if(!(vector->data)){
+        return ERR_SIN_MEM;
+    }
+
+    vector->cantElem = 0;
+    vector->capacidad = capacidad;
+    vector->tamElem = tamElem;
 
     return EXITO;
 }
@@ -42,24 +72,13 @@ int vectorRedimensionar(Vector_t* vector, size_t nuevaCap)
         return ERR_SIN_MEM;
     }
 
-    //printf("Realocacion exitosa de %zu a %zu bytes\n", vector->capacidad * vector->tamElem, nuevaCap * vector->tamElem);
+    /*printf("Realocacion exitosa de %zu a %zu bytes\n", vector->capacidad * vector->tamElem, nuevaCap * vector->tamElem); */
 
     vector->data = nuevaData;
     vector->capacidad = nuevaCap;
 
     return EXITO;
 }
-
-int vectorReservar(Vector_t* vector, size_t nElem)
-{
-    if(nElem > vector->capacidad){
-        return vectorRedimensionar(vector, nElem);
-    }
-
-    return EXITO;
-}
-
-//static int indiceDebug2 = 0;
 
 int vectorLeerDeTexto(Vector_t* vector, const char* nomArch, int (ParsearTexto)(FILE*, void*))
 {
@@ -103,8 +122,8 @@ int vectorEscribirATexto(Vector_t* vector, const char* nomArch, int (ParsearText
         return ERR_ARCH;
     }
 
-    void* i = vector->data;
-    void* ult = vector->data + vector->cantElem * vector->tamElem;
+    char* i = (char*)vector->data;
+    char* ult = (char*)vector->data + vector->cantElem * vector->tamElem;
 
     for(; i < ult; i += vector->tamElem){
         ParsearTexto(arch, i);
@@ -166,7 +185,7 @@ void* vectorObtener(Vector_t* vector, size_t pos)
         return NULL;
     }
 
-    return (vector->data + vector->tamElem * pos);
+    return ((char*)vector->data + vector->tamElem * pos);
 }
 
 int vectorInsertar(Vector_t* vector, size_t pos, void* elem)
@@ -181,7 +200,7 @@ int vectorInsertar(Vector_t* vector, size_t pos, void* elem)
         }
     }
 
-    void* i = vector->data + pos * vector->tamElem;
+    char* i = (char*)vector->data + pos * vector->tamElem;
 
     memcpy(i + vector->tamElem, i, (vector->cantElem - pos) * vector->tamElem);
     memcpy(i, elem, vector->tamElem);
@@ -199,7 +218,7 @@ int vectorEmpujar(Vector_t* vector, void* elem)
         }
     }
 
-    void* i = vector->data + (vector->cantElem) * vector->tamElem;
+    char* i = (char*)vector->data + (vector->cantElem) * vector->tamElem;
 
     memcpy(i, elem, vector->tamElem);
 
@@ -216,8 +235,8 @@ int vectorInsertarOrd(Vector_t* vector, void* elem, int (*Cmp)(void*, void*))
         }
     }
 
-    void* i = vector->data;
-    void* j = vector->data + (vector->cantElem - 1) * vector->tamElem;
+    char* i = vector->data;
+    char* j = (char*)vector->data + (vector->cantElem - 1) * vector->tamElem;
 
     while(Cmp(elem, i) > 0 && i <= j){
         i +=  vector->tamElem;
@@ -275,7 +294,7 @@ int vectorEliminarPos(Vector_t* vector, size_t pos)
         return ERR_USUARIO;
     }
 
-    void* i = vector->data + pos * vector->tamElem;
+    char* i = (char*)vector->data + pos * vector->tamElem;
 
     memcpy(i, i + vector->tamElem, (vector->cantElem - pos) * vector->tamElem);
 
@@ -286,10 +305,10 @@ int vectorEliminarPos(Vector_t* vector, size_t pos)
 
 int vectorOrdenar(Vector_t* vector, int (*Cmp)(void*, void*))
 {
-    void* i = vector->data + vector->tamElem;
-    void* j = vector->data;
-    void* ult = vector->data + (vector->cantElem - 1) * vector->tamElem;
-    void* tmp = malloc(vector->tamElem);
+    char* i = (char*)vector->data + vector->tamElem;
+    char* j = vector->data;
+    char* ult = (char*)vector->data + (vector->cantElem - 1) * vector->tamElem;
+    char* tmp = malloc(vector->tamElem);
 
     if(!tmp){
         return ERR_SIN_MEM;
@@ -299,7 +318,7 @@ int vectorOrdenar(Vector_t* vector, int (*Cmp)(void*, void*))
         j = i - vector->tamElem;
         memcpy(tmp, i, vector->tamElem);
 
-        while(Cmp(j, tmp) > 0 && j >= vector->data){
+        while(Cmp(j, tmp) > 0 && j >= (char*)vector->data){
             memmove(j + vector->tamElem, j, vector->tamElem);
             j -= vector->tamElem;
         }
@@ -312,10 +331,10 @@ int vectorOrdenar(Vector_t* vector, int (*Cmp)(void*, void*))
 
 size_t vectorBuscar(Vector_t* vector, void* elem, int (*Cmp)(void*, void*))
 {
-    void* ori = vector->data;
-    void* li = vector->data;
-    void* ls = vector->data + (vector->cantElem - 1) * vector->tamElem;
-    void* med = li + ((ls - li) / (2 * vector->tamElem)) * vector->tamElem;
+    char* ori = vector->data;
+    char* li = vector->data;
+    char* ls = (char*)vector->data + (vector->cantElem - 1) * vector->tamElem;
+    char* med = li + ((ls - li) / (2 * vector->tamElem)) * vector->tamElem;
 
     int cmp = 0;
 
@@ -333,7 +352,7 @@ size_t vectorBuscar(Vector_t* vector, void* elem, int (*Cmp)(void*, void*))
         return -1;
     }
 
-    //printf("%zu\n", ((med - ori) / vector->tamElem));
+    /*printf("%zu\n", ((med - ori) / vector->tamElem)); */
 
     return ((med - ori) / vector->tamElem);
 }
@@ -360,10 +379,12 @@ bool vectorVacio(Vector_t* vector)
 
 void mostrarVector(Vector_t* vector, void (*Mostrar)(void*))
 {
-    void* i = vector->data;
-    void* ult = vector->data + vector->cantElem * vector->tamElem;
+    char* i = vector->data;
+    char* ult = (char*)vector->data + vector->cantElem * vector->tamElem;
 
     for(; i < ult; i += vector->tamElem){
         Mostrar(i);
     }
 }
+
+/** }@ */

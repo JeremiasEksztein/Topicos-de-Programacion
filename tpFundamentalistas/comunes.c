@@ -1,97 +1,60 @@
+/** @ingroup ModuloComunes 
+ * @{ */
+
+/** @file comunes.c
+ * @brief Implementacion de comunes.h */
+
 #include "comunes.h"
 
-int logError(int cod, char* file, int line, char* func)
+int corregirCampos(Vector_t* vec, int (*Corrector)(void*))
 {
-    char mensaje[50];
-    switch(cod){
-        case EXITO:
-            return EXITO;
-        case ERR_PUNTERO_NULO:
-            stringCopy(mensaje, "Error con operacion con punteros dinamicos.");
-            break;
-        case ERR_SIN_MEM:
-            stringCopy(mensaje, "Error al alocar memoria dinamica.");
-            break;
-        case ERR_ARCH:
-            stringCopy(mensaje, "Error al abrir archivo.");
-            break;
-        case ERR_BUFFER_CORTO:
-            stringCopy(mensaje, "Error en la lectura de archivo. Buffer de lectura demasiado corto.");
-            break;
-        case ERR_REGISTRO:
-            stringCopy(mensaje, "Error en la lectura de archivo. Registro corrompido.");
-            break;
-        case ERR_USUARIO:
-            stringCopy(mensaje, "Error en el ingreso de informacion.");
-            break;
-        case ERR_ARGS:
-            stringCopy(mensaje, "Error el pasaje de argumentos a main");
-            break;
-        default:
-            stringCopy(mensaje, "Error en la funcion de error. Muy mal.");
-            cod = 90;
+    Iterador_t iter;
+
+    iteradorCrear(&iter, vec);
+
+    void* tmp = NULL;
+
+    while((tmp = iteradorSiguiente(&iter))){
+        LOG(Corrector(tmp));
     }
 
-    FILE* fp = fopen("errorlog.txt", "at+");
-
-    fprintf(fp, "%d | %s:%d | %s | %s | %s | %s\n", cod, file, line, __DATE__, __TIME__, func, mensaje);
-
-    //fprintf(fp, "Error codigo: %d; En archivo: %s:%d; Compilado en la fecha %s a la hora %s; en funcion: %s()\n%s\n",cod, file, line,__DATE__, __TIME__ , func, mensaje);
-
-    fclose(fp);
-
-    if(cod == 90){
-        abort();
-    }
+    iteradorDestruir(&iter);
 
     return EXITO;
 }
 
-void* malloc_s(size_t n)
+int parsearEscrDivisiones(FILE* arch, void* reg)
 {
-    void* tmp = malloc(n);
+    IPCDivisiones* tmp = reg;
 
-    if(!tmp){
-        return NULL;
-    }
-
-    return tmp;
+    fprintf(arch, "%s|%s|%s|%s|%s|%s|%s|%s\n", tmp->cod, tmp->desc, tmp->clasif, tmp->indiceIPC, tmp->varMensIPC, tmp->varAnualIPC, tmp->region, tmp->periodo);
+    return EXITO;
 }
 
-void* calloc_s(size_t n, size_t tam)
+int parsearEscrPromedio(FILE* arch, void* reg)
 {
-    void* tmp = calloc(n, tam);
+    IPCPromedio* i = reg;
 
-    if(!tmp){
-        return NULL;
-    }
-
-    return tmp;
-}
-
-void* realloc_s(void* ptr, size_t n)
-{
-    if(!ptr){
-        return NULL;
-    }
-
-    void* tmp = realloc(ptr, n);
-
-    if(!tmp){
-        return NULL;
-    }
-
-    return tmp;
-}
-
-int free_s(void* ptr)
-{
-    if(!ptr){
-        return ERR_PUNTERO_NULO;
-    }
-
-    free(ptr);
-    ptr = NULL;
+    fprintf(arch, "%s | %s | %s | %s\n", i->fecha, i->region, i->indiceBienes, i->indiceServicios);
 
     return EXITO;
 }
+
+int parsearEscrAperturas(FILE* arch, void* reg)
+{
+    IPCAperturas* tmp = reg;
+
+    fprintf(arch, "%s|%s|%s|%s|%s|%s|%s|%s\n", tmp->cod, tmp->desc, tmp->clasif, tmp->periodo, tmp->indiceIPC, tmp->varMensIPC, tmp->varAnualIPC, tmp->region);
+    return EXITO;
+}
+
+int parsearEscrAlquileres(FILE* arch, void* reg)
+{
+    IPCAlquileres* tmp = reg;
+
+    fprintf(arch, "%s | %s | %s | %s\n", tmp->periodo, tmp->indiceIPC, tmp->acumuladoIPC, tmp->montoAjustado);
+
+    return 0;
+}
+
+/** }@ */
