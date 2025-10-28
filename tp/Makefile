@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Werror -g -o3 -std=c99
+CFLAGS = -Wall -Werror -g -o3 -std=c89
 
 SRC_DIRS = master vector secuenciaPalabras proceso cadenas comunes
 SRC = $(foreach dir,$(SRC_DIRS),$(filter-out %/prueba.c %/pruebaVector.c,$(wildcard $(dir)/*.c)))

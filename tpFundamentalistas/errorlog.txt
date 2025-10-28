@@ -21,3 +21,7 @@
 4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\parseo.c:100 | Oct 22 2025 | 17:58:57 | parsearIPCAperturas | Error en la lectura de archivo. Buffer de lectura demasiÀÚ`Qþ
 4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\parseo.c:99 | Oct 22 2025 | 17:58:57 | parsearIPCAperturas | Error en la lectura de archivo. Buffer de lectura demasiÀÚ`Qþ
 6 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:47 | Oct 22 2025 | 17:58:57 | main | Error en el ingreso de informacion.
+7 | main.c:21 | Oct 26 2025 | 19:58:59 | main | Error el pasaje de argumentos a main
+3 | main.c:30 | Oct 26 2025 | 19:58:59 | main | Error al abrir archivo.
+6 | main.c:33 | Oct 26 2025 | 19:58:59 | main | Error en el ingreso de informacion.
+3 | main.c:39 | Oct 26 2025 | 19:58:59 | main | Error al abrir archivo.

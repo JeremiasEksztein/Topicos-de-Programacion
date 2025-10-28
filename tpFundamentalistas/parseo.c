@@ -1,7 +1,5 @@
 #include "parseo.h"
 
-//static int indiceDebug = 0;
-
 int parsearIPCDivisiones(FILE* arch, void* reg)
 {
     IPCDivisiones* tmp = reg;

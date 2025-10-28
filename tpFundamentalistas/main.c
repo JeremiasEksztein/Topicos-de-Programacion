@@ -21,6 +21,30 @@ int main(int argc, char* argv[])
         LOG(ERR_ARGS);
     }
 
+    setlocale(LC_ALL, ""); // Fijamos el locale del programa al locale argentino
+
+    Vector_t vecDivisiones, vecAperturas;
+
+    LOG(vectorCrear(&vecDivisiones, sizeof(IPCDivisiones)));
+    LOG(vectorReservar(&vecDivisiones, ESTIMACION_TAM_DIVISIONES));
+    LOG(vectorLeerDeTexto(&vecDivisiones, argv[ARG_DIVISIONES_NOM], parsearIPCDivisiones));
+    LOG(vectorEliminarPos(&vecDivisiones, 0));
+    LOG(corregirCampos(&vecDivisiones, corregirIPCDivisiones));
+    LOG(herramientaAjustarMontosIPCDivisiones(&vecDivisiones));
+    LOG(clasificarBySIPCDivisiones(&vecDivisiones));
+    vectorDestruir(&vecDivisiones);
+
+    LOG(vectorCrear(&vecAperturas, sizeof(IPCAperturas)));
+    LOG(vectorReservar(&vecAperturas, ESTIMACION_TAM_APERTURAS));
+    LOG(vectorLeerDeTexto(&vecAperturas, argv[ARG_APERTURAS_NOM], parsearIPCAperturas));
+    LOG(vectorEliminarPos(&vecAperturas, 0));
+    LOG(corregirCampos(&vecAperturas, corregirIPCAperturas));
+    LOG(herramientaCalcularAlquilerIPCAperturas(&vecAperturas));
+    vectorDestruir(&vecAperturas);
+
+
+    /*
+
     //setlocale(LC_ALL, ""); // Fijamos el locale del programa al locale argentino
 
     Vector_t vecDivisiones, vecAperturas;
@@ -52,6 +76,8 @@ int main(int argc, char* argv[])
 
     vectorDestruir(&vecDivisiones); // Liberamos la memoria alocada para los vectores
     vectorDestruir(&vecAperturas);
+
+    */
 
     return EXITO; // Salimos gente.
 }
