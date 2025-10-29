@@ -1,16 +1,18 @@
-/** @ingroup ModuloDivisiones 
+/** @ingroup ModuloDivisiones
  * @{ */
 
-/** @file parseoDivisiones.c 
+/** @file parseoDivisiones.c
  * @brief Implementacion de parseoDivisiones.h */
 
 #include "parseoDivisiones.h"
 
-int parsearIPCDivisiones(FILE* arch, void* reg)
+int parsearYCorregirIPCDivisiones(FILE* arch, void* reg)
 {
     IPCDivisiones* tmp = reg;
     char buffer[500] = "";
     char* i = NULL;
+    int decodificador[10] = {'4', '6', '8', '7', '1', '9', '5', '0', '3', '2'}; /* tal vez para el digito 5 le corresponde un 9 */
+
 
     if(!fgets(buffer, 500, arch)){
         return EXITO;
@@ -20,14 +22,14 @@ int parsearIPCDivisiones(FILE* arch, void* reg)
 
     if(!(i = stringRChar(buffer, '\n'))){
         if(!(i = stringRChar(buffer, EOF))){
-            LOG(ERR_BUFFER_CORTO);
+            return ERR_BUFFER_CORTO;
         }
     }
 
     *i = '\0';
 
     if(!(i = stringRChar(buffer, ';'))){
-        LOG(ERR_REGISTRO);
+        return ERR_REGISTRO;
     }
 
     ++i;
@@ -35,7 +37,7 @@ int parsearIPCDivisiones(FILE* arch, void* reg)
     *(--i) = '\0';
 
     if(!(i = stringRChar(buffer, ';'))){
-        LOG(ERR_REGISTRO);
+        return ERR_REGISTRO;
     }
 
     ++i;
@@ -43,7 +45,7 @@ int parsearIPCDivisiones(FILE* arch, void* reg)
     *(--i) = '\0';
 
     if(!(i = stringRChar(buffer, ';'))){
-        LOG(ERR_REGISTRO);
+        return ERR_REGISTRO;
     }
 
     ++i;
@@ -51,7 +53,7 @@ int parsearIPCDivisiones(FILE* arch, void* reg)
     *(--i) = '\0';
 
     if(!(i = stringRChar(buffer, ';'))){
-        LOG(ERR_REGISTRO);
+        return ERR_REGISTRO;
     }
 
     ++i;
@@ -59,7 +61,7 @@ int parsearIPCDivisiones(FILE* arch, void* reg)
     *(--i) = '\0';
 
     if(!(i = stringRChar(buffer, ';'))){
-        LOG(ERR_REGISTRO);
+        return ERR_REGISTRO;
     }
 
     ++i;
@@ -83,15 +85,6 @@ int parsearIPCDivisiones(FILE* arch, void* reg)
     *(--i) = '\0';
 
     stringNCopy(tmp->cod, buffer, DIVISIONES_COD_LEN);
-
-    return EXITO;
-}
-
-int corregirIPCDivisiones(void* reg)
-{
-    IPCDivisiones* tmp = reg;
-
-    int decodificador[10] = {'4', '6', '8', '7', '1', '9', '5', '0', '3', '2'}; /* tal vez para el digito 5 le corresponde un 9 */
 
     decodificarFechaDivisiones(tmp, decodificador);
     convertirFechaDivisiones(tmp);
@@ -123,7 +116,7 @@ int convertirFechaDivisiones(IPCDivisiones* reg)
 {
     char* i = reg->periodo;
 
-    static const char* meses[12] = {"Enero", "Febrero", "Marzo",
+    const char* meses[12] = {"Enero", "Febrero", "Marzo",
                           "Abril", "Mayo", "Junio",
                           "Julio", "Agosto", "Septiembre",
                           "Octubre", "Noviembre", "Diciembre"
@@ -150,6 +143,7 @@ int convertirFechaDivisiones(IPCDivisiones* reg)
 int normalizarDescripcionDivisiones(IPCDivisiones* reg)
 {
     char* i = reg->desc;
+
 	*i = toupper(*i);
 
 	i++;

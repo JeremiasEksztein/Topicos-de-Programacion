@@ -1,7 +1,7 @@
 /** @ingroup ModuloFormulario
  * @{ */
 
-/** @file formulario.c 
+/** @file formulario.c
  * @brief Implementacion del TDA formulario */
 
 #include "formulario.h"
@@ -12,7 +12,7 @@
         puts("");\
         int i__;\
         for(i__ = 0; i__ < atr__->cantOpciones; i__++){\
-            printf("%d - [%s]\n", i__ + 1, atr__->opciones[i__]);\
+            printf(COLOR_DIM COLOR_GRAY "%d - [%s]" COLOR_RESET "\n", i__ + 1, atr__->opciones[i__]);\
         }\
     }while(0)
 
@@ -29,6 +29,8 @@ typedef struct{
 
 typedef struct{
     int len;
+    int (*Validar)(char* ans); /* Las expresiones regulares del hombre pobre. Si tenia mas tiempo y animos las programaba*/
+    char* (*Parsear)(char* ans);
 }AtribTxt;
 
 typedef struct{
@@ -36,17 +38,18 @@ typedef struct{
     int cantOpciones;
 }AtribOpciones;
 
-int formularioValidar(Campo* c);
+int campoValidar(Campo* c);
+int formularioValidar(Formulario_t* f);
 
-int formularioValidar(Campo* c)
+int campoValidar(Campo* c)
 {
     switch(c->tipo){
-        case CAMPO_TIPO_NUMERICO: ; /* C considera un error declarar una variable debajo de un label */
+        case CAMPO_TIPO_NUMERICO: ; /* C considera un error declarar una variable debajo de un label, ; es un statement vacio*/
             AtribNum* atn = c->info;
             double tmpF;
 
             if((tmpF = atof(c->respuesta)) < atn->min || tmpF > atn->max){
-                printf("Respuesta fuera del rango valido [%lf : %lf]\n", atn->min, atn->max);
+                printf(COLOR_BOLD COLOR_RED "Respuesta fuera del rango valido [%lf : %lf]" COLOR_RESET "\n", atn->min, atn->max);
                 return 0;
             }
 
@@ -55,7 +58,11 @@ int formularioValidar(Campo* c)
             AtribTxt* att = c->info;
 
             if(stringLenght(c->respuesta) > att->len){
-                printf("Respuesta demasiado larga, maxlen: %d\n", att->len);
+                printf(COLOR_BOLD COLOR_RED "Respuesta demasiado larga, maxlen: %d" COLOR_RESET "\n", att->len);
+                return 0;
+            }
+
+            if(att->Validar && !att->Validar(c->respuesta)){ /* Si se proveyo de una funcion de validacion y la respuesta no la supera*/
                 return 0;
             }
 
@@ -65,9 +72,22 @@ int formularioValidar(Campo* c)
             int tmpI;
 
             if((tmpI = atoi(c->respuesta)) < 0 || tmpI > ato->cantOpciones){
-                MOSTRAR_OPCIONES(c);
+                puts(COLOR_BOLD COLOR_RED "Opcion incorrecta, elija de nuevo" COLOR_RESET);
                 return 0;
             }
+    }
+
+    return 1;
+}
+
+int formularioValidar(Formulario_t* f)
+{
+    int i;
+
+    for(i = 0; i < f->cv; i++){
+        if(!((f->Validaciones[i])(f))){
+            return 0;
+        }
     }
 
     return 1;
@@ -81,6 +101,7 @@ int formularioInit(Formulario_t* f, char* titulo)
 
     stringNCopy(f->titulo, titulo, FORM_TITULO_LEN);
     f->ce = 0;
+    f->cv = 0;
 
     return EXITO;
 }
@@ -89,6 +110,10 @@ int formularioAgregarCampoVA(Formulario_t* f, char* etiqueta, int validado, int 
 {
     if(!f || !etiqueta || tipo < CAMPO_TIPO_NUMERICO || tipo > CAMPO_TIPO_OPCIONES){
         return ERR_USUARIO;
+    }
+
+    if(f->ce == FORM_CAMPOS_CANT){
+        return ERR_SIN_MEM;
     }
 
     Campo* c = f->campos + f->ce;
@@ -128,6 +153,8 @@ int formularioAgregarCampoVA(Formulario_t* f, char* etiqueta, int validado, int 
             AtribTxt* att = c->info;
 
             att->len = va_arg(ap, int);
+            att->Validar = va_arg(ap, int(*)(char*));
+            att->Parsear = va_arg(ap, char*(*)(char*));
 
             if(att->len < 0){
                 free(c->info);
@@ -150,7 +177,6 @@ int formularioAgregarCampoVA(Formulario_t* f, char* etiqueta, int validado, int 
 
             for(i = 0; i < ato->cantOpciones; i++){
                 stringNCopy(ato->opciones[i], tmp[i], FORM_OPCIONES_LEN);
-                /*memcpy(ato->opciones[i], tmp[i], FORM_OPCIONES_LEN); */
             }
 
             if(ato->cantOpciones < 0){
@@ -169,28 +195,68 @@ int formularioAgregarCampoVA(Formulario_t* f, char* etiqueta, int validado, int 
     return EXITO;
 }
 
+int formularioAgregarValidado(Formulario_t* f, int (*ValidarFormulario)(void* f))
+{
+    if(!f || !ValidarFormulario){
+        return ERR_USUARIO;
+    }
+
+    if(f->cv == FORM_VALIDACIONES_CANT){
+        return ERR_SIN_MEM;
+    }
+
+    (f->Validaciones)[f->cv] = ValidarFormulario;
+    f->cv++;
+
+    return EXITO;
+}
+
 int formularioPublicar(Formulario_t* f)
 {
-    printf("----%s----\n", f->titulo);
     Campo* c;
-    int i;
+    int i, conforme = 0; /* No conforme */
 
-    for(i = 0; i < f->ce; i++){
+    do{
         do{
-            c = (f->campos + i);
-            printf("%s: ", c->etiqueta);
+            esperarInput();
+            flushStdin();
 
-            if(c->tipo == CAMPO_TIPO_OPCIONES){
-                MOSTRAR_OPCIONES(c);
+            for(i = 0; i < f->ce; i++){
+                do{
+                    puts(FLUSH_TERMINAL);
+                    printf(COLOR_BOLD "---------" COLOR_YELLOW "%s" COLOR_RESET COLOR_BOLD "---------\n" COLOR_RESET, f->titulo);
+                    c = (f->campos + i);
+                    printf(COLOR_BOLD COLOR_CYAN "%s: " COLOR_RESET, c->etiqueta);
+
+                    if(c->tipo == CAMPO_TIPO_OPCIONES){
+                        MOSTRAR_OPCIONES(c);
+                    }
+
+                    scanString(c->respuesta, FORM_RESPUESTA_LEN);
+                }while(c->validado && !campoValidar(c));
+
+                if(c->tipo == CAMPO_TIPO_OPCIONES){
+                    GET_OPCION(c, atoi(c->respuesta));
+                }
             }
+        }while(f->cv && !formularioValidar(f));
 
-            scanString(c->respuesta, FORM_RESPUESTA_LEN);
-        }while(c->validado && !formularioValidar(c));
+        puts(FLUSH_TERMINAL);
+        printf(COLOR_BOLD "---------" COLOR_YELLOW "%s" COLOR_RESET COLOR_BOLD "---------\n" COLOR_RESET, f->titulo);
 
-        if(c->tipo == CAMPO_TIPO_OPCIONES){
-            GET_OPCION(c, atoi(c->respuesta));
+        puts("Su seleccion: ");
+        for(i = 0; i < f->ce; i++){
+            c = (f->campos + i);
+            printf("%0d - " COLOR_BOLD COLOR_CYAN "%s" COLOR_RESET "\n", i + 1 , c->respuesta);
         }
-    }
+
+        do{
+            puts(COLOR_BOLD COLOR_GRAY "Esta conforme?\t" COLOR_GREEN "Y" COLOR_RESET "/" COLOR_RED "N" COLOR_RESET "\n" );
+            conforme = toupper(getchar());
+        }while(conforme != 'Y' && conforme != 'N');
+
+        conforme = (conforme == 'Y') ? 1 : 0;
+    }while(!conforme);
 
     return EXITO;
 }
@@ -202,11 +268,27 @@ char* formularioRespuesta(Formulario_t* f, int i)
     }
 
     Campo* c = f->campos + i;
+    AtribTxt* att = (c->tipo == CAMPO_TIPO_TEXTO) ? c->info : NULL;
     char* res;
 
     res = c->respuesta;
 
+    if(att){
+        res = att->Parsear(c->respuesta);
+    }
+
     return res;
+}
+
+char* formularioRawRespuesta(Formulario_t* f, int i)
+{
+    if(!f || i < 0 || i > f->ce){
+        return NULL;
+    }
+
+    Campo* c = f->campos + i;
+
+    return c->respuesta;
 }
 
 int formularioDestruir(Formulario_t* f)

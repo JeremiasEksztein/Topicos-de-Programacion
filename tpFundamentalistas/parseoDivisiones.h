@@ -1,4 +1,4 @@
-/** @ingroup ModuloDivisiones 
+/** @ingroup ModuloDivisiones
  * @{ */
 
 #ifndef PARSEODIVISIONES_H_INCLUDED
@@ -17,7 +17,7 @@
 #include "comunes.h"
 
 /** @brief Funcion para parsear la lectura del archivo serie_ipc_divisiones.csv */
-int parsearIPCDivisiones(FILE* arch, void* reg);
+int parsearYCorregirIPCDivisiones(FILE* arch, void* reg);
 
 /** @brief Funcion del tipo int (*Corrector)(void*), corrige los campos del vector de divisiones */
 int corregirIPCDivisiones(void* reg);

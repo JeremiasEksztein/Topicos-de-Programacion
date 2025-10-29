@@ -1,8 +1,8 @@
 /** @ingroup vector
- *  @{ 
+ *  @{
  */
 
-/** @file vector.c 
+/** @file vector.c
  * @brief Implementacion de vector.h */
 
 #include "vector.h"
@@ -72,7 +72,7 @@ int vectorRedimensionar(Vector_t* vector, size_t nuevaCap)
         return ERR_SIN_MEM;
     }
 
-    /*printf("Realocacion exitosa de %zu a %zu bytes\n", vector->capacidad * vector->tamElem, nuevaCap * vector->tamElem); */
+    /*printf("Realocacion exitosa de %ll a %ll bytes\n", vector->capacidad * vector->tamElem, nuevaCap * vector->tamElem); */
 
     vector->data = nuevaData;
     vector->capacidad = nuevaCap;
@@ -372,9 +372,9 @@ size_t vectorCapacidad(Vector_t* vector)
     return vector->capacidad;
 }
 
-bool vectorVacio(Vector_t* vector)
+int vectorVacio(Vector_t* vector)
 {
-    return vector->cantElem == 0 ? true : false;
+    return vector->cantElem == 0 ? 1 : 0;
 }
 
 void mostrarVector(Vector_t* vector, void (*Mostrar)(void*))

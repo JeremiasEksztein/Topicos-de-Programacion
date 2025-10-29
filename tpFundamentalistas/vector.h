@@ -9,7 +9,6 @@
 /** @brief Header con las principales funcionalidades del TDA Vector */
 
 #include <stdio.h>
-#include <stdbool.h>
 #include <stdlib.h>
 #include <memory.h>
 #include <stddef.h>
@@ -56,7 +55,7 @@ size_t vectorBuscar(Vector_t* vector, void* elem, int (*Cmp)(void*, void*));
 size_t vectorCantElem(Vector_t* vector);
 size_t vectorTamElem(Vector_t* vector);
 size_t vectorCapacidad(Vector_t* vector);
-bool vectorVacio(Vector_t* vector);
+int vectorVacio(Vector_t* vector);
 
 void mostrarVector(Vector_t* vector, void (*Mostrar)(void*));
 

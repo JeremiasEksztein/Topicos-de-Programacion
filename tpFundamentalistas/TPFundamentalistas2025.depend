@@ -5,20 +5,19 @@
 1761606964 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\algoritmos.h
 	"vector.h"
 
-1761604559 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\vector.h
+1761751718 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\vector.h
 	<stdio.h>
-	<stdbool.h>
 	<stdlib.h>
 	<memory.h>
 	<stddef.h>
 	"errores.h"
 
-1761606834 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\comunes.h
+1761747555 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\comunes.h
 	"errores.h"
 	"vector.h"
 	"iterador.h"
 
-1761606264 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\cadenas.h
+1761742522 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\cadenas.h
 	<stdio.h>
 	<stdlib.h>
 	<stddef.h>
@@ -27,7 +26,7 @@
 	<string.h>
 	"errores.h"
 
-1761606845 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\comunes.c
+1761750966 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\comunes.c
 	"comunes.h"
 
 1761536682 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\form.c
@@ -41,27 +40,26 @@
 1761565276 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\herramientas.c
 	"herramientas.h"
 
-1761606674 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\iterador.c
+1761751748 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\iterador.c
 	"iterador.h"
 
-1761606664 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\iterador.h
+1761751724 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\iterador.h
 	"vector.h"
 
 1761530372 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\parseo.c
 	"parseo.h"
 
-1761606569 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\secuenciapalabras.c
+1761751789 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\secuenciapalabras.c
 	"secuenciaPalabras.h"
 
-1761606556 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\secuenciapalabras.h
+1761751663 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\secuenciapalabras.h
 	<stdio.h>
 	<ctype.h>
 	<wchar.h>
 	<wctype.h>
-	<stdbool.h>
 	"errores.h"
 
-1761607026 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\cadenas.c
+1761750966 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\cadenas.c
 	"cadenas.h"
 
 1761530372 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\parseo.h
@@ -76,10 +74,10 @@
 	"secuenciaPalabras.h"
 	"cadenas.h"
 
-1761606529 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\vector.c
+1761751789 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\vector.c
 	"vector.h"
 
-1761665158 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\main.c
+1761751903 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\main.c
 	<stdio.h>
 	<locale.h>
 	"errores.h"
@@ -96,38 +94,39 @@
 	"vector.h"
 	"formulario.h"
 
-1761607107 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\formulario.c
+1761747548 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\formulario.c
 	"formulario.h"
 
-1761606736 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\formulario.h
+1761751423 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\formulario.h
 	<stdarg.h>
 	"errores.h"
+	"comunes.h"
 	"cadenas.h"
 
 1761537617 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\pruebaformulario.c
 	"formulario.h"
 
-1761606757 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\errores.h
+1761751711 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\errores.h
 	<stddef.h>
 	<stdio.h>
-	<stdbool.h>
 	<stdlib.h>
 	"cadenas.h"
 
-1761606765 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\errores.c
+1761708332 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\errores.c
 	"errores.h"
 
-1761665087 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\herramientasdivisiones.c
+1761750966 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\herramientasdivisiones.c
 	"herramientasDivisiones.h"
 
-1761606685 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\herramientasdivisiones.h
+1761753086 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\herramientasdivisiones.h
+	<stdio.h>
 	"comunes.h"
 	"errores.h"
 	"algoritmos.h"
 	"vector.h"
 	"formulario.h"
 
-1761606589 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\parseodivisiones.h
+1761708332 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\parseodivisiones.h
 	<stdlib.h>
 	<stdio.h>
 	"errores.h"
@@ -137,7 +136,7 @@
 	"cadenas.h"
 	"comunes.h"
 
-1761606614 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\parseoaperturas.h
+1761708332 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\parseoaperturas.h
 	<stdlib.h>
 	<stdio.h>
 	"errores.h"
@@ -146,19 +145,19 @@
 	"cadenas.h"
 	"comunes.h"
 
-1761606707 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\herramientasaperturas.h
+1761753122 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\herramientasaperturas.h
 	"comunes.h"
 	"algoritmos.h"
 	"vector.h"
 	"errores.h"
 	"formulario.h"
 
-1761606599 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\parseodivisiones.c
+1761750966 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\parseodivisiones.c
 	"parseoDivisiones.h"
 
-1761606724 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\herramientasaperturas.c
+1761750966 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\herramientasaperturas.c
 	"herramientasAperturas.h"
 
-1761606625 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\parseoaperturas.c
+1761750966 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\parseoaperturas.c
 	"parseoAperturas.h"
 

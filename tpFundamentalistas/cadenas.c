@@ -105,17 +105,20 @@ char* stringDup(char* str)
 
 char* stringNDup(char* str, size_t n)
 {
+    size_t len;
+    char* tmp = NULL;
+
     if(n < 0){
         return NULL;
     }
 
-    size_t len = stringLenght(str);
+    len = stringLenght(str);
 
     if(len < n){
         return NULL;
     }
 
-    char* tmp = malloc((len - n));
+    tmp = malloc((len - n));
 
     if(!tmp){
         return NULL;
@@ -405,6 +408,12 @@ void flushStdin(void)
     int c;
 
     while((c = getchar()) != '\n' && c != EOF);
+}
+
+void esperarInput(void) {
+    printf("\nPresione Enter para continuar...");
+    putc('\n', stdin);
+    getchar();
 }
 
 /**  }@ */

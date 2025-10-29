@@ -11,11 +11,32 @@
 #include "vector.h"
 #include "iterador.h"
 
-/** @brief Funcion del tipo Corrector */
-typedef int (*Corrector)(void*);
+#define SET_TERMINAL_SIZE "\x1b[=14H" /*Seteamos la terminal a 640x200 Colores de 16bits*/
+#define FLUSH_TERMINAL "\x1b[2J\x1b[H" /*Borramos toda la terminal, movemos el cursor a (0;0)*/
 
-/** @brief Funcion generica para corregir los campos de ambos vectores */
-int corregirCampos(Vector_t* vec, int (*Corrector)(void*));
+#define COLOR_RESET "\x1b[0m" /*Reseteamos el color"*/
+#define COLOR_BOLD "\x1b[1m"
+#define COLOR_DIM "\x1b[2m"
+#define COLOR_RED "\x1b[1;31m"
+#define COLOR_GREEN "\x1b[1;32m"
+#define COLOR_YELLOW "\x1b[1;33m"
+#define COLOR_CYAN "\x1b[1;36m"
+#define COLOR_GRAY "\x1b[0;37m"
+
+#define COLOR_BRED "\x1b[1m\x1b[1;31m"
+#define COLOR_BCYAN "\x1b[1m\x1b[1;36m"
+#define COLOR_BYELLOW "\x1b[1m\x1b[1;33m"
+#define COLOR_BGRAY "\x1b[1m\x1b[1;37m"
+
+/*
+typedef short bool;
+
+#define true 1
+#define false 0
+*/
+
+int validarFechaForm(char* str);
+void imprimirHeaderTabla(char* titulo, char** campos, int* paddings, int cc);
 
 #define ARCH_DIVISIONES "./archivos/pruebaDivisiones.csv"
 #define ARCH_BIENES "./archivos/pruebaBienes.csv"

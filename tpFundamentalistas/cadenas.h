@@ -1,4 +1,4 @@
-/** @ingroup ModuloCadenas 
+/** @ingroup ModuloCadenas
  *  @{
  */
 
@@ -161,7 +161,7 @@ int memzero(void* ptr, size_t n);
  * @brief Intercambia el contenido de dos bloques de memoria utilizando un bloque temporal
  * @param dest Puntero al primer bloque de memoria
  * @param src Puntero al segundo bloque de memoria
- * @param tmp Puntero al bloque temporal  
+ * @param tmp Puntero al bloque temporal
  * @param n Tamaño de los bloques de memoria a intercambiar */
 int meminte(void* dest, void* src, void* tmp, size_t n);
 
@@ -174,6 +174,7 @@ char* scanString(char* str, size_t n);
 /** @fn void flushStdin(void)
  * @brief Realiza un flush seguro del stdin, consumiendo todos los caracteres que se encuentren en el stream. */
 void flushStdin(void);
+void esperarInput(void);
 
 #endif /* CADENAS_H_INCLUDED */
 

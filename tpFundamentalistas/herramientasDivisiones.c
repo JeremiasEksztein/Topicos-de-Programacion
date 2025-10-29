@@ -6,10 +6,14 @@
 
 #include "herramientasDivisiones.h"
 
+#define divisionEntreTitulosYDatos "----------------------------------------------------------------------------------------------"
+
 int herramientaAjustarMontosIPCDivisiones(Vector_t* divs)
 {
     Vector_t* tmp;
     RespuestaMontos ans;
+    IPCDivisiones *i = NULL, *f = NULL;
+    double varPor, montoAjus;
 
     ans = preguntarAjustarMonto();
 
@@ -20,13 +24,16 @@ int herramientaAjustarMontosIPCDivisiones(Vector_t* divs)
         return ERR_USUARIO;
     }
 
-    IPCDivisiones* i = vectorObtener(tmp, 0);
-    IPCDivisiones* f = vectorObtener(tmp, 1);
+    i = vectorObtener(tmp, 0);
+    f = vectorObtener(tmp, 1);
 
-    double varPor = ((atof(f->indiceIPC) / atof((i->indiceIPC))) - 1.0f) * 100.0f;
-    double montoAjus = ans.monto + (ans.monto * varPor / 100.0f);
+    varPor = ((atof(f->indiceIPC) / atof((i->indiceIPC))) -1.0f) * 100.0f;
+    montoAjus = ans.monto * ((atof(f->indiceIPC) / atof(i->indiceIPC)));
 
-    printf("El monto $ %0.2lf en la region %s durante %s, ajustado en la misma region al %s vario en un %%%0.1lf a un total de $ %0.1lf\n", ans.monto, ans.region, ans.periodoIni, ans.periodoFin, varPor, montoAjus);
+    puts(FLUSH_TERMINAL);
+    printf("La variacion porcentual del IPC Region " COLOR_BCYAN "%s" COLOR_RESET " entre " COLOR_BCYAN "%s" COLOR_RESET " y " COLOR_BCYAN "%s" COLOR_RESET
+           " fue del " COLOR_YELLOW "%%%0.1lf\n" COLOR_RESET "El monto actualizado para el periodo seleccionado es: " COLOR_CYAN "$ %0.2lf" COLOR_RESET " -> " COLOR_BYELLOW "$ %0.2lf\n" COLOR_RESET, ans.region, ans.periodoIni, ans.periodoFin, varPor, ans.monto, montoAjus);
+    esperarInput();
 
     vectorDestruir(tmp);
 
@@ -36,15 +43,16 @@ int herramientaAjustarMontosIPCDivisiones(Vector_t* divs)
 RespuestaMontos preguntarAjustarMonto(void)
 {
     RespuestaMontos ans;
-
     Formulario_t form;
-    char* regiones[DIVISIONES_REGION_LEN] = {"GBA", "Pampeana", "Patagonia", "Cuyo", "Noroeste", "Noreste"};
+    char* regiones[DIVISIONES_REGION_LEN] = {"Nacional", "GBA", "Pampeana", "Cuyo", "Noroeste", "Noreste", "Patagonia"};
 
     formularioInit(&form, "Ajustar montos por IPC");
-    formularioAgregarCampoVA(&form, "Monto a ajustar", 1, CAMPO_TIPO_NUMERICO, 0.0f, 9999999.9f);
-    formularioAgregarCampoVA(&form, "La region a evaluar", 1, CAMPO_TIPO_OPCIONES, 6, regiones);
-    formularioAgregarCampoVA(&form, "Periodo de inicio (Mes - AAAA)", 1, CAMPO_TIPO_TEXTO, DIVISIONES_PERIODO_LEN);
-    formularioAgregarCampoVA(&form, "Periodo de fin (Mes - AAAA)", 1, CAMPO_TIPO_TEXTO, DIVISIONES_PERIODO_LEN);
+    formularioAgregarCampoVA(&form, "Monto a ajustar ($)", 1, CAMPO_TIPO_NUMERICO, 0.0f, 9999999.9f);
+    formularioAgregarCampoVA(&form, "La region a evaluar", 1, CAMPO_TIPO_OPCIONES, 7, regiones);
+    formularioAgregarCampoVA(&form, "Periodo de inicio (AAAA-MM)", 1, CAMPO_TIPO_TEXTO, DIVISIONES_PERIODO_LEN, validarFechaForm, convertirFechaResDivs);
+    formularioAgregarCampoVA(&form, "Periodo de fin (AAAA-MM)", 1, CAMPO_TIPO_TEXTO, DIVISIONES_PERIODO_LEN, validarFechaForm, convertirFechaResDivs);
+
+    formularioAgregarValidado(&form, validarFechaResDivs);
 
     formularioPublicar(&form);
 
@@ -53,7 +61,44 @@ RespuestaMontos preguntarAjustarMonto(void)
     stringNCopy(ans.periodoIni, formularioRespuesta(&form, 2), DIVISIONES_PERIODO_LEN);
     stringNCopy(ans.periodoFin, formularioRespuesta(&form, 3), DIVISIONES_PERIODO_LEN);
 
-    printf("Su seleccion: %lf | %s | %s | %s\n", ans.monto, ans.region, ans.periodoIni, ans.periodoFin);
+    return ans;
+}
+
+int validarFechaResDivs(void* ptr)
+{
+    Formulario_t* f = ptr;
+    char* ini = formularioRawRespuesta(f, 2);
+    char* fin = formularioRawRespuesta(f, 3);
+    int tmpI, tmpF;
+
+    tmpI = ini[5] * 10 + ini[6] - 11 * '0';
+    tmpF = fin[5] * 10 + fin[6] - 11 * '0';
+
+    tmpI += ini[0] * 100000 + ini[1] * 10000 + ini[2] * 1000 + ini[3] * 100 - 111100 * '0';
+    tmpF += fin[0] * 100000 + fin[1] * 10000 + fin[2] * 1000 + fin[3] * 100 - 111100 * '0';
+
+    if(tmpF <= tmpI){
+        printf(COLOR_BOLD COLOR_RED "Error: fecha de inicio no puede ser mayor a la fecha de fin, vuelva a intentar\n" COLOR_RESET);
+        getchar();
+        return 0;
+    }
+
+    return 1;
+}
+
+char* convertirFechaResDivs(char* ans)
+{
+    char* meses[12] = {"Enero", "Febrero", "Marzo",
+                          "Abril", "Mayo", "Junio",
+                          "Julio", "Agosto", "Septiembre",
+                          "Octubre", "Noviembre", "Diciembre"
+                           };
+    char a[5];
+    char* mes = meses[ans[5] * 10 + ans[6] - 11 * '0' - 1];
+
+    stringNCopy(a, ans, 4);
+
+    sprintf(ans, "%s - %s", mes, a);
 
     return ans;
 }
@@ -79,15 +124,27 @@ int clasificarBySIPCDivisiones(Vector_t* divs)
     bienes = filtrarVector(divs, filtrarBienes, NULL);
     servicios = filtrarVector(divs, filtrarServicios, NULL);
 
-    vectorEscribirATexto(bienes, ARCH_BIENES, parsearEscrDivisiones);
-    vectorEscribirATexto(servicios, ARCH_SERVICIOS, parsearEscrDivisiones);
+    /*vectorEscribirATexto(bienes, ARCH_BIENES, parsearEscrDivisiones);*/
+    /*vectorEscribirATexto(servicios, ARCH_SERVICIOS, parsearEscrDivisiones);*/
 
     bienes = reducirVectorPorClave(bienes, obtenerPeriodo, compararPeriodo, reducirBySProm);
     servicios = reducirVectorPorClave(servicios, obtenerPeriodo, compararPeriodo, reducirBySProm);
 
     nacional = unirVectores(bienes, servicios, unirBienesYServicios, sizeof(IPCPromedio));
 
-    vectorEscribirATexto(nacional, ARCH_NACIONAL, parsearEscrPromedio);
+    /*vectorEscribirATexto(nacional, ARCH_NACIONAL, parsearEscrPromedio);*/
+
+    puts(FLUSH_TERMINAL);
+    printf("---------------------------" COLOR_BYELLOW "Promedio IPC a nivel nacional por grupos" COLOR_RESET "---------------------------\n");
+    printf(COLOR_BGRAY "%-*s\t" COLOR_RESET " | " COLOR_BGRAY "%-*s\t" COLOR_RESET " | " COLOR_BGRAY "%-*s\t" COLOR_RESET " | " COLOR_BGRAY "%-*s\t" COLOR_RESET "\n", DIVISIONES_PERIODO_LEN,"Periodo",DIVISIONES_REGION_LEN,"Region",DIVISIONES_INDICES_LEN,"Bienes",DIVISIONES_INDICES_LEN,"Servicios");
+    puts(COLOR_BGRAY divisionEntreTitulosYDatos COLOR_RESET);
+
+    /*
+    char* campos[] = {"Periodo", "Region", "Bienes", "Servicios"};
+    int paddings[] = {DIVISIONES_PERIODO_LEN, DIVISIONES_REGION_LEN, DIVISIONES_INDICES_LEN, DIVISIONES_INDICES_LEN};
+    imprimirHeaderTabla("Promedio IPC a Nivel Nacional por Grupos", campos, paddings, 4);
+    */
+    mostrarVector(nacional, mostrarPromedio);
 
     vectorDestruir(bienes);
     vectorDestruir(servicios);
@@ -153,12 +210,20 @@ void* unirBienesYServicios(void* lhs, void* rhs, void* elem)
     IPCDivisiones* tmpL = lhs;
     IPCDivisiones* tmpR = rhs;
     IPCPromedio* tmp = elem;
+
     stringNCopy(tmp->fecha, tmpL->periodo, DIVISIONES_PERIODO_LEN);
     snprintf(tmp->indiceBienes, DIVISIONES_INDICES_LEN, "%lf", atof(tmpL->indiceIPC) / 5.0f);
     snprintf(tmp->indiceServicios, DIVISIONES_INDICES_LEN, "%lf", atof(tmpR->indiceIPC) / 7.0f);
     stringNCopy(tmp->region, "Nacional", DIVISIONES_REGION_LEN);
 
     return tmp;
+}
+
+void mostrarPromedio(void* reg)
+{
+    IPCPromedio* tmp = reg;
+
+    printf(COLOR_BCYAN "%-*s\t" COLOR_RESET " | " COLOR_BCYAN "%-*s\t" COLOR_RESET " | " COLOR_BCYAN "%-*s\t" COLOR_RESET " | " COLOR_BCYAN "%-*s\t" COLOR_RESET "\n", DIVISIONES_PERIODO_LEN, tmp->fecha, DIVISIONES_REGION_LEN, tmp->region, DIVISIONES_INDICES_LEN, tmp->indiceBienes, DIVISIONES_INDICES_LEN, tmp->indiceServicios);
 }
 
 /** }@ */

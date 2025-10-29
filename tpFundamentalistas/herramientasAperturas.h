@@ -1,4 +1,4 @@
-/** @ingroup ModuloAperturas 
+/** @ingroup ModuloAperturas
  * @{ */
 
 #ifndef HERRAMIENTASAPERTURAS_H_INCLUDED
@@ -16,6 +16,10 @@
 int herramientaCalcularAlquilerIPCAperturas(Vector_t* vec);
 
 RespuestaAlquileres preguntarAlquileres(void);
+
+int verificarFechaAper(char* ans);
+
+char* convertirFechaResAper(char* ans);
 
 int filtrarAlquileres(void* dato, void* contexto);
 

@@ -1,10 +1,12 @@
-/** @ingroup ModuloAperturas 
+/** @ingroup ModuloAperturas
  * @{ */
 
 /** @file herramientasAperturas.c
  * @brief Implementacion de herramientasAperturas.h */
 
 #include "herramientasAperturas.h"
+
+#define divisionParaTitulo "-------------------------------------------------------------------------------------------------"
 
 int herramientaCalcularAlquilerIPCAperturas(Vector_t* aper)
 {
@@ -21,17 +23,35 @@ int herramientaCalcularAlquilerIPCAperturas(Vector_t* aper)
 
     alquileres = mapearVector(alquileres, mapearAlquileres, sizeof(IPCAlquileres), &tmp);
 
-    vectorEscribirATexto(alquileres, ARCH_ALQUILERES_CSV, parsearEscrAlquileres);
+    /*vectorEscribirATexto(alquileres, ARCH_ALQUILERES_CSV, parsearEscrAlquileres);*/
 
     IPCAlquileres* tmpAlq = vectorObtener(alquileres, vectorCantElem(alquileres) - 1);
-    printf("El alquiler original de $ %s a la fecha %s en la region %s, ha variado en un %% %s hacia un total ajustado de $ %s al periodo %s\n", tmp.monto, tmp.periodo, region, tmpAlq->acumuladoIPC, tmpAlq->montoAjustado, tmpAlq->periodo);
+    puts(FLUSH_TERMINAL);
+    printf("El alquiler original de " COLOR_BCYAN "$%s" COLOR_RESET " a la fecha " COLOR_BCYAN  "%s" COLOR_RESET
+            " en la region " COLOR_BCYAN "%s" COLOR_RESET ", ha variado en un " COLOR_BYELLOW "%%%s" COLOR_RESET
+            " hacia un total ajustado de " COLOR_BYELLOW "$%s" COLOR_RESET " al periodo " COLOR_BCYAN "%s" COLOR_RESET "\n",
+            tmp.monto, tmp.periodo, region, tmpAlq->acumuladoIPC, tmpAlq->montoAjustado, tmpAlq->periodo);
+
+    esperarInput();
+
+    puts(FLUSH_TERMINAL);
+    printf(COLOR_BOLD "%-*s\t" " | " "%-*s\t" " | " "%-*s\t" " | " "%-*s" COLOR_RESET "\n", APERTURAS_PERIODO_LEN, "Periodo", APERTURAS_INDICES_LEN, "Indice", APERTURAS_INDICES_LEN, "Variacion%", APERTURAS_INDICES_LEN, "Monto ajustado");
+    puts(COLOR_BGRAY divisionParaTitulo COLOR_RESET);
+
     mostrarVector(alquileres, mostrarAlquileres);
+
+    esperarInput();
 
     vectorEscribirABinario(alquileres, ARCH_ALQUILERES_DAT);
     vectorLeerDeBinario(alquileres, ARCH_ALQUILERES_DAT);
 
-    printf("Contenidos del archivo binario\n");
+    puts(FLUSH_TERMINAL);
+    printf(COLOR_BOLD "Contenidos del archivo binario\n" COLOR_RESET);
+    printf(COLOR_BOLD "%-*s\t" " | " "%-*s\t" " | " "%-*s\t" " | " "%-*s" COLOR_RESET "\n", APERTURAS_PERIODO_LEN, "Periodo", APERTURAS_INDICES_LEN, "Indice", APERTURAS_INDICES_LEN, "Variacion%", APERTURAS_INDICES_LEN, "Monto ajustado");
+    puts(COLOR_BGRAY divisionParaTitulo COLOR_RESET);
     mostrarVector(alquileres, mostrarAlquileres);
+
+    esperarInput();
 
     vectorDestruir(alquileres);
 
@@ -43,13 +63,13 @@ RespuestaAlquileres preguntarAlquileres(void)
     RespuestaAlquileres ans;
 
     Formulario_t f;
-    char* regiones[APERTURAS_REGION_LEN] = {"GBA", "Pampeana", "Patagonia", "Cuyo", "Noroeste", "Noreste"};
+    char* regiones[APERTURAS_REGION_LEN] = {"Nacional", "GBA", "Pampeana", "Cuyo", "Noroeste", "Noreste", "Patagonia"};
 
     formularioInit(&f, "Calcular alquileres por inflacion");
 
     formularioAgregarCampoVA(&f, "Ingrese monto del alquiler", 1, CAMPO_TIPO_NUMERICO, 0.0f, 9999999.9f);
     formularioAgregarCampoVA(&f, "Seleccione region de analisis", 1, CAMPO_TIPO_OPCIONES, 6, regiones);
-    formularioAgregarCampoVA(&f, "Ingrese periodo de inicio del contrato (AAAA-MM-DD)", 1, CAMPO_TIPO_TEXTO, APERTURAS_PERIODO_LEN);
+    formularioAgregarCampoVA(&f, "Ingrese periodo de inicio del contrato (AAAA-MM)", 1, CAMPO_TIPO_TEXTO, APERTURAS_PERIODO_LEN, NULL, convertirFechaResAper);
 
     formularioPublicar(&f);
 
@@ -57,10 +77,14 @@ RespuestaAlquileres preguntarAlquileres(void)
     stringNCopy(ans.region, formularioRespuesta(&f, 1), APERTURAS_REGION_LEN);
     stringNCopy(ans.periodo, formularioRespuesta(&f, 2), APERTURAS_PERIODO_LEN);
 
-    printf("Su seleccion: %s | %s | %s\n", ans.monto, ans.region, ans.periodo);
-
     formularioDestruir(&f);
 
+    return ans;
+}
+
+char* convertirFechaResAper(char* ans)
+{
+    stringCat(ans, "-01");
     return ans;
 }
 
@@ -112,7 +136,7 @@ void mostrarAlquileres(void* elem)
 {
     IPCAlquileres* tmp = elem;
 
-    printf("%s - %s - %s - %s\n", tmp->periodo, tmp->indiceIPC, tmp->acumuladoIPC, tmp->montoAjustado);
+    printf(COLOR_BOLD COLOR_CYAN "%-*s\t" COLOR_GRAY " | " COLOR_CYAN "%-*s\t" COLOR_GRAY " | " COLOR_CYAN "%-*s\t" COLOR_GRAY " | " COLOR_CYAN "%-*s\n" COLOR_RESET, APERTURAS_PERIODO_LEN, tmp->periodo, APERTURAS_INDICES_LEN, tmp->indiceIPC, APERTURAS_INDICES_LEN, tmp->acumuladoIPC, APERTURAS_INDICES_LEN, tmp->montoAjustado);
 }
 
 /** }@ */

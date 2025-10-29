@@ -1,7 +1,7 @@
-/** @ingroup ModuloSecuenciaPalabras 
+/** @ingroup ModuloSecuenciaPalabras
  * @{ */
 
-/** @file secuenciaPalabras.c 
+/** @file secuenciaPalabras.c
  * @brief Implementacion de secuenciaPalabras.h */
 
 #include "secuenciaPalabras.h"
@@ -9,20 +9,20 @@
 int secuenciaPalabrasCrear(SecuenciaPalabras_t* sec, char* cadena)
 {
     sec->cadena = cadena;
-    sec->finDeCadena = false;
+    sec->finDeCadena = 0;
 
     return EXITO;
 }
 
-bool secuenciaPalabrasLeer(SecuenciaPalabras_t* sec, Palabra_t* pal)
+int secuenciaPalabrasLeer(SecuenciaPalabras_t* sec, Palabra_t* pal)
 {
     while(*(sec->cadena) != '\0' && !isprint(*(sec->cadena))){
         (sec->cadena)++;
     }
 
     if(*(sec->cadena) == '\0'){
-        sec->finDeCadena = true;
-        return false;
+        sec->finDeCadena = 1;
+        return 0;
     }
 
     char* tmp = pal->cadena;
@@ -35,7 +35,7 @@ bool secuenciaPalabrasLeer(SecuenciaPalabras_t* sec, Palabra_t* pal)
 
     *tmp = '\0';
 
-    return true;
+    return 1;
 }
 
 int secuenciaPalabrasEscribir(SecuenciaPalabras_t* sec, Palabra_t* pal)
@@ -62,10 +62,10 @@ int secuenciaPalabrasCerrar(SecuenciaPalabras_t* sec)
 {
     *(sec->cadena) = '\0';
 
-    return true;
+    return 1;
 }
 
-bool secuenciaPalabrasEsFin(SecuenciaPalabras_t* sec)
+int secuenciaPalabrasEsFin(SecuenciaPalabras_t* sec)
 {
     return sec->finDeCadena;
 }
@@ -78,12 +78,12 @@ int esLetra(int ch)
 int palabraModificar(Palabra_t* pal, void (*Modificar)(char*))
 {
     if(Modificar == NULL){
-        return false;
+        return 0;
     }
 
     Modificar(pal->cadena);
 
-    return true;
+    return 1;
 }
 
 void palabraMostrar(Palabra_t* pal)

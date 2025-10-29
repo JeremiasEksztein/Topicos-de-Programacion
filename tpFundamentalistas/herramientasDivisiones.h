@@ -7,6 +7,7 @@
 /** @file herramientasDivisiones.h
  * @brief Header con las funciones de herramientas para divisiones */
 
+#include <stdio.h>
 #include "comunes.h"
 #include "errores.h"
 #include "algoritmos.h"
@@ -16,6 +17,10 @@
 int herramientaAjustarMontosIPCDivisiones(Vector_t* vec);
 
 RespuestaMontos preguntarAjustarMonto(void);
+
+int validarFechaResDivs(void* ptr);
+
+char* convertirFechaResDivs(char* ans);
 
 int filtrarIPCDivisiones(void* dato, void* contexto);
 
@@ -32,6 +37,8 @@ int compararPeriodo(void* lhs, void* rhs);
 void* reducirBySProm(void* dato, void* acumulado);
 
 void* unirBienesYServicios(void* lhs, void* rhs, void* elem);
+
+void mostrarPromedio(void* reg);
 
 #endif /* HERRAMIENTASDIVISIONES_H_INCLUDED */
 

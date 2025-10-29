@@ -6,7 +6,7 @@
 
 #include "parseoAperturas.h"
 
-int parsearIPCAperturas(FILE* arch, void* reg)
+int parsearYCorregirIPCAperturas(FILE* arch, void* reg)
 {
     IPCAperturas* tmp = reg;
     char buffer[500] = "";
@@ -18,7 +18,7 @@ int parsearIPCAperturas(FILE* arch, void* reg)
 
     if(!(i = stringRChar(buffer, '\n'))){
         if(!(i = stringRChar(buffer, EOF))){
-            LOG(ERR_BUFFER_CORTO);
+            return ERR_BUFFER_CORTO;
         }
     }
 
@@ -82,13 +82,6 @@ int parsearIPCAperturas(FILE* arch, void* reg)
 
     stringNCopy(tmp->cod, buffer, APERTURAS_COD_LEN);
 
-    return EXITO;
-}
-
-int corregirIPCAperturas(void* reg)
-{
-    IPCAperturas* tmp = reg;
-
     corregirFormatoFechaAperturas(tmp);
     stringReplace(tmp->indiceIPC, ',', '.');
     stringReplace(tmp->varAnualIPC, ',', '.');
@@ -100,7 +93,6 @@ int corregirIPCAperturas(void* reg)
 int corregirFormatoFechaAperturas(IPCAperturas* reg)
 {
     char* i = reg->periodo;
-
     char a[5], m[3];
 
     stringNCopy(a, i, 4);

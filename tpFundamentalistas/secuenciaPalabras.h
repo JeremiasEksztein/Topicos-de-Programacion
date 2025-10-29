@@ -1,17 +1,16 @@
-/** @ingroup ModuloSecuenciaPalabras 
+/** @ingroup ModuloSecuenciaPalabras
  * @{ */
 
 #ifndef SECUENCIA_PALABRAS_H_INCLUDED
 #define SECUENCIA_PALABRAS_H_INCLUDED
 
-/** @file secuenciaPalabras.h 
+/** @file secuenciaPalabras.h
  * @brief Header con las principales funcionalidades del TDA SecuenciaPalabras y Palabra */
 
 #include <stdio.h>
 #include <ctype.h>
 #include <wchar.h>
 #include <wctype.h>
-#include <stdbool.h>
 #include "errores.h"
 
 #define DEFAULT_PAL_TAM 50 /** @brief Tamaño de palabra normal */
@@ -19,7 +18,7 @@
 /** @brief Struct del TDA SecuenciaPalabras */
 typedef struct{
     char* cadena;
-    bool finDeCadena;
+    int finDeCadena;
 }SecuenciaPalabras_t;
 
 /** @brief Struct del TDA Palabra */
@@ -31,11 +30,11 @@ typedef struct{
 int secuenciaPalabrasCrear(SecuenciaPalabras_t* sec, char* cadena);
 
 /** @brief */
-bool secuenciaPalabrasLeer(SecuenciaPalabras_t* sec, Palabra_t* pal);
+int secuenciaPalabrasLeer(SecuenciaPalabras_t* sec, Palabra_t* pal);
 int secuenciaPalabrasEscribir(SecuenciaPalabras_t* sec, Palabra_t* pal);
 int secuenciaPalabrasEscribirCaract(SecuenciaPalabras_t* sec, int ch);
 int secuenciaPalabrasCerrar(SecuenciaPalabras_t* sec);
-bool secuenciaPalabrasEsFin(SecuenciaPalabras_t* sec);
+int secuenciaPalabrasEsFin(SecuenciaPalabras_t* sec);
 
 int esLetra(int ch);
 

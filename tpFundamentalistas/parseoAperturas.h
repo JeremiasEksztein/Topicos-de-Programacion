@@ -16,7 +16,7 @@
 #include "comunes.h"
 
 /** @brief Funcion para parsear la lectura del archivo serie_ipc_aperturas.csv */
-int parsearIPCAperturas(FILE* arch, void* reg);
+int parsearYCorregirIPCAperturas(FILE* arch, void* reg);
 
 /** @brief Funcion del tipo int (*Corrector)(void*), corrige los campos del vector de aperturas */
 int corregirIPCAperturas(void* reg);

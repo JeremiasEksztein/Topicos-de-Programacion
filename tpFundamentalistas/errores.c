@@ -6,6 +6,7 @@
 
 #include "errores.h"
 
+/*
 int logError(int cod, char* file, int line, char* date, char* time, char* func)
 {
     char mensaje[50];
@@ -40,8 +41,6 @@ int logError(int cod, char* file, int line, char* date, char* time, char* func)
 
     FILE* fp = fopen("errorlog.txt", "at+");
 
-    /*fprintf(fp, "%d | %s:%d | %s | %s | %s | %s\n", cod, file, line, __DATE__, __TIME__, func, mensaje); */
-
     fprintf(fp, "Error codigo: %d; En archivo: %s:%d; Compilado en la fecha %s a la hora %s; en funcion: %s()\n%s\n",cod, file, line, date, time, func, mensaje);
 
     fclose(fp);
@@ -52,5 +51,6 @@ int logError(int cod, char* file, int line, char* date, char* time, char* func)
 
     return EXITO;
 }
+*/
 
 /** }@ */

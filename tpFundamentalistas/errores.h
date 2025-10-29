@@ -9,11 +9,10 @@
 
 #include <stddef.h>
 #include <stdio.h>
-#include <stdbool.h>
 #include <stdlib.h>
 #include "cadenas.h"
 
-#define LOG_FILE_NOM "errorlog.txt"
+/*#define LOG_FILE_NOM "errorlog.txt"*/
 
 #define EXITO 0
 #define ERR_PUNTERO_NULO 1
@@ -24,6 +23,8 @@
 #define ERR_USUARIO 6
 #define ERR_ARGS 7
 
+/*
+
 #define LOG(stmt) do{   \
     int err = (stmt);   \
     if(err != EXITO){   \
@@ -32,6 +33,8 @@
 }while(0)
 
 int logError(int cod, char* file, int line, char* date, char* time, char* func);
+
+*/
 
 #endif /* ERRORES_H_INCLUDED */
 

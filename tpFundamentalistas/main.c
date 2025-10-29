@@ -29,26 +29,22 @@
 int main(int argc, char* argv[])
 {
     if(argc != CANT_ARGS){  /* Si no se ingresa la cantidad correcta de argumentos salimos */
-        LOG(ERR_ARGS);
+        return ERR_ARGS;
     }
-
-    /*setlocale(LC_ALL, ""); Fijamos el locale del programa al locale argentino */
 
     Vector_t vecDivisiones, vecAperturas;
 
-    LOG(vectorCrearConCapacidad(&vecDivisiones, sizeof(IPCDivisiones), ESTIMACION_TAM_DIVISIONES)); /* Creamos el vector con la cantidad de elementos estimados */
-    LOG(vectorLeerDeTexto(&vecDivisiones, argv[ARG_DIVISIONES_NOM], parsearIPCDivisiones)); /* Cargamos en memoria el archivo y lo parseamos */
-    LOG(vectorEliminarPos(&vecDivisiones, 0)); /* Eliminamos el titulo del archivo del vector */
-    LOG(corregirCampos(&vecDivisiones, corregirIPCDivisiones)); /* Corregimos los campos del vector, segun lo pedido */
-    LOG(herramientaAjustarMontosIPCDivisiones(&vecDivisiones)); /* Herramienta de monto ajustado por IPC, ej. 5 */
-    LOG(clasificarBySIPCDivisiones(&vecDivisiones)); /* Clasificamos el vector por bienes, servicios y su promedio nacional, ej. 6 */
+    vectorCrearConCapacidad(&vecDivisiones, sizeof(IPCDivisiones), ESTIMACION_TAM_DIVISIONES); /* Creamos el vector con la cantidad de elementos estimados */
+    vectorLeerDeTexto(&vecDivisiones, argv[ARG_DIVISIONES_NOM], parsearYCorregirIPCDivisiones); /* Cargamos en memoria el archivo lo parseamos y corregimos */
+    vectorEliminarPos(&vecDivisiones, 0); /* Eliminamos el titulo del archivo del vector */
+    herramientaAjustarMontosIPCDivisiones(&vecDivisiones); /* Herramienta de monto ajustado por IPC, ej. 5 */
+    clasificarBySIPCDivisiones(&vecDivisiones); /* Clasificamos el vector por bienes, servicios y su promedio nacional, ej. 6 */
     vectorDestruir(&vecDivisiones); /* Liberamos la memoria del vector */
 
-    LOG(vectorCrearConCapacidad(&vecAperturas, sizeof(IPCAperturas), ESTIMACION_TAM_APERTURAS)); /* Creamos el vector con la cantidad de elementos estimados */
-    LOG(vectorLeerDeTexto(&vecAperturas, argv[ARG_APERTURAS_NOM], parsearIPCAperturas)); /* Cargamos en memoria el archivo y lo parseamos */
-    LOG(vectorEliminarPos(&vecAperturas, 0)); /* Eliminamos el titulo del archivo del vector */
-    LOG(corregirCampos(&vecAperturas, corregirIPCAperturas)); /* Corregimos los campos del vector, segun lo pedido */
-    LOG(herramientaCalcularAlquilerIPCAperturas(&vecAperturas)); /* Herramienta de calcular alquileres segun IPC, ej. 9 */
+    vectorCrearConCapacidad(&vecAperturas, sizeof(IPCAperturas), ESTIMACION_TAM_APERTURAS); /* Creamos el vector con la cantidad de elementos estimados */
+    vectorLeerDeTexto(&vecAperturas, argv[ARG_APERTURAS_NOM], parsearYCorregirIPCAperturas); /* Cargamos en memoria el archivo lo parseamos y corregimos */
+    vectorEliminarPos(&vecAperturas, 0); /* Eliminamos el titulo del archivo del vector */
+    herramientaCalcularAlquilerIPCAperturas(&vecAperturas); /* Herramienta de calcular alquileres segun IPC, ej. 9 */
     vectorDestruir(&vecAperturas); /* Liberamos la memoria del vector */
 
     return EXITO; /* Salimos gente. */

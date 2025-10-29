@@ -1,11 +1,11 @@
-/** @defgroup iterador 
+/** @defgroup iterador
  * @ingroup ModuloVector
  * @{ */
 
 #ifndef ITERADOR_H_INCLUDED
 #define ITERADOR_H_INCLUDED
 
-/** @file iterador.h 
+/** @file iterador.h
  * @brief Header con las funcionalidades del iterador asociado al TDA Vector */
 
 #include "vector.h"
@@ -29,7 +29,7 @@ void iteradorActualizar(Iterador_t* iterador);
 int iteradorReiniciar(Iterador_t* iterador);
 int iteradorMoverCursor(Iterador_t* iterador, size_t cant, int offset);
 size_t iteradorPosCursor(Iterador_t* iterador);
-bool iteradorEsFin(Iterador_t* iterador);
+int iteradorEsFin(Iterador_t* iterador);
 
 #endif /* ITERADOR_H_INCLUDED */
 
