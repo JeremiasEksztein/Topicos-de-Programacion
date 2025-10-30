@@ -1,0 +1,74 @@
+4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:30 | Oct 22 2025 | 17:58:57 | main | Error en la lectura de archivo. Buffer de lectura demasiê⁄`Q˛
+4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:30 | Oct 22 2025 | 17:58:57 | main | Error en la lectura de archivo. Buffer de lectura demasiê⁄`Q˛
+4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\parseo.c:14 | Oct 22 2025 | 17:58:57 | parsearIPCDivisiones | Error en la lectura de archivo. Buffer de lectura demasi¿⁄`Q˛
+4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\parseo.c:17 | Oct 22 2025 | 17:58:57 | parsearIPCDivisiones | Error en la lectura de archivo. Buffer de lectura demasi¿⁄`Q˛
+4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\parseo.c:17 | Oct 22 2025 | 17:58:57 | parsearIPCDivisiones | Error en la lectura de archivo. Buffer de lectura demasi¿⁄`Q˛
+4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\parseo.c:17 | Oct 22 2025 | 17:58:57 | parsearIPCDivisiones | Error en la lectura de archivo. Buffer de lectura demasi¿⁄`Q˛
+4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\parseo.c:17 | Oct 22 2025 | 17:58:57 | parsearIPCDivisiones | Error en la lectura de archivo. Buffer de lectura demasi¿⁄`Q˛
+4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\parseo.c:17 | Oct 22 2025 | 17:58:57 | parsearIPCDivisiones | Error en la lectura de archivo. Buffer de lectura demasi¿⁄`Q˛
+4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\parseo.c:17 | Oct 22 2025 | 17:58:57 | parsearIPCDivisiones | Error en la lectura de archivo. Buffer de lectura demasi¿⁄`Q˛
+4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:38 | Oct 22 2025 | 17:58:57 | main | Error en la lectura de archivo. Buffer de lectura demasiê⁄`Q˛
+4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\parseo.c:17 | Oct 22 2025 | 17:58:57 | parsearIPCDivisiones | Error en la lectura de archivo. Buffer de lectura demasi¿⁄`Q˛
+4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\parseo.c:17 | Oct 22 2025 | 17:58:57 | parsearIPCDivisiones | Error en la lectura de archivo. Buffer de lectura demasi¿⁄`Q˛
+4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\parseo.c:17 | Oct 22 2025 | 17:58:57 | parsearIPCDivisiones | Error en la lectura de archivo. Buffer de lectura demasi¿⁄`Q˛
+4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:38 | Oct 22 2025 | 17:58:57 | main | Error en la lectura de archivo. Buffer de lectura demasiê⁄`Q˛
+4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:38 | Oct 22 2025 | 17:58:57 | main | Error en la lectura de archivo. Buffer de lectura demasiê⁄`Q˛
+4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:38 | Oct 22 2025 | 17:58:57 | main | Error en la lectura de archivo. Buffer de lectura demasiê⁄`Q˛
+4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:38 | Oct 22 2025 | 17:58:57 | main | Error en la lectura de archivo. Buffer de lectura demasiê⁄`Q˛
+4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:38 | Oct 22 2025 | 17:58:57 | main | Error en la lectura de archivo. Buffer de lectura demasiê⁄`Q˛
+4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:38 | Oct 22 2025 | 17:58:57 | main | Error en la lectura de archivo. Buffer de lectura demasiê⁄`Q˛
+4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\parseo.c:100 | Oct 22 2025 | 17:58:57 | parsearIPCAperturas | Error en la lectura de archivo. Buffer de lectura demasi¿⁄`Q˛
+4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\parseo.c:100 | Oct 22 2025 | 17:58:57 | parsearIPCAperturas | Error en la lectura de archivo. Buffer de lectura demasi¿⁄`Q˛
+4 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\parseo.c:99 | Oct 22 2025 | 17:58:57 | parsearIPCAperturas | Error en la lectura de archivo. Buffer de lectura demasi¿⁄`Q˛
+6 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:47 | Oct 22 2025 | 17:58:57 | main | Error en el ingreso de informacion.
+7 | main.c:21 | Oct 26 2025 | 19:58:59 | main | Error el pasaje de argumentos a main
+3 | main.c:30 | Oct 26 2025 | 19:58:59 | main | Error al abrir archivo.
+6 | main.c:33 | Oct 26 2025 | 19:58:59 | main | Error en el ingreso de informacion.
+3 | main.c:39 | Oct 26 2025 | 19:58:59 | main | Error al abrir archivo.
+6 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:43 | Oct 26 2025 | 23:15:21 | main | Error en el ingreso de informacion.
+6 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:41 | Oct 26 2025 | 23:15:21 | main | Error en el ingreso de informacion.
+6 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:57 | Oct 27 2025 | 00:44:16 | main | Error en el ingreso de informacion.
+6 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:57 | Oct 27 2025 | 00:44:16 | main | Error en el ingreso de informacion.
+6 | C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:57 | Oct 27 2025 | 00:44:16 | main | Error en el ingreso de informacion.
+Error codigo: 6; En archivo: C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:43; Compilado en la fecha Oct 27 2025 a la hora 12:12:47; en funcion: main()
+Error en el ingreso de informacion.
+Error codigo: 6; En archivo: C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:43; Compilado en la fecha Oct 27 2025 a la hora 12:30:14; en funcion: main()
+Error en el ingreso de informacion.
+Error codigo: 6; En archivo: C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:43; Compilado en la fecha Oct 27 2025 a la hora 12:30:14; en funcion: main()
+Error en el ingreso de informacion.
+Error codigo: 7; En archivo: main.c:32; Compilado en la fecha Oct 27 2025 a la hora 20:18:30; en funcion: main()
+Error el pasaje de argumentos a main
+Error codigo: 3; En archivo: main.c:40; Compilado en la fecha Oct 27 2025 a la hora 20:18:30; en funcion: main()
+Error al abrir archivo.
+Error codigo: 6; En archivo: main.c:43; Compilado en la fecha Oct 27 2025 a la hora 20:18:30; en funcion: main()
+Error en el ingreso de informacion.
+Error codigo: 6; En archivo: C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:43; Compilado en la fecha Oct 27 2025 a la hora 20:19:10; en funcion: main()
+Error en el ingreso de informacion.
+Error codigo: 6; En archivo: C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:43; Compilado en la fecha Oct 27 2025 a la hora 20:19:10; en funcion: main()
+Error en el ingreso de informacion.
+Error codigo: 6; En archivo: C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:43; Compilado en la fecha Oct 27 2025 a la hora 20:19:10; en funcion: main()
+Error en el ingreso de informacion.
+Error codigo: 6; En archivo: C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:43; Compilado en la fecha Oct 27 2025 a la hora 20:19:10; en funcion: main()
+Error en el ingreso de informacion.
+Error codigo: 6; En archivo: C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:43; Compilado en la fecha Oct 27 2025 a la hora 20:19:10; en funcion: main()
+Error en el ingreso de informacion.
+Error codigo: 6; En archivo: C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:43; Compilado en la fecha Oct 27 2025 a la hora 20:19:10; en funcion: main()
+Error en el ingreso de informacion.
+Error codigo: 6; En archivo: C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:43; Compilado en la fecha Oct 27 2025 a la hora 20:19:10; en funcion: main()
+Error en el ingreso de informacion.
+Error codigo: 6; En archivo: C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:43; Compilado en la fecha Oct 27 2025 a la hora 20:19:10; en funcion: main()
+Error en el ingreso de informacion.
+Error codigo: 6; En archivo: C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:43; Compilado en la fecha Oct 27 2025 a la hora 20:19:10; en funcion: main()
+Error en el ingreso de informacion.
+Error codigo: 6; En archivo: C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:43; Compilado en la fecha Oct 27 2025 a la hora 20:19:10; en funcion: main()
+Error en el ingreso de informacion.
+Error codigo: 6; En archivo: C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:43; Compilado en la fecha Oct 27 2025 a la hora 20:19:10; en funcion: main()
+Error en el ingreso de informacion.
+Error codigo: 6; En archivo: C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:43; Compilado en la fecha Oct 27 2025 a la hora 20:19:10; en funcion: main()
+Error en el ingreso de informacion.
+Error codigo: 6; En archivo: C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:43; Compilado en la fecha Oct 27 2025 a la hora 20:19:10; en funcion: main()
+Error en el ingreso de informacion.
+Error codigo: 6; En archivo: C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:43; Compilado en la fecha Oct 27 2025 a la hora 20:19:10; en funcion: main()
+Error en el ingreso de informacion.
+Error codigo: 6; En archivo: C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:43; Compilado en la fecha Oct 28 2025 a la hora 12:25:58; en funcion: main()
+Error en el ingreso de informacion.

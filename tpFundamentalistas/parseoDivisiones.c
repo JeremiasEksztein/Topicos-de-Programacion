@@ -5,6 +5,7 @@
  * @brief Implementacion de parseoDivisiones.h */
 
 #include "parseoDivisiones.h"
+#include <stdio.h>
 
 int parsearYCorregirIPCDivisiones(FILE* arch, void* reg)
 {

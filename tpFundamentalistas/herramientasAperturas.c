@@ -5,6 +5,7 @@
  * @brief Implementacion de herramientasAperturas.h */
 
 #include "herramientasAperturas.h"
+#include <stdio.h>
 
 #define divisionParaTitulo "-------------------------------------------------------------------------------------------------"
 

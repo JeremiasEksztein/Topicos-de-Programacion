@@ -72,3 +72,7 @@ Error codigo: 6; En archivo: C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalis
 Error en el ingreso de informacion.
 Error codigo: 6; En archivo: C:\Users\LENOVO\OneDrive\Escritorio\TPFundamentalistas2025\main.c:43; Compilado en la fecha Oct 28 2025 a la hora 12:25:58; en funcion: main()
 Error en el ingreso de informacion.
+7 | main.c:21 | Oct 26 2025 | 19:58:59 | main | Error el pasaje de argumentos a main
+3 | main.c:30 | Oct 26 2025 | 19:58:59 | main | Error al abrir archivo.
+6 | main.c:33 | Oct 26 2025 | 19:58:59 | main | Error en el ingreso de informacion.
+3 | main.c:39 | Oct 26 2025 | 19:58:59 | main | Error al abrir archivo.

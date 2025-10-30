@@ -5,6 +5,7 @@
  * @brief Implementacion de herramientasDivisiones.h */
 
 #include "herramientasDivisiones.h"
+#include <stdio.h>
 
 #define divisionEntreTitulosYDatos "----------------------------------------------------------------------------------------------"
 
@@ -139,11 +140,6 @@ int clasificarBySIPCDivisiones(Vector_t* divs)
     printf(COLOR_BGRAY "%-*s\t" COLOR_RESET " | " COLOR_BGRAY "%-*s\t" COLOR_RESET " | " COLOR_BGRAY "%-*s\t" COLOR_RESET " | " COLOR_BGRAY "%-*s\t" COLOR_RESET "\n", DIVISIONES_PERIODO_LEN,"Periodo",DIVISIONES_REGION_LEN,"Region",DIVISIONES_INDICES_LEN,"Bienes",DIVISIONES_INDICES_LEN,"Servicios");
     puts(COLOR_BGRAY divisionEntreTitulosYDatos COLOR_RESET);
 
-    /*
-    char* campos[] = {"Periodo", "Region", "Bienes", "Servicios"};
-    int paddings[] = {DIVISIONES_PERIODO_LEN, DIVISIONES_REGION_LEN, DIVISIONES_INDICES_LEN, DIVISIONES_INDICES_LEN};
-    imprimirHeaderTabla("Promedio IPC a Nivel Nacional por Grupos", campos, paddings, 4);
-    */
     mostrarVector(nacional, mostrarPromedio);
 
     vectorDestruir(bienes);

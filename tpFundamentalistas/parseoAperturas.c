@@ -5,6 +5,7 @@
  * @brief Implementacion de parseoAperturas.c */
 
 #include "parseoAperturas.h"
+#include <stdio.h>
 
 int parsearYCorregirIPCAperturas(FILE* arch, void* reg)
 {
