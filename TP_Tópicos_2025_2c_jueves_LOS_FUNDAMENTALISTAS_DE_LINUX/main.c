@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
         return ERR_ARGS;
     }
 
-    system("chcp 65001 > nul"); /*Definitivamente no compilara en Linux ahora*/
+    /*system("chcp 65001 > nul"); Definitivamente no compilara en Linux ahora*/
 
     Vector_t vecDivisiones, vecAperturas;
 
