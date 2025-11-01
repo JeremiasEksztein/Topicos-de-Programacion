@@ -1,0 +1,544 @@
+# depslib dependency file v1.0
+1761833065 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\algoritmos.c
+	"algoritmos.h"
+
+1761606964 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\algoritmos.h
+	"vector.h"
+
+1761841040 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\vector.h
+	<stdio.h>
+	<stdlib.h>
+	<memory.h>
+	<stddef.h>
+	"errores.h"
+
+1761844840 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\comunes.h
+	"errores.h"
+	"vector.h"
+	"iterador.h"
+
+1761843843 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\cadenas.h
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<memory.h>
+	<ctype.h>
+	<string.h>
+	"errores.h"
+
+1761846779 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\comunes.c
+	"comunes.h"
+
+1761536682 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\form.c
+	"form.h"
+
+1761536682 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\form.h
+	"comunes.h"
+	<string.h>
+	<stdarg.h>
+
+1761565276 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\herramientas.c
+	"herramientas.h"
+
+1761751748 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\iterador.c
+	"iterador.h"
+
+1761751724 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\iterador.h
+	"vector.h"
+
+1761530372 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\parseo.c
+	"parseo.h"
+
+1761843843 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\secuenciapalabras.c
+	"secuenciaPalabras.h"
+
+1761751663 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\secuenciapalabras.h
+	<stdio.h>
+	<ctype.h>
+	<wchar.h>
+	<wctype.h>
+	"errores.h"
+
+1761843855 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\cadenas.c
+	"cadenas.h"
+
+1761530372 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\parseo.h
+	<stdlib.h>
+	<assert.h>
+	<stdio.h>
+	<string.h>
+	<stdbool.h>
+	"comunes.h"
+	"vector.h"
+	"iterador.h"
+	"secuenciaPalabras.h"
+	"cadenas.h"
+
+1761843089 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\vector.c
+	"vector.h"
+
+1761848930 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\main.c
+	<stdio.h>
+	<locale.h>
+	"errores.h"
+	"comunes.h"
+	"vector.h"
+	"parseoDivisiones.h"
+	"herramientasDivisiones.h"
+	"parseoAperturas.h"
+	"herramientasAperturas.h"
+
+1761539756 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\herramientas.h
+	"parseo.h"
+	"algoritmos.h"
+	"vector.h"
+	"formulario.h"
+
+1761843843 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\formulario.c
+	"formulario.h"
+
+1761751423 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\formulario.h
+	<stdarg.h>
+	"errores.h"
+	"comunes.h"
+	"cadenas.h"
+
+1761537617 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\pruebaformulario.c
+	"formulario.h"
+
+1761751711 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\errores.h
+	<stddef.h>
+	<stdio.h>
+	<stdlib.h>
+	"cadenas.h"
+
+1761708332 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\errores.c
+	"errores.h"
+
+1761848689 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\herramientasdivisiones.c
+	"herramientasDivisiones.h"
+
+1761753086 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\herramientasdivisiones.h
+	<stdio.h>
+	"comunes.h"
+	"errores.h"
+	"algoritmos.h"
+	"vector.h"
+	"formulario.h"
+
+1761708332 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\parseodivisiones.h
+	<stdlib.h>
+	<stdio.h>
+	"errores.h"
+	"vector.h"
+	"iterador.h"
+	"secuenciaPalabras.h"
+	"cadenas.h"
+	"comunes.h"
+
+1761708332 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\parseoaperturas.h
+	<stdlib.h>
+	<stdio.h>
+	"errores.h"
+	"vector.h"
+	"iterador.h"
+	"cadenas.h"
+	"comunes.h"
+
+1761753122 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\herramientasaperturas.h
+	"comunes.h"
+	"algoritmos.h"
+	"vector.h"
+	"errores.h"
+	"formulario.h"
+
+1761846435 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\parseodivisiones.c
+	"parseoDivisiones.h"
+
+1761848800 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\herramientasaperturas.c
+	"herramientasAperturas.h"
+
+1761846435 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025\parseoaperturas.c
+	"parseoAperturas.h"
+
+1761833065 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\algoritmos.c
+	"algoritmos.h"
+
+1761606964 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\algoritmos.h
+	"vector.h"
+
+1761841040 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\vector.h
+	<stdio.h>
+	<stdlib.h>
+	<memory.h>
+	<stddef.h>
+	"errores.h"
+
+1761751711 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\errores.h
+	<stddef.h>
+	<stdio.h>
+	<stdlib.h>
+	"cadenas.h"
+
+1761843843 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\cadenas.h
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<memory.h>
+	<ctype.h>
+	<string.h>
+	"errores.h"
+
+1761843855 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\cadenas.c
+	"cadenas.h"
+
+1761846779 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\comunes.c
+	"comunes.h"
+
+1761844840 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\comunes.h
+	"errores.h"
+	"vector.h"
+	"iterador.h"
+
+1761751724 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\iterador.h
+	"vector.h"
+
+1761708332 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\errores.c
+	"errores.h"
+
+1761843843 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\formulario.c
+	"formulario.h"
+
+1761751423 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\formulario.h
+	<stdarg.h>
+	"errores.h"
+	"comunes.h"
+	"cadenas.h"
+
+1761848800 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\herramientasaperturas.c
+	"herramientasAperturas.h"
+
+1761753122 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\herramientasaperturas.h
+	"comunes.h"
+	"algoritmos.h"
+	"vector.h"
+	"errores.h"
+	"formulario.h"
+
+1761848689 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\herramientasdivisiones.c
+	"herramientasDivisiones.h"
+
+1761753086 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\herramientasdivisiones.h
+	<stdio.h>
+	"comunes.h"
+	"errores.h"
+	"algoritmos.h"
+	"vector.h"
+	"formulario.h"
+
+1761751748 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\iterador.c
+	"iterador.h"
+
+1761848930 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\main.c
+	<stdio.h>
+	<locale.h>
+	"errores.h"
+	"comunes.h"
+	"vector.h"
+	"parseoDivisiones.h"
+	"herramientasDivisiones.h"
+	"parseoAperturas.h"
+	"herramientasAperturas.h"
+
+1761708332 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\parseodivisiones.h
+	<stdlib.h>
+	<stdio.h>
+	"errores.h"
+	"vector.h"
+	"iterador.h"
+	"secuenciaPalabras.h"
+	"cadenas.h"
+	"comunes.h"
+
+1761751663 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\secuenciapalabras.h
+	<stdio.h>
+	<ctype.h>
+	<wchar.h>
+	<wctype.h>
+	"errores.h"
+
+1761708332 c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\parseoaperturas.h
+	<stdlib.h>
+	<stdio.h>
+	"errores.h"
+	"vector.h"
+	"iterador.h"
+	"cadenas.h"
+	"comunes.h"
+
+1761846435 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\parseoaperturas.c
+	"parseoAperturas.h"
+
+1761846435 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\parseodivisiones.c
+	"parseoDivisiones.h"
+
+1761843843 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\secuenciapalabras.c
+	"secuenciaPalabras.h"
+
+1761843089 source:c:\users\lenovo\onedrive\escritorio\tpfundamentalistas2025 - copia\vector.c
+	"vector.h"
+
+1761857235 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\algoritmos.c
+	"algoritmos.h"
+
+1761606964 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\algoritmos.h
+	"vector.h"
+
+1761841040 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\vector.h
+	<stdio.h>
+	<stdlib.h>
+	<memory.h>
+	<stddef.h>
+	"errores.h"
+
+1761751711 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\errores.h
+	<stddef.h>
+	<stdio.h>
+	<stdlib.h>
+	"cadenas.h"
+
+1761843843 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\cadenas.h
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<memory.h>
+	<ctype.h>
+	<string.h>
+	"errores.h"
+
+1761843855 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\cadenas.c
+	"cadenas.h"
+
+1761854562 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\comunes.c
+	"comunes.h"
+
+1761844840 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\comunes.h
+	"errores.h"
+	"vector.h"
+	"iterador.h"
+
+1761751724 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\iterador.h
+	"vector.h"
+
+1761708332 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\errores.c
+	"errores.h"
+
+1761875757 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\formulario.c
+	"formulario.h"
+
+1761751423 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\formulario.h
+	<stdarg.h>
+	"errores.h"
+	"comunes.h"
+	"cadenas.h"
+
+1761904311 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\herramientasaperturas.c
+	"herramientasAperturas.h"
+
+1761753122 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\herramientasaperturas.h
+	"comunes.h"
+	"algoritmos.h"
+	"vector.h"
+	"errores.h"
+	"formulario.h"
+
+1761904311 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\herramientasdivisiones.c
+	"herramientasDivisiones.h"
+
+1761753086 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\herramientasdivisiones.h
+	<stdio.h>
+	"comunes.h"
+	"errores.h"
+	"algoritmos.h"
+	"vector.h"
+	"formulario.h"
+
+1761751748 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\iterador.c
+	"iterador.h"
+
+1761848930 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\main.c
+	<stdio.h>
+	<locale.h>
+	"errores.h"
+	"comunes.h"
+	"vector.h"
+	"parseoDivisiones.h"
+	"herramientasDivisiones.h"
+	"parseoAperturas.h"
+	"herramientasAperturas.h"
+
+1761708332 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\parseodivisiones.h
+	<stdlib.h>
+	<stdio.h>
+	"errores.h"
+	"vector.h"
+	"iterador.h"
+	"secuenciaPalabras.h"
+	"cadenas.h"
+	"comunes.h"
+
+1761751663 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\secuenciapalabras.h
+	<stdio.h>
+	<ctype.h>
+	<wchar.h>
+	<wctype.h>
+	"errores.h"
+
+1761708332 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\parseoaperturas.h
+	<stdlib.h>
+	<stdio.h>
+	"errores.h"
+	"vector.h"
+	"iterador.h"
+	"cadenas.h"
+	"comunes.h"
+
+1761846435 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\parseoaperturas.c
+	"parseoAperturas.h"
+
+1761854339 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\parseodivisiones.c
+	"parseoDivisiones.h"
+
+1761843843 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\secuenciapalabras.c
+	"secuenciaPalabras.h"
+
+1761843089 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux\vector.c
+	"vector.h"
+
+1761857234 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\algoritmos.c
+	"algoritmos.h"
+
+1761606964 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\algoritmos.h
+	"vector.h"
+
+1761957068 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\vector.h
+	<stdio.h>
+	<stdlib.h>
+	<memory.h>
+	<stddef.h>
+	"errores.h"
+
+1761958390 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\errores.h
+	<stddef.h>
+	<stdio.h>
+	<stdlib.h>
+	"cadenas.h"
+
+1761843842 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\cadenas.h
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<memory.h>
+	<ctype.h>
+	<string.h>
+	"errores.h"
+
+1761958202 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\cadenas.c
+	"cadenas.h"
+
+1761957742 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\comunes.c
+	"comunes.h"
+
+1761844840 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\comunes.h
+	"errores.h"
+	"vector.h"
+	"iterador.h"
+
+1761751724 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\iterador.h
+	"vector.h"
+
+1761708332 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\errores.c
+	"errores.h"
+
+1761958251 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\formulario.c
+	"formulario.h"
+
+1761751422 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\formulario.h
+	<stdarg.h>
+	"errores.h"
+	"comunes.h"
+	"cadenas.h"
+
+1761953182 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\herramientasaperturas.c
+	"herramientasAperturas.h"
+
+1761753122 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\herramientasaperturas.h
+	"comunes.h"
+	"algoritmos.h"
+	"vector.h"
+	"errores.h"
+	"formulario.h"
+
+1761958145 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\herramientasdivisiones.c
+	"herramientasDivisiones.h"
+
+1761753086 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\herramientasdivisiones.h
+	<stdio.h>
+	"comunes.h"
+	"errores.h"
+	"algoritmos.h"
+	"vector.h"
+	"formulario.h"
+
+1761751748 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\iterador.c
+	"iterador.h"
+
+1761957093 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\parseoaperturas.c
+	"parseoAperturas.h"
+
+1761957093 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\parseoaperturas.h
+	<stdlib.h>
+	<stdio.h>
+	"errores.h"
+	"vector.h"
+	"iterador.h"
+	"cadenas.h"
+	"comunes.h"
+
+1761957217 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\parseodivisiones.c
+	"parseoDivisiones.h"
+
+1761957057 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\parseodivisiones.h
+	<stdlib.h>
+	<stdio.h>
+	"errores.h"
+	"vector.h"
+	"iterador.h"
+	"secuenciaPalabras.h"
+	"cadenas.h"
+	"comunes.h"
+
+1761751662 c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\secuenciapalabras.h
+	<stdio.h>
+	<ctype.h>
+	<wchar.h>
+	<wctype.h>
+	"errores.h"
+
+1761843842 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\secuenciapalabras.c
+	"secuenciaPalabras.h"
+
+1761957878 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\main.c
+	<stdio.h>
+	<locale.h>
+	"errores.h"
+	"comunes.h"
+	"vector.h"
+	"parseoDivisiones.h"
+	"herramientasDivisiones.h"
+	"parseoAperturas.h"
+	"herramientasAperturas.h"
+
+1761957389 source:c:\users\lenovo\onedrive\escritorio\tp_tópicos_2025_2c_jueves_los_fundamentalistas_de_linux[1]\vector.c
+	"vector.h"
+
